@@ -76,7 +76,37 @@ paths:
           description: "Unauthorized"
         403:
           description: "Forbidden"  
-    
+  /restaurants:
+    post:
+      tags:
+      - "restaurant"
+      summary: "Create restaurant"
+      description: "This can only be done by the logged in user."
+      operationId: "createRestaurant"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Restaurant object that should be created"
+        required: true
+        schema:
+          $ref: "#/definitions/NewRestaurant"
+      responses:
+        201:
+          description: "Restaurant successfully create"
+          schema: 
+            $ref: "#/definitions/CreatedRestaurant"
+        400:
+          description: "Data is invalid"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ErrorResponse"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
   
 definitions:
   NewDish:
@@ -243,6 +273,124 @@ definitions:
       check:
         type: "number"
         format: "double"
+        
+  NewRestaurant:
+    type: "object"
+    required: 
+    - "restaurantName"
+    - "workingHours"
+    - "listOfDishes"
+    - "restaurantType"
+    properties:
+      restaurantName:
+        type: "string"
+        minLength: 1
+        maxLength: 255
+        example: "Папин сибиряк"
+      address:
+        type: object
+        properties:
+          street:
+            type: "string"
+            minLength: 1
+            maxLength: 255
+            example: "Плехановская"
+          building: 
+            type: "string"
+            minLength: 1
+            maxLength: 10
+            example: "6A"
+      workingHours:
+        type: object
+        properties:
+          beginingWorkDay:
+            type: "string"
+            format: "date-time"
+            example: "2020-07-13T10:00:00Z"
+          endWorkDay:
+            type: "string"
+            format: "date-time"
+            example: "2020-07-13T22:00:00Z"
+      listOfDishes:
+          type: array
+          items:
+            $ref: "#/definitions/CreatedDish"
+      restaurantType:
+        type: "string"
+        enum:
+        - BAR
+        - PIZZERIA
+        - BURGER
+        - DUMPLINGS
+        - SUSHI
+        - BAKERY
+        - RUSSIAN
+        - ITALIAN
+        - CHINESE
+        - GEORGIAN
+        - ARMENIAN
+        example: "DUMPLINGS"
+  CreatedRestaurant:
+    type: object
+    required:
+    - "dishId"
+    - "mainDishInfo"
+    - "dishType"
+    - "dishCalories"
+    - "dishCookingTimeMinutes"
+    properties:
+      RestaurantId:
+        type: "integer"
+        format: "int64"
+        minimum: 1
+      restaurantName:
+        type: "string"
+        minLength: 1
+        maxLength: 255
+        example: "Папин сибиряк"
+      address:
+        type: object
+        properties:
+          street:
+            type: "string"
+            minLength: 1
+            maxLength: 255
+            example: "Плехановская"
+          building: 
+            type: "string"
+            minLength: 1
+            maxLength: 10
+            example: "6A"
+      workingHours:
+        type: object
+        properties:
+          beginingWorkDay:
+            type: "string"
+            format: "date-time"
+            example: "2020-07-13T10:00:00Z"
+          endWorkDay:
+            type: "string"
+            format: "date-time"
+            example: "2020-07-13T22:00:00Z"
+      listOfDishes:
+          type: array
+          items:
+            $ref: "#/definitions/CreatedDish"
+      restaurantType:
+        type: "string"
+        enum:
+        - BAR
+        - PIZZERIA
+        - BURGER
+        - DUMPLINGS
+        - SUSHI
+        - BAKERY
+        - RUSSIAN
+        - ITALIAN
+        - CHINESE
+        - GEORGIAN
+        - ARMENIAN
+        example: "DUMPLINGS"
   ErrorResponse:
     type: "object"
     properties:
