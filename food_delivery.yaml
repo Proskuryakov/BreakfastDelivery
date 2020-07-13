@@ -63,7 +63,7 @@ paths:
           $ref: "#/definitions/NewOrder"
       responses:
         201:
-          description: "Dish successfully create"
+          description: "Order successfully create"
           schema: 
             $ref: "#/definitions/CreatedOrder"
         400:
@@ -170,15 +170,6 @@ definitions:
         format: "int64"
         minimum: 1
         example: 30
-  ErrorResponse:
-    type: "object"
-    properties:
-      code:
-        type: "string"
-      description:
-        type: "string"
-      payload:
-        type: "object"
   NewOrder:
     type: "object"
     properties:
@@ -252,4 +243,13 @@ definitions:
       check:
         type: "number"
         format: "double"
+  ErrorResponse:
+    type: "object"
+    properties:
+      code:
+        type: "string"
+      description:
+        type: "string"
+      payload:
+        type: "object"
  
