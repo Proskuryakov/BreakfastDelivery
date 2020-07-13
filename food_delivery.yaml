@@ -190,7 +190,7 @@ definitions:
         - PIZZA
         - SUSHI
         - BAKERY
-        example: "ADMIN"
+        example: "MAIN"
       dishCalories:
         type: "integer"
         format: "int64"
@@ -203,10 +203,6 @@ definitions:
   NewOrder:
     type: "object"
     properties:
-      id:
-        type: "integer"
-        format: "int64" 
-        minimum: 1
       createdAt:
         type: "string"
         format: "date-time"
@@ -242,7 +238,7 @@ definitions:
   CreatedOrder:
     type: "object"
     properties:
-      id:
+      orderId:
         type: "integer"
         format: "int64" 
         minimum: 1
