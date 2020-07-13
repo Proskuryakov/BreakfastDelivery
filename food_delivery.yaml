@@ -45,7 +45,7 @@ paths:
           description: "Unauthorized"
         403:
           description: "Forbidden"
-  /order:
+  /orders:
     post:
       tags:
       - "order"
@@ -195,7 +195,7 @@ definitions:
             maxLength: 50
           lastName:
             type: "string"
-            description: First name of the user
+            description: Last name of the user
             minLength: 1
             maxLength: 50
           phone:
@@ -230,7 +230,7 @@ definitions:
             maxLength: 50
           lastName:
             type: "string"
-            description: First name of the user
+            description: Last name of the user
             minLength: 1
             maxLength: 50
           phone:
