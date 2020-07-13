@@ -6,10 +6,12 @@ info:
 host: "127.0.0.1:8080"
 basePath: "/api"
 tags:
-- name: "food_delivery"
-  description: "Operations about food delivery"
+- name: "dish"
+  description: "Operations about dish"
 - name: "order"
   description: "Operations about order"
+- name: "restaurant"
+  description: "Operations about restaurant"
 schemes:
 - "https"
 - "http"
@@ -45,6 +47,7 @@ paths:
           description: "Unauthorized"
         403:
           description: "Forbidden"
+          
   /orders:
     post:
       tags:
@@ -75,7 +78,8 @@ paths:
         401:
           description: "Unauthorized"
         403:
-          description: "Forbidden"  
+          description: "Forbidden" 
+          
   /restaurants:
     post:
       tags:
@@ -109,6 +113,7 @@ paths:
           description: "Forbidden"
   
 definitions:
+
   NewDish:
     type: "object"
     required: 
@@ -153,6 +158,7 @@ definitions:
         format: "int64"
         minimum: 1
         example: 30
+        
   CreatedDish :
     type: object
     required:
@@ -200,8 +206,15 @@ definitions:
         format: "int64"
         minimum: 1
         example: 30
+        
   NewOrder:
     type: "object"
+    required:
+    - "createdAt"
+    - "status"
+    - "userInfo"
+    - "listOfDishes"
+    - "check"
     properties:
       createdAt:
         type: "string"
@@ -237,11 +250,22 @@ definitions:
         
   CreatedOrder:
     type: "object"
+    required:
+    - "orderId"
+    - "createdAt"
+    - "status"
+    - "userInfo"
+    - "listOfDishes"
+    - "check"
     properties:
       orderId:
         type: "integer"
         format: "int64" 
         minimum: 1
+      createdAt:
+        type: "string"
+        format: "date-time"
+        example: "2020-07-13T10:30:00Z"
       status:
         type: "string"
         minLength: 1
@@ -274,6 +298,7 @@ definitions:
     type: "object"
     required: 
     - "restaurantName"
+    - "address"
     - "workingHours"
     - "listOfDishes"
     - "restaurantType"
@@ -326,16 +351,18 @@ definitions:
         - GEORGIAN
         - ARMENIAN
         example: "DUMPLINGS"
+        
   CreatedRestaurant:
     type: object
     required:
-    - "dishId"
-    - "mainDishInfo"
-    - "dishType"
-    - "dishCalories"
-    - "dishCookingTimeMinutes"
+    - "restaurantId"
+    - "restaurantName"
+    - "address"
+    - "workingHours"
+    - "listOfDishes"
+    - "restaurantType"
     properties:
-      RestaurantId:
+      restaurantId:
         type: "integer"
         format: "int64"
         minimum: 1
