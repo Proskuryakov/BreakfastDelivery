@@ -5,7 +5,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Qualifier;
 
- import ru.relex.uber.services.model.order.*;
+import ru.relex.delivery.services.model.order.CreatedOrder;
+import ru.relex.delivery.services.model.order.ImmutableOrderStatus;
+import ru.relex.delivery.services.model.order.NewOrder;
+import ru.relex.delivery.services.model.order.OrderStatus;
 
 @Mapper
 public interface OrderMapper {

@@ -5,11 +5,8 @@ import java.lang.annotation.RetentionPolicy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Qualifier;
-import ru.relex.uber.services.model.ExistingUser;
-import ru.relex.uber.services.model.ImmutableUserStatus;
-import ru.relex.uber.services.model.NewUser;
-import ru.relex.uber.services.model.UpdatableUser;
-import ru.relex.uber.services.model.UserStatus;
+import ru.relex.delivery.services.model.*;
+
 
 @Mapper
 public interface UserMapper {
