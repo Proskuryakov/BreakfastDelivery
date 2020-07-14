@@ -12,6 +12,8 @@ tags:
   description: "Operations about order"
 - name: "restaurant"
   description: "Operations about restaurant"
+- name: "user"
+  description: "Operations about user"
 schemes:
 - "https"
 - "http"
