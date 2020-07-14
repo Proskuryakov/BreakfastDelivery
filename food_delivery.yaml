@@ -145,7 +145,6 @@ paths:
           description: "Forbidden"
   
 definitions:
-
   NewDish:
     type: "object"
     required: 
@@ -446,15 +445,6 @@ definitions:
         - GEORGIAN
         - ARMENIAN
         example: "DUMPLINGS"
-  ErrorResponse:
-    type: "object"
-    properties:
-      code:
-        type: "string"
-      description:
-        type: "string"
-      payload:
-        type: "object"
 
   NewUser:
     type: "object"
@@ -501,15 +491,15 @@ definitions:
           email:
             type: "string"
             maxLength: 128  
-        createdAt:
-          type: "string"
-          required: true
-          format: "date-time"
-          example: "2020-07-13T10:30:00Z"
-        createdBy:
-          type: "integer"
-          format: "int64"
-          minimum: 1  
+      createdAt:
+        type: "string"
+        required: true
+        format: "date-time"
+        example: "2020-07-13T10:30:00Z"
+      createdBy:
+        type: "integer"
+        format: "int64"
+        minimum: 1  
       listOfOrders:
           type: array
           items:
@@ -520,7 +510,6 @@ definitions:
     required:
     - "userId" 
     - "username"
-    - "password"
     - "role"
     - "personalInfo"
     - "listOfOrders"
@@ -534,10 +523,6 @@ definitions:
         minLength: 8
         maxLength: 64
         example: "John"
-      password:
-        type: "string"
-        minLength: 8
-        maxLength: 128
       role:
         type: "string"
         enum:
@@ -565,17 +550,27 @@ definitions:
           email:
             type: "string"
             maxLength: 128  
-        createdAt:
-          type: "string"
-          required: true
-          format: "date-time"
-          example: "2020-07-13T10:30:00Z"
-        createdBy:
-          type: "integer"
-          format: "int64"
-          minimum: 1  
+      createdAt:
+        type: "string"
+        required: true
+        format: "date-time"
+        example: "2020-07-13T10:30:00Z"
+      createdBy:
+        type: "integer"
+        format: "int64"
+        minimum: 1  
       listOfOrders:
           type: array
           items:
-            $ref: "#/definitions/CreatedOrder"          
+            $ref: "#/definitions/CreatedOrder"  
+            
+  ErrorResponse:
+    type: "object"
+    properties:
+      code:
+        type: "string"
+      description:
+        type: "string"
+      payload:
+        type: "object"
  
