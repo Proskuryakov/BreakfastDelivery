@@ -1,0 +1,33 @@
+plugins {
+  id 'java'
+}
+
+ext {
+  bootVer = "2.3.1.RELEASE"
+}
+
+allprojects {
+  apply plugin: "java"
+
+
+  group 'ru.relex'
+  version '1.0-SNAPSHOT'
+
+  repositories {
+    mavenCentral()
+  }
+
+  java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+  }
+}
+
+dependencies {
+
+  implementation(project(":services"))
+  implementation "org.springframework.boot:spring-boot-starter-web:$bootVer"
+  implementation "org.springframework:spring-web:5.2.7.RELEASE"
+  implementation "javax.validation:validation-api:2.0.1.Final"
+}
+
