@@ -12,6 +12,8 @@ tags:
   description: "Operations about order"
 - name: "restaurant"
   description: "Operations about restaurant"
+- name: "user"
+  description: "Operations about user"
 schemes:
 - "https"
 - "http"
@@ -111,9 +113,40 @@ paths:
           description: "Unauthorized"
         403:
           description: "Forbidden"
+
+  /users:
+    post:
+      tags:
+      - "user"
+      summary: "Create user"
+      description: "This can only be done by the logged in user."
+      operationId: "createUser"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User object that should be created"
+        required: true
+        schema:
+          $ref: "#/definitions/NewUser"
+      responses:
+        201:
+          description: "User successfully create"
+          schema: 
+            $ref: "#/definitions/CreatedUser"
+        400:
+          description: "Data is invalid"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ErrorResponse"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
   
 definitions:
-
   NewDish:
     type: "object"
     required: 
@@ -414,6 +447,125 @@ definitions:
         - GEORGIAN
         - ARMENIAN
         example: "DUMPLINGS"
+
+  NewUser:
+    type: "object"
+    required: 
+    - "username"
+    - "password"
+    - "role"
+    - "personalInfo"
+    - "listOfOrders"
+    properties:
+      username:
+        type: "string"
+        minLength: 8
+        maxLength: 64
+        example: "John"
+      password:
+        type: "string"
+        minLength: 8
+        maxLength: 128
+      role:
+        type: "string"
+        enum:
+        - ADMIN
+        - COURIER
+        - CLIENT
+      personalInfo:
+        type: object
+        properties:
+          firstName:
+            type: "string"
+            description: First name of the user
+            required: true
+            minLength: 1
+            maxLength: 50
+          lastName:
+            type: "string"
+            description: Last name of the user
+            required: true
+            minLength: 1
+            maxLength: 50
+          phone:
+            type: "string"
+            maxLength: 15
+          email:
+            type: "string"
+            maxLength: 128  
+      createdAt:
+        type: "string"
+        required: true
+        format: "date-time"
+        example: "2020-07-13T10:30:00Z"
+      createdBy:
+        type: "integer"
+        format: "int64"
+        minimum: 1  
+      listOfOrders:
+          type: array
+          items:
+            $ref: "#/definitions/CreatedOrder"
+
+  CreatedUser:
+    type: "object"
+    required:
+    - "userId" 
+    - "username"
+    - "role"
+    - "personalInfo"
+    - "listOfOrders"
+    properties:
+      userId:
+        type: "integer"
+        format: "int64"
+        minimum: 1
+      username:
+        type: "string"
+        minLength: 8
+        maxLength: 64
+        example: "John"
+      role:
+        type: "string"
+        enum:
+        - ADMIN
+        - COURIER
+        - CLIENT
+      personalInfo:
+        type: object
+        properties:
+          firstName:
+            type: "string"
+            description: First name of the user
+            required: true
+            minLength: 1
+            maxLength: 50
+          lastName:
+            type: "string"
+            description: Last name of the user
+            required: true
+            minLength: 1
+            maxLength: 50
+          phone:
+            type: "string"
+            maxLength: 15
+          email:
+            type: "string"
+            maxLength: 128  
+      createdAt:
+        type: "string"
+        required: true
+        format: "date-time"
+        example: "2020-07-13T10:30:00Z"
+      createdBy:
+        type: "integer"
+        format: "int64"
+        minimum: 1  
+      listOfOrders:
+          type: array
+          items:
+            $ref: "#/definitions/CreatedOrder"  
+            
   ErrorResponse:
     type: "object"
     properties:
