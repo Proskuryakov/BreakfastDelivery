@@ -50,10 +50,8 @@ public class OrdersApi {
 
     @DeleteMapping(path="/{id}")
     void deleteOrder(@PathVariable("id") long id) {
-        final var order = orderFacade.getOrderById(id);
-        System.out.println(id);
-        if (order!=null) {
-             orderFacade.deleteOrderById(id);
+        if (orderFacade.deleteOrderById(id)) {
+            return;
         }
       throw new ObjectNotExistsException();
     }

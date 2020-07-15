@@ -132,6 +132,9 @@ paths:
       responses:
         "200":
           description: "Succesfull deletion"
+        201:
+          description: "Order successfully find"
+
         400:
           description: "Data is invalid"
           schema:
