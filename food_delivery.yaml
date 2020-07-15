@@ -262,12 +262,12 @@ definitions:
         properties:
           firstName:
             type: "string"
-            description: First name of the user
+            description: "First name of the user"
             minLength: 1
             maxLength: 50
           lastName:
             type: "string"
-            description: Last name of the user
+            description: "Last name of the user"
             minLength: 1
             maxLength: 50
           phone:
