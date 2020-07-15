@@ -5,10 +5,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Qualifier;
 
-import ru.relex.delivery.services.model.order.CreatedOrder;
-import ru.relex.delivery.services.model.order.ImmutableOrderStatus;
-import ru.relex.delivery.services.model.order.NewOrder;
-import ru.relex.delivery.services.model.order.OrderStatus;
+import ru.relex.delivery.services.model.order.*;
 
 @Mapper
 public interface OrderMapper {
@@ -16,15 +13,26 @@ public interface OrderMapper {
     @Retention(RetentionPolicy.CLASS)
     @interface DefaultStatusMapper {
     }
+
+    @Qualifier
+    @Retention(RetentionPolicy.CLASS)
+    @interface DefaultCreatedAtMapper {
+    }
     @Mapping(target = "check", source = "resCheck")
     @Mapping(target = "id", source = "newId")
-    @Mapping(target = "createdAt", source = "time")
+    @Mapping(target = "createdAt", source = "order", qualifiedBy = DefaultCreatedAtMapper.class)
     @Mapping(target = "status", source = "order", qualifiedBy = DefaultStatusMapper.class)
-    CreatedOrder fromNewOrder(NewOrder order, long newId, String time, double resCheck);
+    CreatedOrder fromNewOrder(NewOrder order, long newId,   double resCheck);
 
     @DefaultStatusMapper
     default OrderStatus defaultStatusMapper(@SuppressWarnings("unused") NewOrder order) {
         return ImmutableOrderStatus
+                .builder()
+                .build();
+    }
+    @DefaultCreatedAtMapper
+    default CreatedAt defaultCreatedAtMapper(@SuppressWarnings("unused") NewOrder order) {
+        return ImmutableCreatedAt
                 .builder()
                 .build();
     }

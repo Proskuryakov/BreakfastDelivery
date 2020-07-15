@@ -4,7 +4,7 @@ import org.immutables.value.Value;
 
 @Value.Immutable
 public interface CreatedOrder extends BaseOrder {
-    String getCreatedAt();
+    CreatedAt getCreatedAt();
 
     long getId();
 

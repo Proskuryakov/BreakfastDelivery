@@ -31,9 +31,9 @@ public class OrderServiceImpl implements OrderService {
         //позже я добавлю проход по списку блюд с ценами
         double check = 0;
         long newId = lastId.addAndGet(1);
-String currTime = Instant.now().toString();
+
         // Преобразовать NewUser в ExistingUser
-        CreatedOrder createdOrder = orderMapper.fromNewOrder(order, newId, currTime, check  );
+        CreatedOrder createdOrder = orderMapper.fromNewOrder(order, newId,   check  );
 
         // Сохранить в HashMap
         ORDERS.put(newId, createdOrder);
