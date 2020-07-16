@@ -25,17 +25,17 @@ public class OrderFacadeImpl implements OrderFacade {
     }
 
     @Override
-    public CreatedOrder getOrderById(@Valid  long id) {
+    public CreatedOrder getOrderById(  long id) {
         return orderService.getOrderById(id);
     }
 
     @Override
-    public boolean deleteOrderById(@Valid  long id) {
+    public boolean deleteOrderById(  long id) {
         return orderService.deleteOrderById(id);
     }
 
     @Override
-    public CreatedOrder updateOrder(@Valid  long id, UpdatableOrder updatableOrder) {
+    public CreatedOrder updateOrder(  long id, UpdatableOrder updatableOrder) {
         return orderService.updateOrder(id, updatableOrder);
     }
 }

@@ -9,10 +9,10 @@ import javax.validation.Valid;
 public interface OrderFacade {
     CreatedOrder createOrder(@Valid NewOrder order);
 
-    CreatedOrder getOrderById(@Valid  long id);
+    CreatedOrder getOrderById(  long id);
 
-    boolean deleteOrderById(@Valid  long id);
+    boolean deleteOrderById(  long id);
 
-    CreatedOrder updateOrder(@Valid  long id, UpdatableOrder updatableOrder);
+    CreatedOrder updateOrder(  long id, UpdatableOrder updatableOrder);
 
  }

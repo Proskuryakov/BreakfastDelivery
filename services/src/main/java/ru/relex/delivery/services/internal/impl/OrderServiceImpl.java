@@ -22,24 +22,17 @@ public class OrderServiceImpl implements OrderService {
     private final OrderMapper orderMapper;
 
     @Autowired
-    public OrderServiceImpl( final OrderMapper orderMapper) {
+    public OrderServiceImpl(final OrderMapper orderMapper) {
         this.orderMapper = orderMapper;
     }
 
     @Override
     public CreatedOrder createOrder(NewOrder order) {
-        // Выделить ID для пользователя
         //позже я добавлю проход по списку блюд с ценами
-        double check = 0;
+        double check = 1000;
         long newId = lastId.addAndGet(1);
-
-        // Преобразовать NewUser в ExistingUser
-        CreatedOrder createdOrder = orderMapper.fromNewOrder(order, newId,   check  );
-
-        // Сохранить в HashMap
+        CreatedOrder createdOrder = orderMapper.fromNewOrder(order, newId, check);
         ORDERS.put(newId, createdOrder);
-
-        // Вернуть ExistingUser клиенту
         return createdOrder;
     }
 
@@ -50,21 +43,17 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public boolean deleteOrderById(long id) {
-              return   ORDERS.remove(id) != null;
+        return ORDERS.remove(id) != null;
     }
 
     @Override
     public CreatedOrder updateOrder(long id, UpdatableOrder updatableOrder) {
         CreatedOrder order = ORDERS.get(id);
-
         if (order == null) {
             return null;
         }
-
         CreatedOrder updatedOrder = orderMapper.merge(order, updatableOrder);
-
         ORDERS.put(id, updatedOrder);
-
         return updatedOrder;
     }
 }
