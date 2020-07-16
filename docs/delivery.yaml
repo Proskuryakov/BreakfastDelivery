@@ -6,38 +6,40 @@ info:
 host: "127.0.0.1:8080"
 basePath: "/api"
 tags:
-- name: "dish"
-  description: "Operations about dish"
-- name: "order"
-  description: "Operations about order"
-- name: "restaurant"
-  description: "Operations about restaurant"
-- name: "user"
-  description: "Operations about user"
+  - name: "dish"
+    description: "Operations about dish"
+  - name: "order"
+    description: "Operations about order"
+  - name: "restaurant"
+    description: "Operations about restaurant"
+  - name: "user"
+    description: "Operations about user"
 schemes:
-- "https"
-- "http"
+  - "https"
+  - "http"
 paths:
   /dishes:
     post:
       tags:
-      - "dish"
+        - "dish"
       summary: "Create dish"
       description: "This can only be done by the logged in user."
       operationId: "createDish"
+      consumes:
+        - "application/json"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Dish object that should be created"
-        required: true
-        schema:
-          $ref: "#/definitions/NewDish"
+        - in: "body"
+          name: "body"
+          description: "Dish object that should be created"
+          required: true
+          schema:
+            $ref: "#/definitions/NewDish"
       responses:
         201:
-          description: "Dish successfully create"
-          schema: 
+          description: "Dish was successfully created"
+          schema:
             $ref: "#/definitions/CreatedDish"
         400:
           description: "Data is invalid"
@@ -49,27 +51,117 @@ paths:
           description: "Unauthorized"
         403:
           description: "Forbidden"
-          
+
+  /dishes/{dishId}:
+    put:
+      tags:
+        - "dish"
+      summary: "Update an existing dish"
+      description: "This can only be done by the logged in user."
+      operationId: "updateDish"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "dishId"
+          in: "path"
+          description: "ID of dish to update"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        201:
+          description: "Dish was successfully updated"
+          schema:
+            $ref: "#/definitions/UpdatableDish"
+        400:
+          description: "Data is invalid"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ErrorResponse"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+
+    get:
+      tags:
+        - "dish"
+      summary: "Get an existing dish"
+      description: "This can only be done by the logged in user."
+      operationId: "getDish"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "dishId"
+          in: "path"
+          description: "ID of dish to get"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        201:
+          description: "Dish was successfully returned"
+          schema:
+            $ref: "#/definitions/CreatedDish"
+        400:
+          description: "Data is invalid"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ErrorResponse"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+
+    delete:
+      tags:
+        - "dish"
+      summary: "Delete an existing dish"
+      description: "This can only be done by the logged in user."
+      operationId: "deleteDish"
+      parameters:
+        - name: "dishId"
+          in: "path"
+          description: "ID of dish to delete"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        201:
+          description: "Dish was successfully deleted"
+        400:
+          description: "Data is invalid"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ErrorResponse"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+
   /orders:
     post:
       tags:
-      - "order"
+        - "order"
       summary: "Create order"
       description: "This can only be done by the logged in user."
       operationId: "createOrder"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Order object that should be created"
-        required: true
-        schema:
-          $ref: "#/definitions/NewOrder"
+        - in: "body"
+          name: "body"
+          description: "Order object that should be created"
+          required: true
+          schema:
+            $ref: "#/definitions/NewOrder"
       responses:
         201:
           description: "Order successfully create"
-          schema: 
+          schema:
             $ref: "#/definitions/CreatedOrder"
         400:
           description: "Data is invalid"
@@ -80,28 +172,28 @@ paths:
         401:
           description: "Unauthorized"
         403:
-          description: "Forbidden" 
-          
+          description: "Forbidden"
+
   /restaurants:
     post:
       tags:
-      - "restaurant"
+        - "restaurant"
       summary: "Create restaurant"
       description: "This can only be done by the logged in user."
       operationId: "createRestaurant"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Restaurant object that should be created"
-        required: true
-        schema:
-          $ref: "#/definitions/NewRestaurant"
+        - in: "body"
+          name: "body"
+          description: "Restaurant object that should be created"
+          required: true
+          schema:
+            $ref: "#/definitions/NewRestaurant"
       responses:
         201:
           description: "Restaurant successfully create"
-          schema: 
+          schema:
             $ref: "#/definitions/CreatedRestaurant"
         400:
           description: "Data is invalid"
@@ -117,23 +209,23 @@ paths:
   /users:
     post:
       tags:
-      - "user"
+        - "user"
       summary: "Create user"
       description: "This can only be done by the logged in user."
       operationId: "createUser"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "User object that should be created"
-        required: true
-        schema:
-          $ref: "#/definitions/NewUser"
+        - in: "body"
+          name: "body"
+          description: "User object that should be created"
+          required: true
+          schema:
+            $ref: "#/definitions/NewUser"
       responses:
         201:
           description: "User successfully create"
-          schema: 
+          schema:
             $ref: "#/definitions/CreatedUser"
         400:
           description: "Data is invalid"
@@ -145,15 +237,15 @@ paths:
           description: "Unauthorized"
         403:
           description: "Forbidden"
-  
+
 definitions:
   NewDish:
     type: "object"
-    required: 
-    - "mainDishInfo"
-    - "dishType"
-    - "dishCalories"
-    - "dishCookingTimeMinutes"
+    required:
+      - "mainDishInfo"
+      - "dishType"
+      - "dishCalories"
+      - "dishCookingTimeMinutes"
     properties:
       mainDishInfo:
         type: object
@@ -171,15 +263,15 @@ definitions:
       dishType:
         type: "string"
         enum:
-        - DRINK
-        - MAIN
-        - SALAD
-        - SANDWICH
-        - BURGER
-        - DESSERT
-        - PIZZA
-        - SUSHI
-        - BAKERY
+          - DRINK
+          - MAIN
+          - SALAD
+          - SANDWICH
+          - BURGER
+          - DESSERT
+          - PIZZA
+          - SUSHI
+          - BAKERY
         example: "MAIN"
       dishCalories:
         type: "integer"
@@ -191,15 +283,60 @@ definitions:
         format: "int64"
         minimum: 1
         example: 30
-        
+
+  UpdatableDish:
+    type: "object"
+    required:
+      - "mainDishInfo"
+      - "dishType"
+      - "dishCalories"
+      - "dishCookingTimeMinutes"
+    properties:
+      mainDishInfo:
+        type: object
+        properties:
+          dishName:
+            type: "string"
+            minLength: 1
+            maxLength: 64
+            example: "Lasagna"
+          dishPrice:
+            type: "integer"
+            format: "int64"
+            minimum: 1
+            example: 250
+      dishType:
+        type: "string"
+        enum:
+          - DRINK
+          - MAIN
+          - SALAD
+          - SANDWICH
+          - BURGER
+          - DESSERT
+          - PIZZA
+          - SUSHI
+          - BAKERY
+        example: "MAIN"
+      dishCalories:
+        type: "integer"
+        format: "int64"
+        minimum: 1
+        example: 175
+      dishCookingTimeMinutes:
+        type: "integer"
+        format: "int64"
+        minimum: 1
+        example: 30
+
   CreatedDish :
     type: object
     required:
-    - "dishId"
-    - "mainDishInfo"
-    - "dishType"
-    - "dishCalories"
-    - "dishCookingTimeMinutes"
+      - "dishId"
+      - "mainDishInfo"
+      - "dishType"
+      - "dishCalories"
+      - "dishCookingTimeMinutes"
     properties:
       dishId:
         type: "integer"
@@ -220,15 +357,15 @@ definitions:
       dishType:
         type: "string"
         enum:
-        - DRINK
-        - MAIN
-        - SALAD
-        - SANDWICH
-        - BURGER
-        - DESSERT
-        - PIZZA
-        - SUSHI
-        - BAKERY
+          - DRINK
+          - MAIN
+          - SALAD
+          - SANDWICH
+          - BURGER
+          - DESSERT
+          - PIZZA
+          - SUSHI
+          - BAKERY
         example: "MAIN"
       dishCalories:
         type: "integer"
@@ -239,15 +376,15 @@ definitions:
         format: "int64"
         minimum: 1
         example: 30
-        
+
   NewOrder:
     type: "object"
     required:
-    - "createdAt"
-    - "status"
-    - "userInfo"
-    - "listOfDishes"
-    - "check"
+      - "createdAt"
+      - "status"
+      - "userInfo"
+      - "listOfDishes"
+      - "check"
     properties:
       createdAt:
         type: "string"
@@ -274,26 +411,26 @@ definitions:
             type: "string"
             maxLength: 15
       listOfDishes:
-          type: array
-          items:
-            $ref: "#/definitions/CreatedDish"
+        type: array
+        items:
+          $ref: "#/definitions/CreatedDish"
       check:
         type: "number"
         format: "double"
-        
+
   CreatedOrder:
     type: "object"
     required:
-    - "orderId"
-    - "createdAt"
-    - "status"
-    - "userInfo"
-    - "listOfDishes"
-    - "check"
+      - "orderId"
+      - "createdAt"
+      - "status"
+      - "userInfo"
+      - "listOfDishes"
+      - "check"
     properties:
       orderId:
         type: "integer"
-        format: "int64" 
+        format: "int64"
         minimum: 1
       createdAt:
         type: "string"
@@ -320,21 +457,21 @@ definitions:
             type: "string"
             maxLength: 15
       listOfDishes:
-          type: array
-          items:
-            $ref: "#/definitions/CreatedDish"
+        type: array
+        items:
+          $ref: "#/definitions/CreatedDish"
       check:
         type: "number"
         format: "double"
-        
+
   NewRestaurant:
     type: "object"
-    required: 
-    - "restaurantName"
-    - "address"
-    - "workingHours"
-    - "listOfDishes"
-    - "restaurantType"
+    required:
+      - "restaurantName"
+      - "address"
+      - "workingHours"
+      - "listOfDishes"
+      - "restaurantType"
     properties:
       restaurantName:
         type: "string"
@@ -349,7 +486,7 @@ definitions:
             minLength: 1
             maxLength: 255
             example: "Плехановская"
-          building: 
+          building:
             type: "string"
             minLength: 1
             maxLength: 10
@@ -366,34 +503,34 @@ definitions:
             format: "date-time"
             example: "2020-07-13T22:00:00Z"
       listOfDishes:
-          type: array
-          items:
-            $ref: "#/definitions/CreatedDish"
+        type: array
+        items:
+          $ref: "#/definitions/CreatedDish"
       restaurantType:
         type: "string"
         enum:
-        - BAR
-        - PIZZERIA
-        - BURGER
-        - DUMPLINGS
-        - SUSHI
-        - BAKERY
-        - RUSSIAN
-        - ITALIAN
-        - CHINESE
-        - GEORGIAN
-        - ARMENIAN
+          - BAR
+          - PIZZERIA
+          - BURGER
+          - DUMPLINGS
+          - SUSHI
+          - BAKERY
+          - RUSSIAN
+          - ITALIAN
+          - CHINESE
+          - GEORGIAN
+          - ARMENIAN
         example: "DUMPLINGS"
-        
+
   CreatedRestaurant:
     type: object
     required:
-    - "restaurantId"
-    - "restaurantName"
-    - "address"
-    - "workingHours"
-    - "listOfDishes"
-    - "restaurantType"
+      - "restaurantId"
+      - "restaurantName"
+      - "address"
+      - "workingHours"
+      - "listOfDishes"
+      - "restaurantType"
     properties:
       restaurantId:
         type: "integer"
@@ -412,7 +549,7 @@ definitions:
             minLength: 1
             maxLength: 255
             example: "Плехановская"
-          building: 
+          building:
             type: "string"
             minLength: 1
             maxLength: 10
@@ -429,33 +566,33 @@ definitions:
             format: "date-time"
             example: "2020-07-13T22:00:00Z"
       listOfDishes:
-          type: array
-          items:
-            $ref: "#/definitions/CreatedDish"
+        type: array
+        items:
+          $ref: "#/definitions/CreatedDish"
       restaurantType:
         type: "string"
         enum:
-        - BAR
-        - PIZZERIA
-        - BURGER
-        - DUMPLINGS
-        - SUSHI
-        - BAKERY
-        - RUSSIAN
-        - ITALIAN
-        - CHINESE
-        - GEORGIAN
-        - ARMENIAN
+          - BAR
+          - PIZZERIA
+          - BURGER
+          - DUMPLINGS
+          - SUSHI
+          - BAKERY
+          - RUSSIAN
+          - ITALIAN
+          - CHINESE
+          - GEORGIAN
+          - ARMENIAN
         example: "DUMPLINGS"
 
   NewUser:
     type: "object"
-    required: 
-    - "username"
-    - "password"
-    - "role"
-    - "personalInfo"
-    - "listOfOrders"
+    required:
+      - "username"
+      - "password"
+      - "role"
+      - "personalInfo"
+      - "listOfOrders"
     properties:
       username:
         type: "string"
@@ -469,22 +606,20 @@ definitions:
       role:
         type: "string"
         enum:
-        - ADMIN
-        - COURIER
-        - CLIENT
+          - ADMIN
+          - COURIER
+          - CLIENT
       personalInfo:
         type: object
         properties:
           firstName:
             type: "string"
             description: First name of the user
-            required: true
             minLength: 1
             maxLength: 50
           lastName:
             type: "string"
             description: Last name of the user
-            required: true
             minLength: 1
             maxLength: 50
           phone:
@@ -492,29 +627,28 @@ definitions:
             maxLength: 15
           email:
             type: "string"
-            maxLength: 128  
+            maxLength: 128
       createdAt:
         type: "string"
-        required: true
         format: "date-time"
         example: "2020-07-13T10:30:00Z"
       createdBy:
         type: "integer"
         format: "int64"
-        minimum: 1  
+        minimum: 1
       listOfOrders:
-          type: array
-          items:
-            $ref: "#/definitions/CreatedOrder"
+        type: array
+        items:
+          $ref: "#/definitions/CreatedOrder"
 
   CreatedUser:
     type: "object"
     required:
-    - "userId" 
-    - "username"
-    - "role"
-    - "personalInfo"
-    - "listOfOrders"
+      - "userId"
+      - "username"
+      - "role"
+      - "personalInfo"
+      - "listOfOrders"
     properties:
       userId:
         type: "integer"
@@ -528,22 +662,20 @@ definitions:
       role:
         type: "string"
         enum:
-        - ADMIN
-        - COURIER
-        - CLIENT
+          - ADMIN
+          - COURIER
+          - CLIENT
       personalInfo:
         type: object
         properties:
           firstName:
             type: "string"
             description: First name of the user
-            required: true
             minLength: 1
             maxLength: 50
           lastName:
             type: "string"
             description: Last name of the user
-            required: true
             minLength: 1
             maxLength: 50
           phone:
@@ -551,21 +683,20 @@ definitions:
             maxLength: 15
           email:
             type: "string"
-            maxLength: 128  
+            maxLength: 128
       createdAt:
         type: "string"
-        required: true
         format: "date-time"
         example: "2020-07-13T10:30:00Z"
       createdBy:
         type: "integer"
         format: "int64"
-        minimum: 1  
+        minimum: 1
       listOfOrders:
-          type: array
-          items:
-            $ref: "#/definitions/CreatedOrder"  
-            
+        type: array
+        items:
+          $ref: "#/definitions/CreatedOrder"
+
   ErrorResponse:
     type: "object"
     properties:
@@ -575,4 +706,4 @@ definitions:
         type: "string"
       payload:
         type: "object"
- 
+

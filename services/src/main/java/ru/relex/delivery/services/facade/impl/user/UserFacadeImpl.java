@@ -1,4 +1,4 @@
-package ru.relex.delivery.services.facade.impl;
+package ru.relex.delivery.services.facade.impl.user;
 
 import javax.validation.Valid;
 

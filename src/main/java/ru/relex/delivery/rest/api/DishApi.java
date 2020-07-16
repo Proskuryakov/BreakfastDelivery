@@ -41,9 +41,10 @@ public class DishApi {
 
     final var dish = dishFacade.getById(id);
     if (dish == null) {
+      logger.error("GET request error. Dish with such id does not exist");
       throw new ObjectNotExistsException();
     }
-
+    logger.info("Return {} by id = {}", dish, id);
     return dish;
   }
 
@@ -53,18 +54,21 @@ public class DishApi {
     final var dish = dishFacade.update(id, updatableDish);
 
     if (dish == null) {
+      logger.error("PUT request error. Dish with such id does not exist");
       throw new ObjectNotExistsException();
     }
 
+    logger.info("Updatable: {}", dish);
     return dish;
   }
 
   @DeleteMapping(path = "/{dishId}")
   void deleteDish(@PathVariable("dishId") long id) {
     if (dishFacade.deleteById(id)) {
+      logger.info("Delete dish by id = {}", id);
       return;
     }
-
+    logger.error("DELETE request Error. Dish with such id does not exist");
     throw new ObjectNotExistsException();
   }
 }

@@ -1,4 +1,4 @@
-package ru.relex.delivery.services.facade.impl;
+package ru.relex.delivery.services.facade.impl.dish;
 
 import ru.relex.delivery.services.facade.DishFacade;
 import ru.relex.delivery.services.internal.DishService;
