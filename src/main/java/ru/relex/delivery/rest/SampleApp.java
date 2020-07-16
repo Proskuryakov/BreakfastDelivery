@@ -10,6 +10,7 @@ import ru.relex.delivery.services.ServicesConfiguration;
 public class SampleApp {
 
   public static void main(String[] args) {
+
     SpringApplication.run(SampleApp.class, args);
   }
 }

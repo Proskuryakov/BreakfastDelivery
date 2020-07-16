@@ -6,9 +6,9 @@ import org.immutables.value.Value;
 @Value.Immutable
 @Value.Style(defaultAsDefault = true)
 @JsonDeserialize(builder = ImmutableOrderStatus.Builder.class)
-
 public interface OrderStatus {
-    default String getStatus() {
+
+default String getStatus() {
         return "order is cooking";
     }
 

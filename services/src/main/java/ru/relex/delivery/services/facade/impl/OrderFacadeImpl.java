@@ -5,6 +5,7 @@ import ru.relex.delivery.services.internal.OrderService;
 import ru.relex.delivery.services.meta.Facade;
 import ru.relex.delivery.services.model.order.CreatedOrder;
 import ru.relex.delivery.services.model.order.NewOrder;
+import ru.relex.delivery.services.model.order.UpdatableOrder;
 
 @Facade
 
@@ -30,4 +31,11 @@ public class OrderFacadeImpl implements OrderFacade {
     public boolean deleteOrderById(long id) {
         return orderService.deleteOrderById(id);
     }
+
+    @Override
+    public CreatedOrder updateOrder(long id, UpdatableOrder updatableOrder) {
+        return orderService.updateOrder(id, updatableOrder);
+    }
 }
+
+

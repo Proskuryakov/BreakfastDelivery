@@ -6,6 +6,7 @@ import ru.relex.delivery.services.internal.OrderService;
 import ru.relex.delivery.services.mapper.OrderMapper;
 import ru.relex.delivery.services.model.order.CreatedOrder;
 import ru.relex.delivery.services.model.order.NewOrder;
+import ru.relex.delivery.services.model.order.UpdatableOrder;
 
 import java.time.Instant;
 import java.util.Map;
@@ -50,5 +51,20 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean deleteOrderById(long id) {
               return   ORDERS.remove(id) != null;
+    }
+
+    @Override
+    public CreatedOrder updateOrder(long id, UpdatableOrder updatableOrder) {
+        CreatedOrder order = ORDERS.get(id);
+
+        if (order == null) {
+            return null;
+        }
+
+        CreatedOrder updatedOrder = orderMapper.merge(order, updatableOrder);
+
+        ORDERS.put(id, updatedOrder);
+
+        return updatedOrder;
     }
 }

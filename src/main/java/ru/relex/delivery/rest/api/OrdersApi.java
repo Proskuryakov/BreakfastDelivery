@@ -10,6 +10,7 @@ import ru.relex.delivery.rest.exception.ObjectNotExistsException;
 import ru.relex.delivery.services.facade.OrderFacade;
 import ru.relex.delivery.services.model.order.CreatedOrder;
 import ru.relex.delivery.services.model.order.NewOrder;
+import ru.relex.delivery.services.model.order.UpdatableOrder;
 
 
 @RestController
@@ -56,6 +57,17 @@ public class OrdersApi {
       throw new ObjectNotExistsException();
     }
 
+    @PutMapping(path = "/{id}")
+    CreatedOrder updateOrder(@PathVariable("id") long id,
+                           @RequestBody UpdatableOrder updatableOrder) {
+        final var order = orderFacade.updateOrder(id, updatableOrder);
+
+        if (order == null) {
+            throw new ObjectNotExistsException();
+        }
+
+        return order;
+    }
 
 
 

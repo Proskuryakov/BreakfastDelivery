@@ -18,6 +18,14 @@ public interface OrderMapper {
     @Retention(RetentionPolicy.CLASS)
     @interface DefaultCreatedAtMapper {
     }
+    @Mapping(target = "check", source = "order.check")
+    @Mapping(target = "id", source = "order.id")
+    @Mapping(target = "userInfo", source = "updateData.userInfo" )
+    @Mapping(target = "createdAt", source = "order.createdAt" )
+    @Mapping(target = "listOfDishes", source = "order.listOfDishes" )
+    @Mapping(target = "status", source = "updateData.status")
+    CreatedOrder merge(CreatedOrder order, UpdatableOrder updateData);
+
     @Mapping(target = "check", source = "resCheck")
     @Mapping(target = "id", source = "newId")
     @Mapping(target = "createdAt", source = "order", qualifiedBy = DefaultCreatedAtMapper.class)
