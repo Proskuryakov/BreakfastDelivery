@@ -43,6 +43,7 @@ public class OrdersApi {
     CreatedOrder getOrderById(@PathVariable("id") long id) {
         final var order = orderFacade.getOrderById(id);
         if (order == null) {
+            logger.error("Order with such id does not exist");
              throw new ObjectNotExistsException();
         }
 
@@ -52,8 +53,11 @@ public class OrdersApi {
     @DeleteMapping(path="/{id}")
     void deleteOrder(@PathVariable("id") long id) {
         if (orderFacade.deleteOrderById(id)) {
+            logger.error("Order successful delete");
+
             return;
         }
+        logger.error("Delete Error. Order with such id does not exist");
       throw new ObjectNotExistsException();
     }
 
@@ -63,8 +67,11 @@ public class OrdersApi {
         final var order = orderFacade.updateOrder(id, updatableOrder);
 
         if (order == null) {
+            logger.error("Update Error. Order with such id does not exist");
+
             throw new ObjectNotExistsException();
         }
+        logger.error("Order successful update");
 
         return order;
     }

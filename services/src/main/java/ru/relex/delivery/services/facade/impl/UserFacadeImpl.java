@@ -23,17 +23,17 @@ public class UserFacadeImpl implements UserFacade {
   }
 
   @Override
-  public ExistingUser getById(long id) {
+  public ExistingUser getById(@Valid  long id) {
     return userService.getById(id);
   }
 
   @Override
-  public ExistingUser update(long id, UpdatableUser updatableUser) {
+  public ExistingUser update(@Valid  long id, UpdatableUser updatableUser) {
     return userService.update(id, updatableUser);
   }
 
   @Override
-  public boolean deleteById(long id) {
+  public boolean deleteById(@Valid  long id) {
     return userService.deleteById(id);
   }
 }

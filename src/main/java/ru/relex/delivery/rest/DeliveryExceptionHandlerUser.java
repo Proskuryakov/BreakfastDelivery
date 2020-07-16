@@ -14,7 +14,7 @@ import ru.relex.delivery.rest.model.ErrorModel;
 import ru.relex.delivery.services.validation.ValidationErrors;
 
 @ControllerAdvice
-public class DeliveryExceptionHandler {
+public class DeliveryExceptionHandlerUser {
 
   @ExceptionHandler(ObjectNotExistsException.class)
   ResponseEntity<?> handleNotFoundException(ObjectNotExistsException e) {

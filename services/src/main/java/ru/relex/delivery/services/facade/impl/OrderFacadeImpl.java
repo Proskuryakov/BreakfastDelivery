@@ -7,6 +7,8 @@ import ru.relex.delivery.services.model.order.CreatedOrder;
 import ru.relex.delivery.services.model.order.NewOrder;
 import ru.relex.delivery.services.model.order.UpdatableOrder;
 
+import javax.validation.Valid;
+
 @Facade
 
 public class OrderFacadeImpl implements OrderFacade {
@@ -18,22 +20,22 @@ public class OrderFacadeImpl implements OrderFacade {
     }
 
     @Override
-    public CreatedOrder createOrder(final NewOrder order) {
+    public CreatedOrder createOrder( @Valid final NewOrder order) {
         return orderService.createOrder(order);
     }
 
     @Override
-    public CreatedOrder getOrderById(long id) {
+    public CreatedOrder getOrderById(@Valid  long id) {
         return orderService.getOrderById(id);
     }
 
     @Override
-    public boolean deleteOrderById(long id) {
+    public boolean deleteOrderById(@Valid  long id) {
         return orderService.deleteOrderById(id);
     }
 
     @Override
-    public CreatedOrder updateOrder(long id, UpdatableOrder updatableOrder) {
+    public CreatedOrder updateOrder(@Valid  long id, UpdatableOrder updatableOrder) {
         return orderService.updateOrder(id, updatableOrder);
     }
 }
