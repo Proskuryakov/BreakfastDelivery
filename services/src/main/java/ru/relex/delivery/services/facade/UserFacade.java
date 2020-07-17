@@ -1,9 +1,9 @@
 package ru.relex.delivery.services.facade;
 
 import javax.validation.Valid;
-import ru.relex.delivery.services.model.ExistingUser;
-import ru.relex.delivery.services.model.NewUser;
-import ru.relex.delivery.services.model.UpdatableUser;
+import ru.relex.delivery.services.model.user.ExistingUser;
+import ru.relex.delivery.services.model.user.NewUser;
+import ru.relex.delivery.services.model.user.UpdatableUser;
 
 public interface UserFacade {
 

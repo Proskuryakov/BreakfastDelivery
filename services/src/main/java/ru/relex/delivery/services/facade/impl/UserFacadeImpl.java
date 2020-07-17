@@ -4,9 +4,9 @@ import javax.validation.Valid;
 import ru.relex.delivery.services.facade.UserFacade;
 import ru.relex.delivery.services.internal.UserService;
 import ru.relex.delivery.services.meta.Facade;
-import ru.relex.delivery.services.model.ExistingUser;
-import ru.relex.delivery.services.model.NewUser;
-import ru.relex.delivery.services.model.UpdatableUser;
+import ru.relex.delivery.services.model.user.ExistingUser;
+import ru.relex.delivery.services.model.user.NewUser;
+import ru.relex.delivery.services.model.user.UpdatableUser;
 
 @Facade
 public class UserFacadeImpl implements UserFacade {

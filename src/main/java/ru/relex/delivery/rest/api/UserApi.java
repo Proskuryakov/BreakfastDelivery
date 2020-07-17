@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ru.relex.delivery.rest.exception.ObjectNotExistsException;
 import ru.relex.delivery.services.facade.UserFacade;
-import ru.relex.delivery.services.model.ExistingUser;
-import ru.relex.delivery.services.model.NewUser;
-import ru.relex.delivery.services.model.UpdatableUser;
+import ru.relex.delivery.services.model.user.ExistingUser;
+import ru.relex.delivery.services.model.user.NewUser;
+import ru.relex.delivery.services.model.user.UpdatableUser;
 
 
 @RestController

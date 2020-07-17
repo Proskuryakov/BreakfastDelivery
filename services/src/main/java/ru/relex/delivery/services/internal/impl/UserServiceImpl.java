@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.relex.delivery.services.internal.UserService;
 import ru.relex.delivery.services.mapper.UserMapper;
-import ru.relex.delivery.services.model.ExistingUser;
-import ru.relex.delivery.services.model.NewUser;
-import ru.relex.delivery.services.model.UpdatableUser;
+import ru.relex.delivery.services.model.user.ExistingUser;
+import ru.relex.delivery.services.model.user.NewUser;
+import ru.relex.delivery.services.model.user.UpdatableUser;
 
 @Service
 public class UserServiceImpl implements UserService {

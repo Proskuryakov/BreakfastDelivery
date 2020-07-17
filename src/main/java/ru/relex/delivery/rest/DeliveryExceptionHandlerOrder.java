@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.relex.delivery.rest.exception.ObjectNotExistsException;
 import ru.relex.delivery.rest.model.ErrorModel;
-import ru.relex.delivery.services.validation.ValidationErrors;
 import ru.relex.delivery.services.validation.ValidationErrorsOrder;
 
 import javax.validation.ConstraintViolation;

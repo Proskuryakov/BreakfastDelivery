@@ -1,4 +1,4 @@
-package ru.relex.delivery.services.model;
+package ru.relex.delivery.services.model.user;
 
 import org.immutables.value.Value;
 

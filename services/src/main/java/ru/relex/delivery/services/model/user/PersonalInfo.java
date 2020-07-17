@@ -1,11 +1,11 @@
-package ru.relex.delivery.services.model;
+package ru.relex.delivery.services.model.user;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 import org.immutables.value.Value;
 import org.springframework.lang.Nullable;
-import ru.relex.delivery.services.validation.ValidationErrors;
+import ru.relex.delivery.services.validation.ValidationErrorsUser;
 
 @Value.Immutable
 @JsonDeserialize(builder = ImmutablePersonalInfo.Builder.class)
@@ -15,7 +15,7 @@ public interface PersonalInfo {
   @Length(
     min = 1,
     max = 50,
-    message = ValidationErrors.FIRST_NAME_LENGTH_IS_INVALID
+    message = ValidationErrorsUser.FIRST_NAME_LENGTH_IS_INVALID
   )
   String getFirstName();
 
@@ -23,11 +23,11 @@ public interface PersonalInfo {
   @Length(
     min = 1,
     max = 50,
-    message = ValidationErrors.LAST_NAME_LENGTH_IS_INVALID
+    message = ValidationErrorsUser.LAST_NAME_LENGTH_IS_INVALID
   )
   String getLastName();
 
-  @Pattern(regexp = "[a-zA-Z\\d-_.]+@[a-zA-Z\\d-_.]{3,}", message = ValidationErrors.EMAIL_HAS_INVALID_FORMAT)
+  @Pattern(regexp = "[a-zA-Z\\d-_.]+@[a-zA-Z\\d-_.]{3,}", message = ValidationErrorsUser.EMAIL_HAS_INVALID_FORMAT)
   String getEmail();
 
   @Pattern(regexp = "\\d{5,15}", message = "PHONE_FORMAT_IS_INVALID")

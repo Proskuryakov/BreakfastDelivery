@@ -1,4 +1,4 @@
-package ru.relex.delivery.services.model;
+package ru.relex.delivery.services.model.user;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.immutables.value.Value;

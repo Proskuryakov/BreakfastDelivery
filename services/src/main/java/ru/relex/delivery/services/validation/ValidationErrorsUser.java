@@ -2,10 +2,10 @@ package ru.relex.delivery.services.validation;
 
 import java.util.Map;
 
-public final class ValidationErrors {
+public final class ValidationErrorsUser {
   public static final String EMAIL_HAS_INVALID_FORMAT = "EMAIL_HAS_INVALID_FORMAT";
 
-  private ValidationErrors() {
+  private ValidationErrorsUser() {
   }
 
 

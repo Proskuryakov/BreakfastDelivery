@@ -5,7 +5,7 @@ import java.lang.annotation.RetentionPolicy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Qualifier;
-import ru.relex.delivery.services.model.*;
+import ru.relex.delivery.services.model.user.*;
 
 
 @Mapper

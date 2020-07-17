@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.relex.delivery.rest.exception.ObjectNotExistsException;
 import ru.relex.delivery.rest.model.ErrorModel;
-import ru.relex.delivery.services.validation.ValidationErrors;
+import ru.relex.delivery.services.validation.ValidationErrorsUser;
 
 @ControllerAdvice
 public class DeliveryExceptionHandlerUser {
@@ -25,7 +25,7 @@ public class DeliveryExceptionHandlerUser {
   ResponseEntity<List<ErrorModel>> handleConstraintViolationException(ConstraintViolationException e) {
     final Set<ConstraintViolation<?>> errors = e.getConstraintViolations();
     final var errorModels = errors.stream()
-      .map(err -> new ErrorModel(err.getMessage(), ValidationErrors.getMessageByCode(err.getMessage())))
+      .map(err -> new ErrorModel(err.getMessage(), ValidationErrorsUser.getMessageByCode(err.getMessage())))
       .collect(Collectors.toList());
 
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorModels);
