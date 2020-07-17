@@ -19,7 +19,6 @@ import ru.relex.delivery.services.model.user.ExistingUser;
 import ru.relex.delivery.services.model.user.NewUser;
 import ru.relex.delivery.services.model.user.UpdatableUser;
 
-
 @RestController
 @RequestMapping(
   value = "/users",

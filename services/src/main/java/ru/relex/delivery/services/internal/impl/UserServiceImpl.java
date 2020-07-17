@@ -5,11 +5,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.relex.delivery.services.internal.UserService;
 import ru.relex.delivery.services.mapper.UserMapper;
 import ru.relex.delivery.services.model.user.ExistingUser;
 import ru.relex.delivery.services.model.user.NewUser;
 import ru.relex.delivery.services.model.user.UpdatableUser;
+import ru.relex.delivery.services.internal.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {

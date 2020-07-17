@@ -7,7 +7,6 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Qualifier;
 import ru.relex.delivery.services.model.user.*;
 
-
 @Mapper
 public interface UserMapper {
 
@@ -31,5 +30,4 @@ public interface UserMapper {
       .builder()
       .build();
   }
-
 }
