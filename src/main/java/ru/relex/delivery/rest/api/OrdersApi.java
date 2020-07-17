@@ -1,0 +1,81 @@
+package ru.relex.delivery.rest.api;
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import ru.relex.delivery.rest.exception.ObjectNotExistsException;
+import ru.relex.delivery.services.facade.OrderFacade;
+import ru.relex.delivery.services.model.order.CreatedOrder;
+import ru.relex.delivery.services.model.order.NewOrder;
+import ru.relex.delivery.services.model.order.UpdatableOrder;
+
+
+@RestController
+@RequestMapping(
+        value = "/orders",
+        consumes = "application/json",
+        produces = "application/json"
+)
+public class OrdersApi {
+
+    private static final Logger logger = LoggerFactory.getLogger(OrdersApi.class);
+
+    private final OrderFacade orderFacade;
+
+    @Autowired
+    public OrdersApi(final OrderFacade userFacade) {
+        this.orderFacade = userFacade;
+    }
+
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    CreatedOrder createOrder(@RequestBody final NewOrder order) {
+        logger.info("Consumed: {}", order);
+
+        return orderFacade.createOrder(order);
+    }
+
+    @GetMapping(path="/{id}")
+    CreatedOrder getOrderById(@PathVariable("id") long id) {
+        final var order = orderFacade.getOrderById(id);
+        if (order == null) {
+            logger.error("Order with such id does not exist");
+             throw new ObjectNotExistsException();
+        }
+
+        return order;
+    }
+
+    @DeleteMapping(path="/{id}")
+    void deleteOrder(@PathVariable("id") long id) {
+        if (orderFacade.deleteOrderById(id)) {
+            logger.error("Order successful delete");
+
+            return;
+        }
+        logger.error("Delete Error. Order with such id does not exist");
+      throw new ObjectNotExistsException();
+    }
+
+    @PutMapping(path = "/{id}")
+    CreatedOrder updateOrder(@PathVariable("id") long id,
+                           @RequestBody UpdatableOrder updatableOrder) {
+        final var order = orderFacade.updateOrder(id, updatableOrder);
+
+        if (order == null) {
+            logger.error("Update Error. Order with such id does not exist");
+
+            throw new ObjectNotExistsException();
+        }
+        logger.error("Order successful update");
+
+        return order;
+    }
+
+
+
+}
