@@ -8,7 +8,7 @@ dependencies {
   compileOnly "org.immutables:value-annotations:$immVer"
   compileOnly "org.mapstruct:mapstruct:$msVer"
 
-
+  implementation "org.springframework.boot:spring-boot-autoconfigure:2.+"
   annotationProcessor "org.immutables:value-processor:$immVer"
   annotationProcessor "org.mapstruct:mapstruct-processor:$msVer"
 
@@ -18,6 +18,8 @@ dependencies {
   implementation "com.fasterxml.jackson.core:jackson-databind:2.11.1"
 
   implementation 'org.hibernate.validator:hibernate-validator:6.1.5.Final'
+
+
   //implementation 'org.projectlombok:lombok:1.18.12'
 }
 
