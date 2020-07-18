@@ -714,7 +714,6 @@ definitions:
       - "password"
       - "role"
       - "personalInfo"
-      - "listOfOrders"
     properties:
       username:
         type: "string"
