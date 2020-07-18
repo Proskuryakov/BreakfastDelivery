@@ -14,7 +14,7 @@ import ru.relex.uber.rest.model.ErrorModel;
 import ru.relex.uber.services.validation.ValidationErrors;
 
 @ControllerAdvice
-public class UberExceptionHandler {
+public class DeliveryExceptionHandlerUser {
 
   @ExceptionHandler(ObjectNotExistsException.class)
   ResponseEntity<?> handleNotFoundException(ObjectNotExistsException e) {

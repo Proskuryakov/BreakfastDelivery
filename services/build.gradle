@@ -13,6 +13,7 @@ dependencies {
   annotationProcessor "org.mapstruct:mapstruct-processor:$msVer"
 
   implementation "org.springframework:spring-context:5.2.7.RELEASE"
+  implementation "org.springframework.boot:spring-boot-autoconfigure:2.+"
 
   implementation "com.fasterxml.jackson.core:jackson-databind:2.11.1"
 

@@ -455,7 +455,6 @@ definitions:
     - "password"
     - "role"
     - "personalInfo"
-    - "listOfOrders"
     properties:
       username:
         type: "string"
@@ -478,13 +477,11 @@ definitions:
           firstName:
             type: "string"
             description: First name of the user
-            required: true
             minLength: 1
             maxLength: 50
           lastName:
             type: "string"
             description: Last name of the user
-            required: true
             minLength: 1
             maxLength: 50
           phone:
@@ -495,7 +492,6 @@ definitions:
             maxLength: 128  
       createdAt:
         type: "string"
-        required: true
         format: "date-time"
         example: "2020-07-13T10:30:00Z"
       createdBy:
@@ -537,13 +533,11 @@ definitions:
           firstName:
             type: "string"
             description: First name of the user
-            required: true
             minLength: 1
             maxLength: 50
           lastName:
             type: "string"
             description: Last name of the user
-            required: true
             minLength: 1
             maxLength: 50
           phone:
@@ -554,7 +548,6 @@ definitions:
             maxLength: 128  
       createdAt:
         type: "string"
-        required: true
         format: "date-time"
         example: "2020-07-13T10:30:00Z"
       createdBy:

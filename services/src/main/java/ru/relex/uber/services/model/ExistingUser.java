@@ -2,6 +2,8 @@ package ru.relex.uber.services.model;
 
 import org.immutables.value.Value;
 
+import java.util.List;
+
 @Value.Immutable
 public interface ExistingUser extends BaseUser {
 
@@ -10,5 +12,7 @@ public interface ExistingUser extends BaseUser {
   String getUsername();
 
   UserStatus getStatus();
+
+  List<String> getListOfOrders();
 
 }
