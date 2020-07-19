@@ -29,12 +29,13 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public CreatedOrder createOrder(NewOrder order) {
         double check = 0;
-        for (int i = 0; i < order.getListOfDishes().size(); i++) {
-            check +=  order.getListOfDishes().get(i).getCount()  *  Double.parseDouble(order.getListOfDishes().get(i).getMainDishInfo().getDishPrice()) ;
-        }
-        //double check = 1000;
-        long newId = lastId.addAndGet(1);
+        //по id продукта получим финальную стоимость
+//        for (int i = 0; i < order.getListOfDishes().size(); i++) {
+//            check +=  order.getListOfDishes().get(i).getCount()*Double.parseDouble(order.getListOfDishes().get(i).getDishId()      ) ;
+//        }
+         long newId = lastId.addAndGet(1);
         CreatedOrder createdOrder = orderMapper.fromNewOrder(order, newId, check);
+
         ORDERS.put(newId, createdOrder);
         return createdOrder;
     }

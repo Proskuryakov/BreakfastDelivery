@@ -22,7 +22,7 @@ class OrderServiceTest {
             .listOfDishes(Arrays.asList(ImmutablePositionInOrder
                     .builder()
                     .count(1)
-                    .mainDishInfo(ImmutableMainDishInfo.builder().dishPrice("500").dishName("dfdf").build())
+                    .dishId(56)
                     .build()))
             .address(ImmutableAddress
                     .builder()
@@ -38,7 +38,7 @@ class OrderServiceTest {
     private static final CreatedOrder createdOrder = ImmutableCreatedOrder
             .builder()
             .id(1)
-            .check(1234)
+            .check(0)
             .createdAt(ImmutableCreatedAt.builder().build())
             .status(ImmutableOrderStatus.builder().build())
             .from(newOrder)
@@ -52,7 +52,7 @@ class OrderServiceTest {
                 Mockito.argThat(a -> !newOrder.equals(a)), Mockito.anyLong(), Mockito.anyDouble()))
                 .thenThrow(new RuntimeException());
 
-        Mockito.when(mock.fromNewOrder(newOrder, 1L, 1000D)).thenReturn(createdOrder);
+        Mockito.when(mock.fromNewOrder(newOrder, 1L, 0)).thenReturn(createdOrder);
         Mockito.when(mock.merge(Mockito.any(), Mockito.any())).thenThrow(new RuntimeException());
         Mockito.when(mock.defaultStatusMapper(Mockito.any())).thenThrow(new RuntimeException());
 

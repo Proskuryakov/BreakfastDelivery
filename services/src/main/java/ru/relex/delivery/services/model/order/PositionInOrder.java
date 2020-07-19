@@ -11,6 +11,7 @@ import ru.relex.delivery.services.model.dish.MainDishInfo;
 @JsonDeserialize(builder = ImmutablePositionInOrder.Builder.class)
  public interface  PositionInOrder {
     @JsonDeserialize(builder = ImmutableCreatedDish.Builder.class)
-    MainDishInfo getMainDishInfo();
+    //MainDishInfo getMainDishInfo();
+    long getDishId();
     long getCount();
 }
