@@ -8,8 +8,8 @@ import org.immutables.value.Value;
 @JsonDeserialize(builder = ImmutableOrderStatus.Builder.class)
 public interface OrderStatus {
 
-default String getStatus() {
-        return "order is cooking";
+default Statuses getStatus() {
+        return Statuses.ORDER_IN_PROCESSING;
     }
 
 }

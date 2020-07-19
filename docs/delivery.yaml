@@ -476,51 +476,68 @@ definitions:
   NewOrder:
     type: "object"
     required:
-      - "userInfo"
+      - "address"
       - "listOfDishes"
-      - "check"
+      - "phone"
     properties:
-      userInfo:
+      phone:
+        type: "string"
+        maxLength: 15
+      address:
         type: "object"
         properties:
-          firstName:
+          city:
             type: "string"
-            description: First name of the user
+            description: city for delivery
             minLength: 1
             maxLength: 50
-          lastName:
+          street:
             type: "string"
-            description: Last name of the user
+            description: street for delivery
             minLength: 1
             maxLength: 50
-          phone:
+          house:
             type: "string"
-            maxLength: 15
+            description: house for delivery
+            minLength: 1
+            maxLength: 50
+          flat:
+            type: "string"
+            description: flat for delivery
+            minLength: 1
+            maxLength: 50
+          entrance:
+            type: "string"
+            description: entrance for delivery
+            minLength: 1
+            maxLength: 50
       listOfDishes:
         type: array
         items:
           $ref: "#/definitions/PositionInOrder"
+
   PositionInOrder:
     type: "object"
     required:
       - "count"
       - "dishInfo"
-
     properties:
       count:
         type: "integer"
         format: "int64"
         minimum: 1
-      dishInfo:
+      mainDishInfo:
         type: "object"
         items:
           $ref: "#/definitions/CreatedDish"
+
   CreatedOrder:
     type: "object"
     required:
       - "createdAt"
       - "orderId"
-      - "userInfo"
+      - "phone"
+      - "address"
       - "listOfDishes"
       - "check"
     properties:
@@ -536,22 +553,9 @@ definitions:
         type: "string"
         minLength: 1
         example: "Заказ готовится"
-      userInfo:
-        type: "object"
-        properties:
-          firstName:
-            type: "string"
-            description: First name of the user
-            minLength: 1
-            maxLength: 50
-          lastName:
-            type: "string"
-            description: Last name of the user
-            minLength: 1
-            maxLength: 50
-          phone:
-            type: "string"
-            maxLength: 15
+      phone:
+        type: "string"
+        maxLength: 15
       listOfDishes:
         type: array
         items:
@@ -559,29 +563,11 @@ definitions:
       check:
         type: "number"
         format: "double"
+
   UpdatableOrder:
     type: "object"
     properties:
-      userInfo:
-        type: "object"
-        properties:
-          firstName:
-            type: "string"
-            description: First name of the user
-            minLength: 1
-            maxLength: 50
-          lastName:
-            type: "string"
-            description: Last name of the user
-            minLength: 1
-            maxLength: 50
-          phone:
-            type: "string"
-            maxLength: 15
-      listOfDishes:
-        type: array
-        items:
-          $ref: "#/definitions/PositionInOrder"
+
       status:
         type: "object"
         properties:

@@ -30,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
     public CreatedOrder createOrder(NewOrder order) {
         double check = 0;
         for (int i = 0; i < order.getListOfDishes().size(); i++) {
-            check +=  order.getListOfDishes().get(i).getCount()  *  Double.parseDouble(order.getListOfDishes().get(i).getDishInfo().getMainDishInfo().getDishPrice()) ;
+            check +=  order.getListOfDishes().get(i).getCount()  *  Double.parseDouble(order.getListOfDishes().get(i).getMainDishInfo().getDishPrice()) ;
         }
         //double check = 1000;
         long newId = lastId.addAndGet(1);

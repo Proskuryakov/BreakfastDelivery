@@ -5,7 +5,7 @@ import org.immutables.value.Value;
 
 @Value.Immutable
 @JsonDeserialize(builder = ImmutableUpdatableOrder.Builder.class)
-public interface UpdatableOrder extends BaseOrder{
+public interface UpdatableOrder {
 
     OrderStatus getStatus();
 

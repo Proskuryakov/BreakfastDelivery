@@ -20,7 +20,7 @@ public interface OrderMapper {
     }
     @Mapping(target = "check", source = "order.check")
     @Mapping(target = "id", source = "order.id")
-    @Mapping(target = "userInfo", source = "updateData.userInfo" )
+    @Mapping(target = "address", source = "order.address" )
     @Mapping(target = "createdAt", source = "order.createdAt" )
     @Mapping(target = "listOfDishes", source = "order.listOfDishes" )
     @Mapping(target = "status", source = "updateData.status")

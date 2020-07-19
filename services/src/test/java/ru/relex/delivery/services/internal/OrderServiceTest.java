@@ -22,25 +22,17 @@ class OrderServiceTest {
             .listOfDishes(Arrays.asList(ImmutablePositionInOrder
                     .builder()
                     .count(1)
-                    .dishInfo(ImmutableCreatedDish
-                            .builder()
-                            .dishId(2)
-                            .mainDishInfo(ImmutableMainDishInfo
-                                    .builder()
-                                    .dishName("fuci")
-                                    .dishPrice("125")
-                                    .build())
-                            .dishCalories(125)
-                            .dishCookingTimeMinutes(45)
-                            .dishType(DishType.MAIN)
-                            .build())
+                    .mainDishInfo(ImmutableMainDishInfo.builder().dishPrice("500").dishName("dfdf").build())
                     .build()))
-            .userInfo(ImmutableUserInfo
+            .address(ImmutableAddress
                     .builder()
-                    .firstName("marina")
-                    .lastName("gerasimova")
-                    .phone("89204129865")
+                    .city("voronezh")
+                    .street("lesnaya")
+                    .house("565")
+                    .flat("12")
+                    .entrance("5")
                     .build())
+            .phone("8950383839")
             .build();
 
     private static final CreatedOrder createdOrder = ImmutableCreatedOrder
