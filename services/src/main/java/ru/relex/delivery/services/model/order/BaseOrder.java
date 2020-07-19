@@ -10,7 +10,7 @@ import java.util.List;
 public interface BaseOrder {
     @Nullable
     @NotEmpty(message = ValidationErrorsOrder.LIST_OF_DISHES_MUST_BE_SET)
-    List<String> getListOfDishes();
+    List<PositionInOrder> getListOfDishes();
 
     @Valid
     @Nullable

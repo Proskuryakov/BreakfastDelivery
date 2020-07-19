@@ -1,4 +1,4 @@
-package ru.relex.delivery.services.facade.impl;
+package ru.relex.delivery.services.facade.impl.order;
 
 import ru.relex.delivery.services.facade.OrderFacade;
 import ru.relex.delivery.services.internal.OrderService;

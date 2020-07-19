@@ -28,8 +28,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public CreatedOrder createOrder(NewOrder order) {
-        //позже я добавлю проход по списку блюд с ценами
-        double check = 1000;
+        double check = 0;
+        for (int i = 0; i < order.getListOfDishes().size(); i++) {
+            check +=  order.getListOfDishes().get(i).getCount()  *  Double.parseDouble(order.getListOfDishes().get(i).getDishInfo().getMainDishInfo().getDishPrice()) ;
+        }
+        //double check = 1000;
         long newId = lastId.addAndGet(1);
         CreatedOrder createdOrder = orderMapper.fromNewOrder(order, newId, check);
         ORDERS.put(newId, createdOrder);

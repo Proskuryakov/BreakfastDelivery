@@ -1,11 +1,17 @@
 package ru.relex.delivery.services.internal;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import ru.relex.delivery.services.internal.impl.OrderServiceImpl;
 import ru.relex.delivery.services.mapper.OrderMapper;
+import ru.relex.delivery.services.model.dish.DishType;
+import ru.relex.delivery.services.model.dish.ImmutableCreatedDish;
+import ru.relex.delivery.services.model.dish.ImmutableMainDishInfo;
+import ru.relex.delivery.services.model.dish.ImmutableNewDish;
 import ru.relex.delivery.services.model.order.*;
+
 import java.util.Arrays;
 
 class OrderServiceTest {
@@ -13,7 +19,22 @@ class OrderServiceTest {
 
     private static final NewOrder newOrder = ImmutableNewOrder
             .builder()
-            .listOfDishes(Arrays.asList("Java", "Scala", "Groovy"))
+            .listOfDishes(Arrays.asList(ImmutablePositionInOrder
+                    .builder()
+                    .count(1)
+                    .dishInfo(ImmutableCreatedDish
+                            .builder()
+                            .dishId(2)
+                            .mainDishInfo(ImmutableMainDishInfo
+                                    .builder()
+                                    .dishName("fuci")
+                                    .dishPrice("125")
+                                    .build())
+                            .dishCalories(125)
+                            .dishCookingTimeMinutes(45)
+                            .dishType(DishType.MAIN)
+                            .build())
+                    .build()))
             .userInfo(ImmutableUserInfo
                     .builder()
                     .firstName("marina")
