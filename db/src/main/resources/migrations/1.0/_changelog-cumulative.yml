@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - preConditions:
+      - dbms:
+          type: postgresql
+  - changeSet:
+      id: DELIVERY-1-20200719-2345
+      author: stupak
+      comment: Create initial information
+      changes:
+        - sqlFile:
+            path: DELIVERY-1-20200719-2345.sql
+            relativeToChangelogFile: true
+
+

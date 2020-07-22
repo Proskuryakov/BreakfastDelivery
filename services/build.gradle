@@ -4,10 +4,10 @@ ext {
 }
 
 dependencies {
-
+  implementation(project(":db"))
   compileOnly "org.immutables:value-annotations:$immVer"
   compileOnly "org.mapstruct:mapstruct:$msVer"
-
+  implementation 'org.springframework:spring-tx:5.2.7.RELEASE'
   implementation "org.springframework.boot:spring-boot-autoconfigure:2.+"
   annotationProcessor "org.immutables:value-processor:$immVer"
   annotationProcessor "org.mapstruct:mapstruct-processor:$msVer"

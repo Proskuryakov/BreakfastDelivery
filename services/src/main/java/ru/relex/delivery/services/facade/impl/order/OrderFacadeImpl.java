@@ -1,5 +1,6 @@
 package ru.relex.delivery.services.facade.impl.order;
 
+import org.springframework.transaction.annotation.Transactional;
 import ru.relex.delivery.services.facade.OrderFacade;
 import ru.relex.delivery.services.internal.OrderService;
 import ru.relex.delivery.services.meta.Facade;
@@ -10,7 +11,7 @@ import ru.relex.delivery.services.model.order.UpdatableOrder;
 import javax.validation.Valid;
 
 @Facade
-
+@Transactional
 public class OrderFacadeImpl implements OrderFacade {
 
     private final OrderService orderService;

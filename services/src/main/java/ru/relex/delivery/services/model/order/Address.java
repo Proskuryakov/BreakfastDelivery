@@ -22,7 +22,7 @@ public interface Address {
     @Nullable
     @Length(
             min = 1,
-            max = 50,
+            max = 100,
             message = ValidationErrorsOrder.STREET_LENGTH_IS_INVALID
     )
     String getStreet();
@@ -30,21 +30,28 @@ public interface Address {
     @NotNull
     @Length(
             min = 1,
-            max = 5,
+            max = 10,
             message = ValidationErrorsOrder.HOUSE_LENGTH_IS_INVALID
     )      String getHouse();
     @Nullable
     @NotNull
     @Length(
             min = 1,
-            max = 5,
+            max = 10,
             message = ValidationErrorsOrder.FLAT_LENGTH_IS_INVALID
     )      String getFlat();
     @Nullable
     @NotNull
     @Length(
             min = 1,
-            max = 5,
+            max = 10,
             message = ValidationErrorsOrder.ENTRANCE_LENGTH_IS_INVALID
     )      String getEntrance();
+    @Nullable
+    @NotNull
+    @Length(
+            min = 1,
+            max = 10,
+            message = ValidationErrorsOrder.FLOOR_LENGTH_IS_INVALID
+    )      String getFloor();
 }

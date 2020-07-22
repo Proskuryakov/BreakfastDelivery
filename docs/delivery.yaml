@@ -490,27 +490,32 @@ definitions:
             type: "string"
             description: city for delivery
             minLength: 1
-            maxLength: 50
+            maxLength: 100
           street:
             type: "string"
             description: street for delivery
             minLength: 1
-            maxLength: 50
+            maxLength: 100
           house:
             type: "string"
             description: house for delivery
             minLength: 1
-            maxLength: 50
+            maxLength: 10
           flat:
             type: "string"
             description: flat for delivery
             minLength: 1
-            maxLength: 50
+            maxLength: 10
           entrance:
             type: "string"
             description: entrance for delivery
             minLength: 1
-            maxLength: 50
+            maxLength: 10
+          floor:
+            type: "string"
+            description: floor for delivery
+            minLength: 1
+            maxLength: 10
       listOfDishes:
         type: array
         items:
@@ -526,11 +531,11 @@ definitions:
         type: "integer"
         format: "int64"
         minimum: 1
-      mainDishInfo:
-        type: "object"
-        items:
-          $ref: "#/definitions/CreatedDish"
+      dishId:
 
+        type: "integer"
+        format: "int64"
+        minimum: 1
   CreatedOrder:
     type: "object"
     required:

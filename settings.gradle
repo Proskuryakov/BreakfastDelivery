@@ -1,4 +1,6 @@
 rootProject.name = 'delivery'
 
 include 'services'
+include 'db'
+
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ru.relex.uber.db.mapper.UserMapper">
+
+    <select id="createOrder"
+            parameterType="ru.relex.delivery.db.model.OrderModel"
+            resultType="ru.relex.delivery.db.model.OrderModel">
+        INSERT INTO orders (order_id, phone, city, street, house, flat, entrance , floor  , status_id)
+        VALUES (#{order_id}, #{phone}, #{city}, #{street}, #{house}, #{flat}, #{entrance}, #{floor}, #{status_id})
+        RETURNING order_id, created_at
+    </select>
+
+
+</mapper>
