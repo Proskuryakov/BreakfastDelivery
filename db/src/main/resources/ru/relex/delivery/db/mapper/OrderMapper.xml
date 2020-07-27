@@ -14,11 +14,10 @@
     </select>
 
 
-<!--    <insert  id="addPositionOfOrder"-->
-<!--            parameterType="map">-->
-<!-- INSERT INTO dishesfromorder (  order_id,  dish_id , count   )-->
-<!--        VALUES (  #{order_id}, #{dish_id}, #{count}  )-->
-<!--        RETURNING order_id AS id, dish_id AS dishId, position_id  AS positionId-->
-<!--    </insert >-->
+    <insert  id="addPositionOfOrder"  parameterType="map">
+ INSERT INTO dishesfromorder (  order_id  ,  dish_id , count   )
+        VALUES (  #{order_id}  , #{dish_id}, #{count}  )
+
+    </insert >
 
 </mapper>

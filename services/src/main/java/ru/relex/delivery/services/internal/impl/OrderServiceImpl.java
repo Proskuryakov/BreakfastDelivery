@@ -35,9 +35,12 @@ public class OrderServiceImpl implements OrderService {
 
         final var model = orderStruct.fromNewOrder(order );
         OrderModel newOrder = orderMapper.createOrder(model);
-//        for (int i = 0; i < order.getListOfDishes().size(); i++) {
-//            orderMapper.addPositionOfOrder(newOrder.getId(), order.getListOfDishes().get(i).getDishId(),order.getListOfDishes().get(i).getCount() );
-//        }
+        long id = newOrder.getId();
+        for (int i = 0; i < order.getListOfDishes().size(); i++) {
+            orderMapper.addPositionOfOrder(id, order.getListOfDishes().get(i).getDishId(),order.getListOfDishes().get(i).getCount() );
+        }
+
+
          //по id продукта получим финальную стоимость
 //        for (int i = 0; i < order.getListOfDishes().size(); i++) {
 //            check +=  order.getListOfDishes().get(i).getCount()*Double.parseDouble(order.getListOfDishes().get(i).getDishId()      ) ;

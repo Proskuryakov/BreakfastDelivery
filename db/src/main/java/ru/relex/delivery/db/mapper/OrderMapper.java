@@ -25,11 +25,20 @@ public interface OrderMapper {
             "WHERE  order_id = #{id}"
 
     )
-    //void addPositionOfOrder(@Param("orderId") long orderId,@Param("dishId") long dishId, @Param("count") long count );
-
-
-
     OrderModel findById(@Param("id") long id);
+//    @Select("" +
+//            "SELECT   order_id AS orderId, " +
+//            "       dish_id AS dishId," +
+//            "       count," +
+//            "FROM dishesOfOrder   "+
+//            "WHERE  order_id = #{orderId}"
+//
+//    )
+    void addPositionOfOrder(@Param("order_id") long orderId,@Param("dish_id") long dishId, @Param("count") long count );
+
+
+
+
 
 }
 
