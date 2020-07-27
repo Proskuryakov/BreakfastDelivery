@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - preConditions:
+      - dbms:
+          type: postgresql
+  - changeSet:
+      id: DELIVERY-1-20200717-1121
+      author: nskornyakov
+      comment: Create initial information
+      changes:
+        - sqlFile:
+            path: DELIVERY-1-20200717-1121.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: DELIVERY-1-20200717-1444
+      author: nskornyakov
+      comment: Fill roles tables
+      changes:
+        - sqlFile:
+            path: DELIVERY-1-20200717-1444.sql
+            relativeToChangelogFile: true
