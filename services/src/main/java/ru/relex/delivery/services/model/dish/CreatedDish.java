@@ -5,5 +5,5 @@ import org.immutables.value.Value;
 @Value.Immutable
 public interface CreatedDish extends BaseDish {
 
-  long getDishId();
+  long getId();
 }

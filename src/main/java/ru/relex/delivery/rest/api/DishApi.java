@@ -36,8 +36,8 @@ public class DishApi {
     return dishFacade.createDish(dish);
   }
 
-  @GetMapping(path = "/{dishId}")
-  CreatedDish getById(@PathVariable("dishId") long id) {
+  @GetMapping(path = "/{id}")
+  CreatedDish getById(@PathVariable("id") long id) {
 
     final var dish = dishFacade.getById(id);
     if (dish == null) {

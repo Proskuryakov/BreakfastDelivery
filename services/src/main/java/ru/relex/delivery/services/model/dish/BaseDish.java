@@ -1,6 +1,7 @@
 package ru.relex.delivery.services.model.dish;
 
 import org.springframework.lang.Nullable;
+import ru.relex.delivery.commons.model.DishType;
 import ru.relex.delivery.services.validation.ValidationErrorsDish;
 
 import javax.validation.Valid;
