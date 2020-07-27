@@ -35,7 +35,11 @@ allprojects {
 
   }
 
-
+  if (name != 'commons') {
+    dependencies {
+      implementation(project(":commons"))
+    }
+  }
   test {
     useJUnitPlatform()
   }

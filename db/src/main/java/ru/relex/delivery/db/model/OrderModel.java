@@ -1,5 +1,7 @@
 package ru.relex.delivery.db.model;
 import lombok.*;
+import ru.relex.delivery.commons.model.PositionInOrder;
+import ru.relex.delivery.commons.model.StatusesOfOrder;
 
 import java.time.Instant;
 import java.util.List;
@@ -9,7 +11,8 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode(exclude = {
-        "created_at",
+        "id",
+        "createdAt",
         "phone",
         "city",
         "street",
@@ -17,20 +20,21 @@ import java.util.List;
         "flat",
         "entrance",
         "floor",
-        "status_id"
+        "statusId"
 })
 
 public class OrderModel {
-    public long order_id;
-    public Instant created_at;
-    public String city;
-    public String street;
-    public String house;
-    public String flat;
-    public String entrance;
-    public String floor;
-    public long status_id;
-     public String phone;
+    private long id;
+    private Instant createdAt;
+    private String city;
+    private String street;
+    private String house;
+    private String flat;
+    private String entrance;
+    private String floor;
+    private StatusesOfOrder statusId;
+    private String phone;
+    private List<PositionInOrder> listOfDishes;
 
 
 }

@@ -11,7 +11,7 @@ import ru.relex.delivery.services.model.order.UpdatableOrder;
 import javax.validation.Valid;
 
 @Facade
-@Transactional
+
 public class OrderFacadeImpl implements OrderFacade {
 
     private final OrderService orderService;
@@ -21,6 +21,7 @@ public class OrderFacadeImpl implements OrderFacade {
     }
 
     @Override
+    @Transactional
     public CreatedOrder createOrder( @Valid final NewOrder order) {
         return orderService.createOrder(order);
     }

@@ -1,6 +1,7 @@
 package ru.relex.delivery.services.model.order;
 
 import org.immutables.value.Value;
+import ru.relex.delivery.commons.model.StatusesOfOrder;
 
 import java.time.Instant;
 
@@ -10,7 +11,7 @@ public interface CreatedOrder extends BaseOrder {
 
     long getId();
 
-    OrderStatus getStatus();
+    StatusesOfOrder getStatus();
 
     double getCheck();
 }

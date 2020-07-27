@@ -3,12 +3,10 @@ databaseChangeLog:
       - dbms:
           type: postgresql
   - changeSet:
-      id: DELIVERY-1-20200719-2345
-      author: stupak
+      id: DELIVERY-1-20200719-1518
+      author: dasha
       comment: Create initial information
       changes:
         - sqlFile:
-            path: DELIVERY-1-20200719-2345.sql
+            path: DELIVERY-1-20200719-1518.sql
             relativeToChangelogFile: true
-
-

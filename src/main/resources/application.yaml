@@ -1,12 +1,20 @@
 server:
   servlet:
     context-path: /api
+
 spring:
   liquibase:
     change-log: classpath*:migrations/master-changelog.yaml
 
+
   datasource:
-    url: jdbc:postgresql://localhost:5432/delivery
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password:  1111
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  type-handlers-package: ru.relex.delivery.db.handler
+
 

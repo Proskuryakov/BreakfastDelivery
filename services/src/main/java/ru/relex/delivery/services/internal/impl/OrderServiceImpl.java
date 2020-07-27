@@ -2,11 +2,11 @@ package ru.relex.delivery.services.internal.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.relex.delivery.commons.model.StatusesOfOrder;
 import ru.relex.delivery.db.mapper.OrderMapper;
 import ru.relex.delivery.db.model.OrderModel;
 import ru.relex.delivery.services.internal.OrderService;
 import ru.relex.delivery.services.mapper.OrderStruct;
-import ru.relex.delivery.services.mapper.UserMapper;
 import ru.relex.delivery.services.model.order.CreatedOrder;
 import ru.relex.delivery.services.model.order.NewOrder;
 import ru.relex.delivery.services.model.order.UpdatableOrder;
@@ -23,40 +23,40 @@ public class OrderServiceImpl implements OrderService {
     private final OrderStruct orderStruct;
     private final OrderMapper orderMapper;
     @Autowired
-    public OrderServiceImpl(OrderMapper orderMapper,OrderStruct orderStruct) {
+    public OrderServiceImpl(OrderMapper orderMapper, OrderStruct orderStruct) {
         this.orderMapper = orderMapper;
         this.orderStruct = orderStruct;
     }
 
-
-
     @Override
     public CreatedOrder createOrder(NewOrder order) {
-
-
-
-
-
-
         double check = 0;
 
-        final var model = orderStruct.fromNewOrder(order, check);
+
+        final var model = orderStruct.fromNewOrder(order );
         OrderModel newOrder = orderMapper.createOrder(model);
+//        for (int i = 0; i < order.getListOfDishes().size(); i++) {
+//            orderMapper.addPositionOfOrder(newOrder.getId(), order.getListOfDishes().get(i).getDishId(),order.getListOfDishes().get(i).getCount() );
+//        }
          //по id продукта получим финальную стоимость
 //        for (int i = 0; i < order.getListOfDishes().size(); i++) {
 //            check +=  order.getListOfDishes().get(i).getCount()*Double.parseDouble(order.getListOfDishes().get(i).getDishId()      ) ;
 //        }
         // long newId = lastId.addAndGet(1);
        // CreatedOrder createdOrder = orderMapper.fromNewOrder(order, newId, check);
-
         //ORDERS.put(newId, createdOrder);
-        return orderStruct.toCreatedOrder(model, newOrder.order_id, newOrder.created_at);
+        return orderStruct.toCreatedOrder(model, newOrder.getId(), newOrder.getCreatedAt(), 0, StatusesOfOrder.ORDER_IN_PROCESSING);
     }
 
     @Override
     public CreatedOrder getOrderById(long id) {
-        return orderStruct.toCreatedOrder(orderMapper.findById(id));
+        return null;
     }
+
+//    @Override
+//    public CreatedOrder getOrderById(long id) {
+//        return orderStruct.toCreatedOrder(orderMapper.findById(id));
+//    }
 
     @Override
     public boolean deleteOrderById(long id) {

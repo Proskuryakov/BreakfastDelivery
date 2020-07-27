@@ -1,4 +1,4 @@
-package ru.relex.delivery.services.model.order;
+package ru.relex.delivery.commons.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.immutables.value.Value;
@@ -6,7 +6,7 @@ import org.immutables.value.Value;
 
 @Value.Immutable
 @JsonDeserialize(builder = ImmutablePositionInOrder.Builder.class)
- public interface  PositionInOrder {
+ public interface PositionInOrder {
    // @JsonDeserialize(builder = ImmutableCreatedDish.Builder.class)
     //MainDishInfo getMainDishInfo();
     long getDishId();

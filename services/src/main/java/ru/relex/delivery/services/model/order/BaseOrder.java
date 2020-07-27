@@ -1,6 +1,7 @@
 package ru.relex.delivery.services.model.order;
 
 import org.springframework.lang.Nullable;
+import ru.relex.delivery.commons.model.PositionInOrder;
 import ru.relex.delivery.services.validation.ValidationErrorsOrder;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
