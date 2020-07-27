@@ -8,10 +8,11 @@
     <select id="createOrder"
             parameterType="ru.relex.delivery.db.model.OrderModel"
             resultType="ru.relex.delivery.db.model.OrderModel">
-        INSERT INTO orders (  phone, city, street, house, flat, entrance , floor   )
-        VALUES (  #{phone}, #{city}, #{street}, #{house}, #{flat}, #{entrance}, #{floor} )
-        RETURNING order_id AS id, created_at AS createdAt
+        INSERT INTO orders (  phone, city, street, house, flat, entrance , floor, checkres , status_id  )
+        VALUES (  #{phone}, #{city}, #{street}, #{house}, #{flat}, #{entrance}, #{floor}  , #{checkres},#{statusId} )
+        RETURNING order_id AS id, created_at AS createdAt, status_id AS statusId
     </select>
+
 
 
     <insert  id="addPositionOfOrder"  parameterType="map">
@@ -19,5 +20,10 @@
         VALUES (  #{order_id}  , #{dish_id}, #{count}  )
 
     </insert >
+
+
+<!--    <delete  id="deleteOrder"  parameterType="map">-->
+<!-- DELETE FROM dishesfromorder WHERE position_id = #{position_id}-->
+<!--    </delete >-->
 
 </mapper>

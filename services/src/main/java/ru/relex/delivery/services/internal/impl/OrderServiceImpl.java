@@ -2,15 +2,19 @@ package ru.relex.delivery.services.internal.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.relex.delivery.commons.model.PositionInOrder;
 import ru.relex.delivery.commons.model.StatusesOfOrder;
 import ru.relex.delivery.db.mapper.OrderMapper;
 import ru.relex.delivery.db.model.OrderModel;
+import ru.relex.delivery.db.model.PositionInOrderModel;
 import ru.relex.delivery.services.internal.OrderService;
 import ru.relex.delivery.services.mapper.OrderStruct;
 import ru.relex.delivery.services.model.order.CreatedOrder;
 import ru.relex.delivery.services.model.order.NewOrder;
 import ru.relex.delivery.services.model.order.UpdatableOrder;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -33,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
         double check = 0;
 
 
-        final var model = orderStruct.fromNewOrder(order );
+        final var model = orderStruct.fromNewOrder(order, 0,1 );
         OrderModel newOrder = orderMapper.createOrder(model);
         long id = newOrder.getId();
         for (int i = 0; i < order.getListOfDishes().size(); i++) {
@@ -48,12 +52,39 @@ public class OrderServiceImpl implements OrderService {
         // long newId = lastId.addAndGet(1);
        // CreatedOrder createdOrder = orderMapper.fromNewOrder(order, newId, check);
         //ORDERS.put(newId, createdOrder);
-        return orderStruct.toCreatedOrder(model, newOrder.getId(), newOrder.getCreatedAt(), 0, StatusesOfOrder.ORDER_IN_PROCESSING);
+        return orderStruct.toCreatedOrder(model, newOrder.getId(), newOrder.getCreatedAt(), 0, StatusesOfOrder.fromId(newOrder.getStatusId()));
     }
 
     @Override
     public CreatedOrder getOrderById(long id) {
-        return null;
+OrderModel om = orderMapper.getOrder(id);
+if(om!= null){
+    Integer idstatus = om.getStatusId();
+    System.out.println(idstatus);
+
+    List<PositionInOrderModel> positions = orderMapper.getPositionOfOrder(id);
+    List<PositionInOrder> createdList = new ArrayList<>();
+
+    //получить
+    for (int i = 0; i <positions.size() ; i++) {
+        int finalI = i;
+        createdList.add(new PositionInOrder() {
+            @Override
+            public long getDishId() {
+                return positions.get(finalI).getDishid();
+            }
+
+            @Override
+            public long getCount() {
+                return positions.get(finalI).getCount();
+            }
+        });
+    }
+
+
+    return orderStruct.toCreatedOrder(orderMapper.getOrder(id), StatusesOfOrder.fromId(idstatus),createdList );
+}else  return orderStruct.toCreatedOrder(orderMapper.getOrder(id) );
+
     }
 
 //    @Override

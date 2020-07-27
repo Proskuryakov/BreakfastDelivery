@@ -1,5 +1,6 @@
 
- CREATE TABLE  orders
+drop table orders ,dishesFromOrder cascade;
+CREATE TABLE  orders
 (
     order_id    SERIAL PRIMARY KEY,
     created_at TIMESTAMP    NOT NULL DEFAULT NOW(),
@@ -10,8 +11,10 @@
     flat   VARCHAR(10)  NOT NULL ,
     entrance   VARCHAR(10)  NOT NULL,
     floor   VARCHAR(10)  NOT NULL ,
-    status_id INTEGER DEFAULT 1
+     status_id INTEGER DEFAULT '1',
+       checkres INTEGER
  );
+
  CREATE TABLE  dishesFromOrder
 (
      position_id    SERIAL PRIMARY KEY,
@@ -20,7 +23,6 @@
      dish_id VARCHAR(50)  NOT NULL,
      FOREIGN KEY (order_id) REFERENCES orders(order_id)
  );
-
 
 
 

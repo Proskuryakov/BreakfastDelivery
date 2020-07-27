@@ -30,9 +30,10 @@ public class OrderModel {
     private String street;
     private String house;
     private String flat;
+    private Double checkres;
     private String entrance;
     private String floor;
-    private StatusesOfOrder statusId;
+    private Integer statusId;
     private String phone;
     private List<PositionInOrder> listOfDishes;
 

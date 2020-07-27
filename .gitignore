@@ -52,3 +52,7 @@ hs_err_pid*
 .idea/modules/
 .idea/vcs.xml
 
+/.idea/.name
+/.idea/dataSources.xml
+/.idea/kotlinc.xml
+/.idea/sqldialects.xml

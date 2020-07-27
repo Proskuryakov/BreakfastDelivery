@@ -3,15 +3,20 @@ package ru.relex.delivery.db.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
- import ru.relex.delivery.db.model.OrderModel;
+import ru.relex.delivery.commons.model.PositionInOrder;
+import ru.relex.delivery.db.model.OrderModel;
+import ru.relex.delivery.db.model.PositionInOrderModel;
+
+import java.util.List;
 
 @Mapper
 public interface OrderMapper {
 
     OrderModel createOrder(OrderModel order);
+
     //language=postgreSQL
     @Select("" +
-            "SELECT  o.order_id AS id, " +
+            "SELECT  order_id   , " +
             "       created_at," +
             "       phone," +
             "       city," +
@@ -20,24 +25,23 @@ public interface OrderMapper {
             "       flat," +
             "      entrance," +
             "       floor," +
-            "status_id  "+
-            "FROM orders o "+
-            "WHERE  order_id = #{id}"
-
+            "       status_id  as statusId ," +
+            "       checkres  " +
+            "FROM orders   " +
+            "WHERE  order_id = #{order_id}"
     )
-    OrderModel findById(@Param("id") long id);
-//    @Select("" +
-//            "SELECT   order_id AS orderId, " +
-//            "       dish_id AS dishId," +
-//            "       count," +
-//            "FROM dishesOfOrder   "+
-//            "WHERE  order_id = #{orderId}"
-//
-//    )
-    void addPositionOfOrder(@Param("order_id") long orderId,@Param("dish_id") long dishId, @Param("count") long count );
+    OrderModel getOrder(@Param("order_id") long order_id);
 
+    @Select("" +
+            "SELECT  dish_id  as dishId , " +
+            "       count " +
+            "FROM dishesFromOrder   " +
+            "WHERE  order_id = #{order_id}"
+    )
+    List<PositionInOrderModel> getPositionOfOrder(@Param("order_id") long order_id);
+    void addPositionOfOrder(@Param("order_id") long orderId, @Param("dish_id") long dishId, @Param("count") long count);
 
-
+    //OrderModel getOrder(@Param("position_id") long orderId  );
 
 
 }

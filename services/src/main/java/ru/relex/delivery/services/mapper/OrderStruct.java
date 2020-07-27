@@ -2,11 +2,13 @@ package ru.relex.delivery.services.mapper;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.time.Instant;
+import java.util.List;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Qualifier;
 
+import ru.relex.delivery.commons.model.PositionInOrder;
 import ru.relex.delivery.commons.model.StatusesOfOrder;
 import ru.relex.delivery.db.model.OrderModel;
 import ru.relex.delivery.services.model.order.*;
@@ -28,8 +30,7 @@ public interface OrderStruct {
 
     @Mapping(target = "createdAt", source = "createdAt")
 
-    @Mapping(target = "status", source = "statusId")
-    CreatedOrder toCreatedOrder(OrderModel byId);
+     CreatedOrder toCreatedOrder(OrderModel byId);
 
     @Mapping(target = "phone", source = "order.phone")
     @Mapping(target = "house", source = "order.address.house")
@@ -39,9 +40,26 @@ public interface OrderStruct {
     @Mapping(target = "entrance", source = "order.address.entrance")
     @Mapping(target = "floor", source = "order.address.floor")
     @Mapping(target = "listOfDishes", source = "order.listOfDishes")
-    OrderModel fromNewOrder(NewOrder order    );
+    @Mapping(target = "checkres", source = "check")
+    @Mapping(target = "statusId", source = "status")
+
+    OrderModel fromNewOrder(NewOrder order , Integer check, Integer status    );
 
 
+    @Mapping(target = "address.house", source = "byId.house")
+    @Mapping(target = "address.street", source = "byId.street")
+    @Mapping(target = "address.city", source = "byId.city")
+    @Mapping(target = "address.flat", source = "byId.flat")
+    @Mapping(target = "address.entrance", source = "byId.entrance")
+    @Mapping(target = "address.floor", source = "byId.floor")
+    @Mapping(target = "phone", source = "byId.phone")
+    @Mapping(target = "createdAt", source = "byId.createdAt")
+    @Mapping(target = "check", source = "byId.checkres")
+    @Mapping(target = "status", source = "statusId")
+    @Mapping(target = "id", source = "byId.id")
+    @Mapping(target = "listOfDishes", source = "pst")
+
+    CreatedOrder toCreatedOrder(OrderModel byId, StatusesOfOrder statusId, List<PositionInOrder> pst );
 
 
     @Mapping(target = "address.house", source = "model.house")
