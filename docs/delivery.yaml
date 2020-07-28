@@ -572,22 +572,14 @@ definitions:
   UpdatableOrder:
     type: "object"
     properties:
-
       status:
-        type: "object"
-        properties:
-          status:
-            type: "string"
-            enum:
-              - ORDER_IN_PROCESSING
-              - ORDER_PREPARING
-              - ORDER_DELIVERY
-              - ORDER_DELIVERED
-              - ORDER_CANCELLED
-
-            description: new status of order
-            minLength: 1
-            maxLength: 50
+        type: "string"
+        enum:
+          - ORDER_IN_PROCESSING
+          - ORDER_PREPARING
+          - ORDER_DELIVERY
+          - ORDER_DELIVERED
+          - ORDER_CANCELLED
 
 
   NewRestaurant:
