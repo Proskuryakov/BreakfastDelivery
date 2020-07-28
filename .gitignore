@@ -56,3 +56,6 @@ hs_err_pid*
 /.idea/dataSources.xml
 /.idea/kotlinc.xml
 /.idea/sqldialects.xml
+/db/src/test/
+/db/src/test/java/
+/db/src/test/resources/
