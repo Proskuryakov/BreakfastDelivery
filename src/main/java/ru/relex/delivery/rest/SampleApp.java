@@ -3,11 +3,15 @@ package ru.relex.delivery.rest;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
+import ru.relex.delivery.db.DatabaseConfig;
 import ru.relex.delivery.services.ServicesConfiguration;
 
 @SpringBootApplication
-@Import(ServicesConfiguration.class)
- public class SampleApp {
+@Import({
+  ServicesConfiguration.class,
+  DatabaseConfig.class
+})
+public class SampleApp {
 
   public static void main(String[] args) {
 

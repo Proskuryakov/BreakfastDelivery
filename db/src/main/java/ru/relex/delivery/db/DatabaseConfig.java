@@ -9,6 +9,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan
 @MapperScan(basePackages = "ru.relex.delivery.db.mapper")
 @EnableTransactionManagement
-
 public class DatabaseConfig {
+
 }

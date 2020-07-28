@@ -269,7 +269,6 @@ paths:
         "404":
           description: "Order not found"
 
-
   /restaurants:
     post:
       tags:
@@ -288,9 +287,36 @@ paths:
             $ref: "#/definitions/NewRestaurant"
       responses:
         201:
-          description: "Restaurant successfully create"
+          description: "Restaurant successfully created"
           schema:
             $ref: "#/definitions/CreatedRestaurant"
+        400:
+          description: "Data is invalid"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ErrorResponse"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+
+    delete:
+      tags:
+        - "restaurant"
+      summary: "Delete an created restaurant"
+      description: "This can only be done by the logged in user."
+      operationId: "deleteRestaurant"
+      parameters:
+        - name: "restaurantId"
+          in: "path"
+          description: "ID of restaurant to delete"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        201:
+          description: "Restaurant was successfully deleted"
         400:
           description: "Data is invalid"
           schema:
@@ -473,236 +499,6 @@ definitions:
         minimum: 1
         example: 30
 
-  NewOrder:
-    type: "object"
-    required:
-      - "address"
-      - "listOfDishes"
-      - "phone"
-    properties:
-      phone:
-        type: "string"
-        maxLength: 15
-      address:
-        type: "object"
-        properties:
-          city:
-            type: "string"
-            description: city for delivery
-            minLength: 1
-            maxLength: 100
-          street:
-            type: "string"
-            description: street for delivery
-            minLength: 1
-            maxLength: 100
-          house:
-            type: "string"
-            description: house for delivery
-            minLength: 1
-            maxLength: 10
-          flat:
-            type: "string"
-            description: flat for delivery
-            minLength: 1
-            maxLength: 10
-          entrance:
-            type: "string"
-            description: entrance for delivery
-            minLength: 1
-            maxLength: 10
-          floor:
-            type: "string"
-            description: floor for delivery
-            minLength: 1
-            maxLength: 10
-      listOfDishes:
-        type: array
-        items:
-          $ref: "#/definitions/PositionInOrder"
-
-  PositionInOrder:
-    type: "object"
-    required:
-      - "count"
-      - "dishInfo"
-    properties:
-      count:
-        type: "integer"
-        format: "int64"
-        minimum: 1
-      dishId:
-
-        type: "integer"
-        format: "int64"
-        minimum: 1
-  CreatedOrder:
-    type: "object"
-    required:
-      - "createdAt"
-      - "orderId"
-      - "phone"
-      - "address"
-      - "listOfDishes"
-      - "check"
-    properties:
-      orderId:
-        type: "integer"
-        format: "int64"
-        minimum: 1
-      createdAt:
-        type: "string"
-        format: "date-time"
-        example: "2020-07-13T10:30:00Z"
-      status:
-        type: "string"
-        minLength: 1
-        example: "Заказ готовится"
-      phone:
-        type: "string"
-        maxLength: 15
-      listOfDishes:
-        type: array
-        items:
-          $ref: "#/definitions/PositionInOrder"
-      check:
-        type: "number"
-        format: "double"
-
-  UpdatableOrder:
-    type: "object"
-    properties:
-      status:
-        type: "string"
-        enum:
-          - ORDER_IN_PROCESSING
-          - ORDER_PREPARING
-          - ORDER_DELIVERY
-          - ORDER_DELIVERED
-          - ORDER_CANCELLED
-
-
-  NewRestaurant:
-    type: "object"
-    required:
-      - "restaurantName"
-      - "address"
-      - "workingHours"
-      - "listOfDishes"
-      - "restaurantType"
-    properties:
-      restaurantName:
-        type: "string"
-        minLength: 1
-        maxLength: 255
-        example: "Папин сибиряк"
-      address:
-        type: object
-        properties:
-          street:
-            type: "string"
-            minLength: 1
-            maxLength: 255
-            example: "Плехановская"
-          building:
-            type: "string"
-            minLength: 1
-            maxLength: 10
-            example: "6A"
-      workingHours:
-        type: object
-        properties:
-          beginingWorkDay:
-            type: "string"
-            format: "date-time"
-            example: "2020-07-13T10:00:00Z"
-          endWorkDay:
-            type: "string"
-            format: "date-time"
-            example: "2020-07-13T22:00:00Z"
-      listOfDishes:
-        type: array
-        items:
-          $ref: "#/definitions/CreatedDish"
-      restaurantType:
-        type: "string"
-        enum:
-          - BAR
-          - PIZZERIA
-          - BURGER
-          - DUMPLINGS
-          - SUSHI
-          - BAKERY
-          - RUSSIAN
-          - ITALIAN
-          - CHINESE
-          - GEORGIAN
-          - ARMENIAN
-        example: "DUMPLINGS"
-
-  CreatedRestaurant:
-    type: object
-    required:
-      - "restaurantId"
-      - "restaurantName"
-      - "address"
-      - "workingHours"
-      - "listOfDishes"
-      - "restaurantType"
-    properties:
-      restaurantId:
-        type: "integer"
-        format: "int64"
-        minimum: 1
-      restaurantName:
-        type: "string"
-        minLength: 1
-        maxLength: 255
-        example: "Папин сибиряк"
-      address:
-        type: object
-        properties:
-          street:
-            type: "string"
-            minLength: 1
-            maxLength: 255
-            example: "Плехановская"
-          building:
-            type: "string"
-            minLength: 1
-            maxLength: 10
-            example: "6A"
-      workingHours:
-        type: object
-        properties:
-          beginingWorkDay:
-            type: "string"
-            format: "date-time"
-            example: "2020-07-13T10:00:00Z"
-          endWorkDay:
-            type: "string"
-            format: "date-time"
-            example: "2020-07-13T22:00:00Z"
-      listOfDishes:
-        type: array
-        items:
-          $ref: "#/definitions/CreatedDish"
-      restaurantType:
-        type: "string"
-        enum:
-          - BAR
-          - PIZZERIA
-          - BURGER
-          - DUMPLINGS
-          - SUSHI
-          - BAKERY
-          - RUSSIAN
-          - ITALIAN
-          - CHINESE
-          - GEORGIAN
-          - ARMENIAN
-        example: "DUMPLINGS"
-
   NewUser:
     type: "object"
     required:
@@ -813,6 +609,294 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/CreatedOrder"
+
+  NewOrder:
+    type: "object"
+    required:
+      - "address"
+      - "listOfDishes"
+      - "phone"
+    properties:
+      phone:
+        type: "string"
+        maxLength: 15
+      address:
+        type: "object"
+        properties:
+          city:
+            type: "string"
+            description: city for delivery
+            minLength: 1
+            maxLength: 100
+          street:
+            type: "string"
+            description: street for delivery
+            minLength: 1
+            maxLength: 100
+          house:
+            type: "string"
+            description: house for delivery
+            minLength: 1
+            maxLength: 10
+          flat:
+            type: "string"
+            description: flat for delivery
+            minLength: 1
+            maxLength: 10
+          entrance:
+            type: "string"
+            description: entrance for delivery
+            minLength: 1
+            maxLength: 10
+          floor:
+            type: "string"
+            description: floor for delivery
+            minLength: 1
+            maxLength: 10
+      listOfDishes:
+        type: array
+        items:
+          $ref: "#/definitions/PositionInOrder"
+
+  PositionInOrder:
+    type: "object"
+    required:
+      - "count"
+      - "dishInfo"
+    properties:
+      count:
+        type: "integer"
+        format: "int64"
+        minimum: 1
+      dishId:
+
+        type: "integer"
+        format: "int64"
+        minimum: 1
+  CreatedOrder:
+    type: "object"
+    required:
+      - "createdAt"
+      - "orderId"
+      - "phone"
+      - "address"
+      - "listOfDishes"
+      - "check"
+    properties:
+      orderId:
+        type: "integer"
+        format: "int64"
+        minimum: 1
+      createdAt:
+        type: "string"
+        format: "date-time"
+        example: "2020-07-13T10:30:00Z"
+      status:
+        type: "string"
+        minLength: 1
+        example: "Заказ готовится"
+      phone:
+        type: "string"
+        maxLength: 15
+      listOfDishes:
+        type: array
+        items:
+          $ref: "#/definitions/PositionInOrder"
+      check:
+        type: "number"
+        format: "double"
+
+  UpdatableOrder:
+    type: "object"
+    properties:
+      status:
+        type: "string"
+        enum:
+          - ORDER_IN_PROCESSING
+          - ORDER_PREPARING
+          - ORDER_DELIVERY
+          - ORDER_DELIVERED
+          - ORDER_CANCELLED
+
+  NewRestaurant:
+    type: "object"
+    required:
+      - "restaurantName"
+      - "address"
+      - "workingHours"
+      - "restaurantType"
+    properties:
+      restaurantName:
+        type: "string"
+        minLength: 1
+        maxLength: 255
+        example: "Папин сибиряк"
+      address:
+        type: object
+        properties:
+          street:
+            type: "string"
+            minLength: 1
+            maxLength: 255
+            example: "Плехановская"
+          building:
+            type: "string"
+            minLength: 1
+            maxLength: 10
+            example: "6A"
+      workingHours:
+        type: object
+        properties:
+          startWorkDay:
+            type: "string"
+            format: "date-time"
+            example: "2020-07-13T10:00:00Z"
+          endWorkDay:
+            type: "string"
+            format: "date-time"
+            example: "2020-07-13T22:00:00Z"
+      listOfDishes:
+        type: array
+        items:
+          type: "integer"
+      restaurantType:
+        type: "string"
+        enum:
+          - BAR
+          - PIZZERIA
+          - BURGER
+          - DUMPLINGS
+          - SUSHI
+          - BAKERY
+          - RUSSIAN
+          - ITALIAN
+          - CHINESE
+          - GEORGIAN
+          - ARMENIAN
+        example: "DUMPLINGS"
+
+  UpdatableRestaurant:
+    type: object
+    required:
+      - "restaurantId"
+      - "restaurantName"
+      - "address"
+      - "workingHours"
+      - "listOfDishes"
+      - "restaurantType"
+    properties:
+      restaurantName:
+        type: "string"
+        minLength: 1
+        maxLength: 100
+        example: "Папин сибиряк"
+      address:
+        type: object
+        properties:
+          street:
+            type: "string"
+            minLength: 1
+            maxLength: 150
+            example: "Плехановская"
+          building:
+            type: "string"
+            minLength: 1
+            maxLength: 10
+            example: "6A"
+      workingHours:
+        type: object
+        properties:
+          startWorkDay:
+            type: "string"
+            format: "date-time"
+            example: "2020-07-13T10:00:00Z"
+          endWorkDay:
+            type: "string"
+            format: "date-time"
+            example: "2020-07-13T22:00:00Z"
+      listOfDishes:
+        type: array
+        items:
+          type: "integer"
+      restaurantType:
+        type: "string"
+        enum:
+          - BAR
+          - PIZZERIA
+          - BURGER
+          - DUMPLINGS
+          - SUSHI
+          - BAKERY
+          - RUSSIAN
+          - ITALIAN
+          - CHINESE
+          - GEORGIAN
+          - ARMENIAN
+        example: "DUMPLINGS"
+
+  CreatedRestaurant:
+    type: object
+    required:
+      - "restaurantId"
+      - "restaurantName"
+      - "address"
+      - "workingHours"
+      - "listOfDishes"
+      - "restaurantType"
+    properties:
+      restaurantId:
+        type: "integer"
+        format: "int64"
+        minimum: 1
+      restaurantName:
+        type: "string"
+        minLength: 1
+        maxLength: 255
+        example: "Папин сибиряк"
+      address:
+        type: object
+        properties:
+          street:
+            type: "string"
+            minLength: 1
+            maxLength: 255
+            example: "Плехановская"
+          building:
+            type: "string"
+            minLength: 1
+            maxLength: 10
+            example: "6A"
+      workingHours:
+        type: object
+        properties:
+          startWorkDay:
+            type: "string"
+            format: "date-time"
+            example: "2020-07-13T10:00:00Z"
+          endWorkDay:
+            type: "string"
+            format: "date-time"
+            example: "2020-07-13T22:00:00Z"
+      listOfDishes:
+        type: array
+        items:
+          type: "integer"
+      restaurantType:
+        type: "string"
+        enum:
+          - BAR
+          - PIZZERIA
+          - BURGER
+          - DUMPLINGS
+          - SUSHI
+          - BAKERY
+          - RUSSIAN
+          - ITALIAN
+          - CHINESE
+          - GEORGIAN
+          - ARMENIAN
+        example: "DUMPLINGS"
+
 
   ErrorResponse:
     type: "object"
