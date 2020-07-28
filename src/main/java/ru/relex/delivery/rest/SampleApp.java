@@ -7,10 +7,9 @@ import ru.relex.delivery.db.DatabaseConfig;
 import ru.relex.delivery.services.ServicesConfiguration;
 
 @SpringBootApplication
-@Import({
-  ServicesConfiguration.class,
-  DatabaseConfig.class
-})
+@Import(
+  ServicesConfiguration.class
+  )
 public class SampleApp {
 
   public static void main(String[] args) {
