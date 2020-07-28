@@ -2,6 +2,7 @@ package ru.relex.delivery.services.model.restaurant;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.lang.Nullable;
+import ru.relex.delivery.commons.model.RestaurantType;
 import ru.relex.delivery.services.validation.ValidationErrorsRestaurant;
 
 import javax.validation.Valid;
