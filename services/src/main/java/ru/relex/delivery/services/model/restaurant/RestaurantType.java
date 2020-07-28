@@ -12,6 +12,7 @@ public enum RestaurantType {
   ITALIAN,
   CHINESE,
   GEORGIAN,
-  ARMENIAN
+  ARMENIAN,
+  COMMON
 
 }
