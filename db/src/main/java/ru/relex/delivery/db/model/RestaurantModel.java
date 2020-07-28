@@ -4,6 +4,8 @@ package ru.relex.delivery.db.model;
 import lombok.*;
 import ru.relex.delivery.commons.model.RestaurantType;
 
+import java.time.LocalTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -26,8 +28,8 @@ public class RestaurantModel {
   private String street;
   private String building;
 
-  private String startWorkDay;
-  private String endWorkDay;
+  private LocalTime startWorkDay;
+  private LocalTime endWorkDay;
 
   private RestaurantType restaurantType;
 
