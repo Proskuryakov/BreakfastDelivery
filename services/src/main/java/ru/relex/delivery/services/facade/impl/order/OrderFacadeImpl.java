@@ -1,5 +1,6 @@
-package ru.relex.delivery.services.facade.impl;
+package ru.relex.delivery.services.facade.impl.order;
 
+import org.springframework.transaction.annotation.Transactional;
 import ru.relex.delivery.services.facade.OrderFacade;
 import ru.relex.delivery.services.internal.OrderService;
 import ru.relex.delivery.services.meta.Facade;
@@ -20,6 +21,7 @@ public class OrderFacadeImpl implements OrderFacade {
     }
 
     @Override
+    @Transactional
     public CreatedOrder createOrder( @Valid final NewOrder order) {
         return orderService.createOrder(order);
     }

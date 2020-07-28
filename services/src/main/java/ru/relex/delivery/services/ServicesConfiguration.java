@@ -5,8 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import ru.relex.delivery.db.DatabaseConfig;
 
+ @Configuration
 @Import(DatabaseConfig.class)
-@Configuration
 @ComponentScan(basePackageClasses = ServicesConfiguration.class)
 public class ServicesConfiguration {
 }

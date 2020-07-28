@@ -1,3 +1,4 @@
+
 CREATE TABLE dish_types
 (
     dish_type_id INTEGER PRIMARY KEY,
@@ -22,3 +23,37 @@ CREATE TABLE dish_dish_types
     CONSTRAINT dish_dish_types_dish_type_id_fk FOREIGN KEY (dish_type_id) REFERENCES dish_types (dish_type_id) ON DELETE CASCADE
 );
 
+INSERT INTO dish_types(dish_type_id, name)
+VALUES (1, 'DRINK'),
+       (2, 'MAIN'),
+       (3, 'SALAD'),
+       (4, 'SANDWICH'),
+       (5, 'BURGER'),
+       (6, 'DESSERT'),
+       (7, 'PIZZA'),
+       (8, 'SUSHI'),
+       (9, 'BAKERY');
+
+ CREATE TABLE  orders
+(
+    order_id    SERIAL PRIMARY KEY,
+    created_at TIMESTAMP    NOT NULL DEFAULT NOW(),
+    phone      VARCHAR(15)  NOT NULL UNIQUE,
+    city   VARCHAR(100)  NOT NULL ,
+    street   VARCHAR(100)  NOT NULL ,
+    house   VARCHAR(10)  NOT NULL ,
+    flat   VARCHAR(10)  NOT NULL ,
+    entrance   VARCHAR(10)  NOT NULL,
+    floor   VARCHAR(10)  NOT NULL ,
+     status_id INTEGER DEFAULT '1',
+       checkres INTEGER
+ );
+
+ CREATE TABLE  dishesFromOrder
+(
+     position_id    SERIAL PRIMARY KEY,
+     order_id   INTEGER   ,
+     count INTEGER NOT NULL DEFAULT '1',
+     dish_id VARCHAR(50)  NOT NULL,
+     FOREIGN KEY (order_id) REFERENCES orders(order_id)
+ );

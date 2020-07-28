@@ -4,9 +4,7 @@ ext {
 }
 
 dependencies {
-
   implementation(project(":db"))
-
   compileOnly "org.immutables:value-annotations:$immVer"
   compileOnly "org.mapstruct:mapstruct:$msVer"
 
