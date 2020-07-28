@@ -21,6 +21,14 @@
 
     </insert >
 
+    <select  id="updateOrder"
+             parameterType="map"
+             resultType="ru.relex.delivery.db.model.OrderModel"
+             >
+ UPDATE orders
+SET status_id = #{status_id} WHERE order_id = #{order_id};
+
+    </select >
 
 <!--    <delete  id="deleteOrder"  parameterType="map">-->
 <!-- DELETE FROM dishesfromorder WHERE position_id = #{position_id}-->

@@ -99,7 +99,18 @@ if(om!= null){
 
     @Override
     public CreatedOrder updateOrder(long id, UpdatableOrder updatableOrder) {
-        return null;
+
+        //updateOrder
+        CreatedOrder order = getOrderById(id);
+        if (order == null) {
+            return null;
+        }
+       Integer ind =  updatableOrder.getStatus().getId();
+        OrderModel updmodel = orderMapper.updateOrder(id, updatableOrder.getStatus().getId());
+
+        CreatedOrder updatedOrder = orderStruct.merge(order, updatableOrder );
+
+        return updatedOrder;
     }
 
 //    @Override

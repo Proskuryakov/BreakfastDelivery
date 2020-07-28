@@ -41,6 +41,7 @@ public interface OrderMapper {
     List<PositionInOrderModel> getPositionOfOrder(@Param("order_id") long order_id);
     void addPositionOfOrder(@Param("order_id") long orderId, @Param("dish_id") long dishId, @Param("count") long count);
 
+    OrderModel updateOrder(@Param("order_id") long order_id, @Param("status_id") long status_id);
     //OrderModel getOrder(@Param("position_id") long orderId  );
 
 

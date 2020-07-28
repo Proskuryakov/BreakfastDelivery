@@ -1,5 +1,8 @@
 package ru.relex.delivery.commons.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.immutables.value.Value;
+
 
 public enum StatusesOfOrder {
 

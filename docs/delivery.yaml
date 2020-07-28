@@ -578,7 +578,14 @@ definitions:
         properties:
           status:
             type: "string"
-            description: First name of the user
+            enum:
+              - ORDER_IN_PROCESSING
+              - ORDER_PREPARING
+              - ORDER_DELIVERY
+              - ORDER_DELIVERED
+              - ORDER_CANCELLED
+
+            description: new status of order
             minLength: 1
             maxLength: 50
 

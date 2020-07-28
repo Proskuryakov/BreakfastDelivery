@@ -24,8 +24,8 @@ public interface OrderStruct {
     @interface DefaultCreatedAtMapper {
     }
 
-    @Mapping(target = "status", source = "updateData.status")
-    CreatedOrder merge(CreatedOrder order, UpdatableOrder updateData);
+    @Mapping(target = "status", source = "neword.status")
+    CreatedOrder merge(CreatedOrder order, UpdatableOrder neword);
 
 
     @Mapping(target = "createdAt", source = "createdAt")
