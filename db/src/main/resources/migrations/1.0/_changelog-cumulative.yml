@@ -11,6 +11,13 @@ databaseChangeLog:
             path: DELIVERY-1-20200717-1121.sql
             relativeToChangelogFile: true
   - changeSet:
+      id: DELIVERY-1-20200728-1705
+      author: eproskuryakov
+      comment: Create initiel restaurant information
+      changes:
+        - sqlFile:
+            path: DELIVERY-1-20200728-1705.sql
+            relativeToChangelogFile: true  - changeSet:
       id: DELIVERY-1-20200208-2050
       author: dasha
       comment: create table current state of user basket
@@ -18,4 +25,3 @@ databaseChangeLog:
         - sqlFile:
             path: DELIVERY-1-20200208-2050.sql
             relativeToChangelogFile: true
-
