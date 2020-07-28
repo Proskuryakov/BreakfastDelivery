@@ -45,6 +45,10 @@ public interface OrderMapper {
     //OrderModel getOrder(@Param("position_id") long orderId  );
 
 
+    void deleteOrder(@Param("order_id") long order_id );
+    void deletePosition(@Param("order_id") long order_id );
+
+
 }
 
 

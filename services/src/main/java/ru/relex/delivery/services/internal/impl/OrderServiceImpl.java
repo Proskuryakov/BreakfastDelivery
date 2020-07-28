@@ -94,7 +94,15 @@ if(om!= null){
 
     @Override
     public boolean deleteOrderById(long id) {
-        return false;
+        CreatedOrder order = getOrderById(id);
+        if (order == null) {
+            return false;
+        }
+
+        orderMapper.deletePosition(id);
+        orderMapper.deleteOrder(id);
+
+        return true;
     }
 
     @Override
