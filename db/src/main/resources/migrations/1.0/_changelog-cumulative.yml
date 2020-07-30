@@ -17,14 +17,14 @@ databaseChangeLog:
       changes:
         - sqlFile:
             path: DELIVERY-1-20200728-1705.sql
-            relativeToChangelogFile: true  - changeSet:
+            relativeToChangelogFile: true
+  - changeSet:
       id: DELIVERY-1-20200728-1900
       author: eproskuryakov
       comment: Fill restaurant types table
       changes:
         - sqlFile:
             path: DELIVERY-1-20200728-1900.sql
-            relativeToChangelogFile: true
   - changeSet:
       id: DELIVERY-1-20200208-2050
       author: dasha

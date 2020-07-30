@@ -7,8 +7,8 @@
   <select id="createRestaurant"
           parameterType="ru.relex.delivery.db.model.RestaurantModel"
           resultType="ru.relex.delivery.db.model.RestaurantModel">
-    INSERT INTO restaurants (restaurant_name, street, building, start_work_day, end_work_day)
-    VALUES (#{restaurantName}, #{street}, #{building}, #{startWorkDay}, #{endWorkDay})
+    INSERT INTO restaurants (restaurant_name, street, building, start_work_day, end_work_day, restaurant_image)
+    VALUES (#{restaurantName}, #{street}, #{building}, #{startWorkDay}, #{endWorkDay}, #{restaurantImage})
     RETURNING restaurant_id AS id
   </select>
 

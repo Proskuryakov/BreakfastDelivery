@@ -43,7 +43,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
   @Override
   public CreatedRestaurant getById(long id) {
-    return RESTAURANT.get(id);
+    return restaurantStruct.toCreatedRestaurant(restaurantMapper.getById(id));
   }
 
   @Override

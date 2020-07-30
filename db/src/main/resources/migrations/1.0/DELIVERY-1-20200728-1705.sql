@@ -11,7 +11,8 @@ CREATE TABLE restaurants
     street          VARCHAR(50),
     building        VARCHAR(5),
     start_work_day  TIME,
-    end_work_day    TIME
+    end_work_day    TIME,
+    restaurant_image VARCHAR(2000)
 );
 
 CREATE TABLE restaurant_restaurant_types

@@ -33,4 +33,6 @@ public class RestaurantModel {
 
   private RestaurantType restaurantType;
 
+  private String restaurantImage;
+
 }
