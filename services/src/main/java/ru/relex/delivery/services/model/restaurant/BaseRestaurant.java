@@ -34,6 +34,9 @@ public interface BaseRestaurant {
   @NotNull(message = ValidationErrorsRestaurant.RESTAURANT_WORKING_HOURS_MUST_BE_SET)
   WorkingHours getWorkingHours();
 
-  List<Long> getListOfDishes();
+  @Valid
+  @Nullable
+  @NotNull(message = ValidationErrorsRestaurant.RESTAURANT_IMAGE_MUST_BE_SET)
+  String getRestaurantImage();
 
 }

@@ -15,9 +15,10 @@ public class ValidationErrorsRestaurant {
   public static final String RESTAURANT_BUILDING_LENGTH_IS_INVALID = "RESTAURANT_BUILDING_LENGTH_IS_INVALID";
   public static final String RESTAURANT_START_WORK_DAY_IN_ADDRESS_MUST_BE_SET = "RESTAURANT_START_WORK_DAY_IN_ADDRESS_MUST_BE_SET";
   public static final String RESTAURANT_END_WORK_DAY_IN_ADDRESS_MUST_BE_SET = "RESTAURANT_END_WORK_DAY_IN_ADDRESS_MUST_BE_SET";
+  public static final String RESTAURANT_IMAGE_MUST_BE_SET = "RESTAURANT_IMAGE_MUST_BE_SET";
 
 
-  public ValidationErrorsRestaurant() {
+    public ValidationErrorsRestaurant() {
   }
 
   private static final Map<String, String> ERRORS = Map.ofEntries(
@@ -26,7 +27,8 @@ public class ValidationErrorsRestaurant {
     Map.entry(RESTAURANT_ADDRESS_MUST_BE_SET, "Address must be set"),
     Map.entry(RESTAURANT_WORKING_HOURS_MUST_BE_SET, "Working hours must be set"),
     Map.entry(RESTAURANT_STREET_IN_ADDRESS_MUST_BE_SET, "Restaurant street in address must be set"),
-    Map.entry(RESTAURANT_BUILDING_IN_ADDRESS_MUST_BE_SET, "Restaurant building in address must be set")
+    Map.entry(RESTAURANT_BUILDING_IN_ADDRESS_MUST_BE_SET, "Restaurant building in address must be set"),
+    Map.entry(RESTAURANT_IMAGE_MUST_BE_SET, "Restaurant image must be set")
   );
 
   public static String getMessageByCode(String code) {
