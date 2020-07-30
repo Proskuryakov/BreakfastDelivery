@@ -15,17 +15,32 @@ public interface DishMapper {
 
   //language=PostgreSQL
   @Select("" +
-    "SELECT u.dish_id AS id, " +
+    "SELECT d.dish_id AS id, " +
     "       dish_name," +
     "       dish_price," +
     "       dish_calories," +
     "       dish_cooking_time_minutes," +
-    "       dish_type_id AS dish_type " +
-    "FROM dishes u " +
-    "INNER JOIN dish_types r ON u.dish_id = r.dish_type_id " +
-    "WHERE u.dish_id = #{id}"
+    "       dish_type_id AS dish_type," +
+    "       restaurant_id " +
+    "FROM dishes d " +
+    "INNER JOIN dish_dish_types dt ON d.dish_id = dt.dish_id " +
+    "WHERE d.dish_id = #{id}"
   )
   DishModel findById(@Param("id") long id);
+
+  //language=PostgreSQL
+  @Select("" +
+    "SELECT d.dish_id AS id, " +
+    "       dish_name," +
+    "       dish_price," +
+    "       dish_calories," +
+    "       dish_cooking_time_minutes," +
+    "       dish_type_id AS dish_type,  " +
+    "       restaurant_id " +
+    "FROM dishes d " +
+    "INNER JOIN dish_dish_types dt ON d.dish_id = dt.dish_id"
+  )
+  DishModel[] findAll();
 
   void saveDishType(@Param("dishId") long dishId, @Param("dishType") DishType dishType);
 }

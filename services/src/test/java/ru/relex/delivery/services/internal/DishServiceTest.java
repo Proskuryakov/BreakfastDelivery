@@ -45,7 +45,7 @@ class DishServiceTest {
 //    dishService = new DishServiceImpl(mock);
 //  }
 
-  @Test
+  /*@Test
   void checkUserWillBeCreated() {
     Assertions.assertEquals(dishService.createDish(newDish), createdDish);
   }
@@ -70,6 +70,6 @@ class DishServiceTest {
   void checkWillBeDeleted() {
     dishService.createDish(newDish);
     Assertions.assertTrue(dishService.deleteById(1));
-  }
+  }*/
 
 }
