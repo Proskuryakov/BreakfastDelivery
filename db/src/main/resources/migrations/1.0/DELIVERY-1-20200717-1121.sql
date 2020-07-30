@@ -12,6 +12,7 @@ CREATE TABLE dishes
     dish_price INTEGER,
     dish_calories INTEGER,
     dish_cooking_time_minutes INTEGER,
+    dish_image VARCHAR(2000),
     restaurant_id INTEGER
 );
 

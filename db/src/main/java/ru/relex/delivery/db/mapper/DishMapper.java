@@ -21,6 +21,7 @@ public interface DishMapper {
     "       dish_calories," +
     "       dish_cooking_time_minutes," +
     "       dish_type_id AS dish_type," +
+    "       dish_image," +
     "       restaurant_id " +
     "FROM dishes d " +
     "INNER JOIN dish_dish_types dt ON d.dish_id = dt.dish_id " +
@@ -35,7 +36,8 @@ public interface DishMapper {
     "       dish_price," +
     "       dish_calories," +
     "       dish_cooking_time_minutes," +
-    "       dish_type_id AS dish_type,  " +
+    "       dish_type_id AS dish_type," +
+    "       dish_image," +
     "       restaurant_id " +
     "FROM dishes d " +
     "INNER JOIN dish_dish_types dt ON d.dish_id = dt.dish_id"

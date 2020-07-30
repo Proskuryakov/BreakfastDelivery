@@ -16,12 +16,14 @@ public interface DishStruct {
   @Mapping(target = "dishType", source = "updateData.dishType")
   @Mapping(target = "dishCalories", source = "updateData.dishCalories")
   @Mapping(target = "dishCookingTimeMinutes", source = "updateData.dishCookingTimeMinutes")
+  @Mapping(target = "dishImage", source = "updateData.dishImage")
   CreatedDish merge(CreatedDish dish, UpdatableDish updateData);
 
   @Mapping(target = "dishName", source = "dish.mainDishInfo.dishName")
   @Mapping(target = "dishPrice", source = "dish.mainDishInfo.dishPrice")
   @Mapping(target = "dishCalories", source = "dish.dishCalories")
   @Mapping(target = "dishCookingTimeMinutes", source = "dish.dishCookingTimeMinutes")
+  @Mapping(target = "dishImage", source = "dish.dishImage")
   @Mapping(target = "restaurantId", source = "restaurantId")
   DishModel fromNewDish(NewDish dish, long restaurantId);
 

@@ -7,8 +7,8 @@
   <select id="createDish"
           parameterType="ru.relex.delivery.db.model.DishModel"
           resultType="ru.relex.delivery.db.model.DishModel">
-    INSERT INTO dishes (dish_name, dish_price, dish_calories, dish_cooking_time_minutes, restaurant_id)
-    VALUES (#{dishName}, #{dishPrice}, #{dishCalories}, #{dishCookingTimeMinutes}, #{restaurantId})
+    INSERT INTO dishes (dish_name, dish_price, dish_calories, dish_cooking_time_minutes, dish_image, restaurant_id)
+    VALUES (#{dishName}, #{dishPrice}, #{dishCalories}, #{dishCookingTimeMinutes}, #{dishImage}, #{restaurantId})
     RETURNING dish_id AS id
   </select>
 
