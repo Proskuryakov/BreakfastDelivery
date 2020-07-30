@@ -24,6 +24,8 @@ public class DishModel {
   private Integer dishCalories;
   private Integer dishCookingTimeMinutes;
   private DishType dishType;
+  private String dishImage;
   private Integer restaurantId;
+
 
 }
