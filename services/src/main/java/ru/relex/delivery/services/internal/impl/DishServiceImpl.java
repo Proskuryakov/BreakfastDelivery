@@ -30,9 +30,9 @@ public class DishServiceImpl implements DishService {
   }
 
   @Override
-  public CreatedDish createDish(final NewDish dish) {
+  public CreatedDish createDish(final NewDish dish, long restaurantId) {
     // Преобразовать NewUser в UserModel
-    final var model = dishStruct.fromNewDish(dish);
+    final var model = dishStruct.fromNewDish(dish, restaurantId);
 
     DishModel newDish = dishMapper.createDish(model);
     dishMapper.saveDishType(newDish.getId(), dish.getDishType());
@@ -47,6 +47,11 @@ public class DishServiceImpl implements DishService {
   @Override
   public CreatedDish getById(long id) {
     return dishStruct.toCreatedDish(dishMapper.findById(id));
+  }
+
+  @Override
+  public CreatedDish[] getAll() {
+    return dishStruct.toCreatedDishes(dishMapper.findAll());
   }
 
   @Override

@@ -13,8 +13,6 @@ import ru.relex.delivery.services.model.dish.UpdatableDish;
 
 @RestController
 @RequestMapping(
-  value = "/dishes",
-  consumes = "application/json",
   produces = "application/json"
 )
 public class DishApi {
@@ -29,14 +27,15 @@ public class DishApi {
   }
 
 
-  @PostMapping
+  @PostMapping(path = "/restaurants/{restaurant_id}/dishes", consumes = "application/json")
   @ResponseStatus(HttpStatus.CREATED)
-  CreatedDish createDish(@RequestBody final NewDish dish) {
+  CreatedDish createDish(@RequestBody final NewDish dish,
+                         @PathVariable("restaurant_id") long restaurant_id) {
     logger.info("Consumed: {}", dish);
-    return dishFacade.createDish(dish);
+    return dishFacade.createDish(dish, restaurant_id);
   }
 
-  @GetMapping(path = "/{id}")
+  @GetMapping(path = "/dishes/{id}")
   CreatedDish getById(@PathVariable("id") long id) {
 
     final var dish = dishFacade.getById(id);
@@ -48,7 +47,19 @@ public class DishApi {
     return dish;
   }
 
-  @PutMapping(path = "/{dishId}")
+  @GetMapping(path = "/dishes")
+  CreatedDish[] getAll() {
+
+    final var dishes = dishFacade.getAll();
+    if (dishes == null) {
+      logger.error("GET request error. Dishes do not exist");
+      throw new ObjectNotExistsException();
+    }
+    logger.info("Return {}", dishes);
+    return dishes;
+  }
+
+  @PutMapping(path = "/dishes/{dishId}", consumes = "application/json")
   CreatedDish updateDish(@PathVariable("dishId") long id,
                           @RequestBody UpdatableDish updatableDish) {
     final var dish = dishFacade.update(id, updatableDish);
@@ -62,7 +73,7 @@ public class DishApi {
     return dish;
   }
 
-  @DeleteMapping(path = "/{dishId}")
+  @DeleteMapping(path = "/dishes/{dishId}")
   void deleteDish(@PathVariable("dishId") long id) {
     if (dishFacade.deleteById(id)) {
       logger.info("Delete dish by id = {}", id);
