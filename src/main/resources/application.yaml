@@ -9,7 +9,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/delivery
     username: postgres
-    password: 1111
+    password: root
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
