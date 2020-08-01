@@ -47,6 +47,17 @@ public class DishApi {
     return dish;
   }
 
+  @GetMapping(path = "/restaurants/{restaurantId}/dishes")
+  CreatedDish[] getByRestaurantId(@PathVariable("restaurantId") long id) {
+    final var dish = dishFacade.getByRestaurantId(id);
+    if (dish == null) {
+      logger.error("GET request error. Dishes with such restaurant_id does not exist");
+      throw new ObjectNotExistsException();
+    }
+    logger.info("Return {} by id = {}", dish, id);
+    return dish;
+  }
+
   @GetMapping(path = "/dishes")
   CreatedDish[] getAll() {
 

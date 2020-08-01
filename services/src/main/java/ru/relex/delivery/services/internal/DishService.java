@@ -10,6 +10,8 @@ public interface DishService {
 
   CreatedDish getById(long id);
 
+  CreatedDish[] getByRestaurantId(long id);
+
   CreatedDish[] getAll();
 
   CreatedDish update(long id, UpdatableDish updatableDish);

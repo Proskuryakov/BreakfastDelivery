@@ -41,5 +41,7 @@ public interface DishStruct {
   CreatedDish toCreatedDish(DishModel byId);
 
   CreatedDish[] toCreatedDishes(DishModel[] all);
+  
+  CreatedDish[] toCreatedDishesByRestaurantId(DishModel[] byRestaurantId);
 
 }

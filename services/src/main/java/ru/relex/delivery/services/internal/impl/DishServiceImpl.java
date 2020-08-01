@@ -50,6 +50,11 @@ public class DishServiceImpl implements DishService {
   }
 
   @Override
+  public CreatedDish[] getByRestaurantId(long id) {
+    return dishStruct.toCreatedDishesByRestaurantId(dishMapper.findByRestaurantId(id));
+  }
+
+  @Override
   public CreatedDish[] getAll() {
     return dishStruct.toCreatedDishes(dishMapper.findAll());
   }

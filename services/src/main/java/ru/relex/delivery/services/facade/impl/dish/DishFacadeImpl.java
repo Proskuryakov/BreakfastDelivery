@@ -37,6 +37,11 @@ public class DishFacadeImpl implements DishFacade {
   }
 
   @Override
+  public CreatedDish[] getByRestaurantId(long id) {
+    return dishService.getByRestaurantId(id);
+  }
+
+  @Override
   public CreatedDish update(long id, UpdatableDish updatableDish) {
     return dishService.update(id, updatableDish);
   }
