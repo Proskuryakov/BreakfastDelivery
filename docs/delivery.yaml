@@ -51,6 +51,36 @@ paths:
           description: "Unauthorized"
         403:
           description: "Forbidden"
+    delete:
+      tags:
+        - "dishesFromBasket"
+      summary: "delete a dish from the user's basket"
+      description: "This can only be done by the logged in user."
+      operationId: "deleteDish"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Dish object that should be deleted"
+          required: true
+          schema:
+            $ref: "#/definitions/DishesFromBasket"
+      responses:
+        201:
+          description: "Dish was successfully created"
+        400:
+          description: "Data is invalid"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ErrorResponse"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
   /dishesFromBasket/{userId}:
     get:
       tags:
