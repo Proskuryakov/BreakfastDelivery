@@ -11,7 +11,9 @@ CREATE TABLE dishes
     dish_name VARCHAR(50),
     dish_price INTEGER,
     dish_calories INTEGER,
-    dish_cooking_time_minutes INTEGER
+    dish_cooking_time_minutes INTEGER,
+    dish_image VARCHAR(2000),
+    restaurant_id INTEGER
 );
 
 CREATE TABLE dish_dish_types

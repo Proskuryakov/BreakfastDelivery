@@ -22,4 +22,6 @@ public interface BaseDish {
   @Nullable @NotNull(message = ValidationErrorsDish.DISH_COOKING_TIME_MINUTES_MUST_BE_SET)
   Integer getDishCookingTimeMinutes();
 
+  String getDishImage();
+
 }

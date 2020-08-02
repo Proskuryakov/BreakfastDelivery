@@ -14,17 +14,18 @@ import java.time.Instant;
   "dishPrice",
   "dishCalories",
   "dishCookingTimeMinutes",
+  "restaurant_id"
 })
 public class DishModel {
 
   private long id;
-
   private String dishName;
   private Integer dishPrice;
-
   private Integer dishCalories;
   private Integer dishCookingTimeMinutes;
-
   private DishType dishType;
+  private String dishImage;
+  private Integer restaurantId;
+
 
 }

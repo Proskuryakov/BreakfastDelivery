@@ -7,9 +7,13 @@ import ru.relex.delivery.services.model.dish.UpdatableDish;
 
 public interface DishFacade {
 
-  CreatedDish createDish(@Valid NewDish dish);
+  CreatedDish createDish(@Valid NewDish dish, long restaurant_id);
 
   CreatedDish getById(long id);
+
+  CreatedDish[] getByRestaurantId(long id);
+
+  CreatedDish[] getAll();
 
   CreatedDish update(long id, UpdatableDish updatableDish);
 

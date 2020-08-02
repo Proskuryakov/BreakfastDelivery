@@ -9,4 +9,6 @@ import org.immutables.value.Value;
 public interface CreatedDish extends BaseDish {
 
   long getId();
+
+  long getRestaurantId();
 }

@@ -21,14 +21,24 @@ public class DishFacadeImpl implements DishFacade {
 
   @Override
   @Transactional
-  public CreatedDish createDish(@Valid final NewDish dish) {
-    return dishService.createDish(dish);
+  public CreatedDish createDish(@Valid final NewDish dish, long restaurant_id) {
+    return dishService.createDish(dish, restaurant_id);
   }
 
   @Override
   @Transactional
   public CreatedDish getById(long id) {
     return dishService.getById(id);
+  }
+
+  @Override
+  public CreatedDish[] getAll() {
+    return dishService.getAll();
+  }
+
+  @Override
+  public CreatedDish[] getByRestaurantId(long id) {
+    return dishService.getByRestaurantId(id);
   }
 
   @Override
