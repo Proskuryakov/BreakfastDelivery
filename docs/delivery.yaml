@@ -34,13 +34,13 @@ paths:
       parameters:
         - in: "body"
           name: "body"
-          description: "Dish object that should be created"
+          description: "Dish that should be added to the basket"
           required: true
           schema:
             $ref: "#/definitions/DishesFromBasket"
       responses:
         201:
-          description: "Dish was successfully created"
+          description: "Dish was successfully added"
         400:
           description: "Data is invalid"
           schema:
@@ -56,7 +56,7 @@ paths:
         - "dishesFromBasket"
       summary: "delete a dish from the user's basket"
       description: "This can only be done by the logged in user."
-      operationId: "deleteDish"
+      operationId: "deleteDishFromBasket"
       consumes:
         - "application/json"
       produces:
@@ -85,7 +85,7 @@ paths:
     get:
       tags:
         - "dishesFromBasket"
-      summary: "Get an current basket"
+      summary: "Get the current basket"
       description: "This can only be done by the logged in user."
       operationId: "getBasket"
       produces:
@@ -99,7 +99,7 @@ paths:
           format: "int64"
       responses:
         201:
-          description: "Dish was successfully returned"
+          description: "Dishes was successfully returned"
           schema:
             type: "array"
             items:
