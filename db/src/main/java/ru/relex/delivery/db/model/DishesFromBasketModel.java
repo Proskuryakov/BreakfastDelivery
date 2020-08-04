@@ -15,7 +15,6 @@ import lombok.*;
 })
 public class DishesFromBasketModel {
     private long resId;
-
     private long userId;
     private long dishId;
     private long count;

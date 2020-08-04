@@ -4,6 +4,7 @@ import ru.relex.delivery.services.facade.DishesFromBasketFacade;
 import ru.relex.delivery.services.internal.DishesFromBasketService;
 import ru.relex.delivery.services.meta.Facade;
 import ru.relex.delivery.services.model.dishesFromBasket.BaseDishesFromBasket;
+import ru.relex.delivery.services.model.dishesFromBasket.DishesFromBasketIds;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -17,13 +18,18 @@ public class DishesFromBasketFacadeImpl implements DishesFromBasketFacade {
     }
 
     @Override
-    public void addDishToBasket(@Valid BaseDishesFromBasket dish) {
-        dishesFromBasketService.addDishToBasket(dish);
+    public boolean addDishToBasket(@Valid BaseDishesFromBasket dish) {
+      return   dishesFromBasketService.addDishToBasket(dish);
     }
 
     @Override
-    public boolean deleteDishFromBasket(long user_id, long dish_id, long count) {
-        return dishesFromBasketService.deleteDishFromBasket(user_id, dish_id, count);
+    public boolean deleteDishFromBasket(DishesFromBasketIds ids ) {
+        return dishesFromBasketService.deleteDishFromBasket(ids);
+    }
+
+    @Override
+    public BaseDishesFromBasket updateDishCount(long user_id, long dish_id, long count) {
+        return dishesFromBasketService.updateDishCount(user_id, dish_id, count);
     }
 
     @Override

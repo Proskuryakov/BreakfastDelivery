@@ -9,6 +9,7 @@ import ru.relex.delivery.services.model.order.NewOrder;
 import ru.relex.delivery.services.model.order.UpdatableOrder;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Facade
 
@@ -29,6 +30,11 @@ public class OrderFacadeImpl implements OrderFacade {
     @Override
     public CreatedOrder getOrderById(  long id) {
         return orderService.getOrderById(id);
+    }
+
+    @Override
+    public List<CreatedOrder> getOrders() {
+        return orderService.getOrders();
     }
 
     @Override

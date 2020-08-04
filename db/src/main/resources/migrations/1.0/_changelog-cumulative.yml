@@ -10,12 +10,5 @@ databaseChangeLog:
         - sqlFile:
             path: DELIVERY-1-20200717-1121.sql
             relativeToChangelogFile: true
-  - changeSet:
-      id: DELIVERY-1-20200208-2050
-      author: dasha
-      comment: create table current state of user basket
-      changes:
-        - sqlFile:
-            path: DELIVERY-1-20200208-2050.sql
-            relativeToChangelogFile: true
+
 
