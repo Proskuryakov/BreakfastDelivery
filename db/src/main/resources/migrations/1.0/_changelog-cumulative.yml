@@ -25,6 +25,7 @@ databaseChangeLog:
       changes:
         - sqlFile:
             path: DELIVERY-1-20200728-1900.sql
+            relativeToChangelogFile: true
   - changeSet:
       id: DELIVERY-1-20200208-2050
       author: dasha

@@ -28,7 +28,7 @@ public class RestaurantApi {
   }
 
 
-  @PostMapping(path = "/restaurants")
+  @PostMapping(path = "/restaurants", consumes = "application/json")
   @ResponseStatus(HttpStatus.CREATED)
   CreatedRestaurant createRestaurant(@RequestBody final NewRestaurant restaurant) {
     logger.info("Consumed: {}", restaurant);
