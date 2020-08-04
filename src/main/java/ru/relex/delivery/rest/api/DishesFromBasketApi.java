@@ -32,7 +32,7 @@ public class DishesFromBasketApi {
     @ResponseStatus(HttpStatus.CREATED)
     boolean deleteOrder(@RequestBody final DishesFromBasketIds ids) {
         if (dishesFromBasketFacade.deleteDishFromBasket(ids)) {
-            logger.error("Order successful delete");
+            logger.info("Order successful delete");
             return true;
         }
         logger.error("Delete Error.  ");
@@ -46,7 +46,7 @@ public class DishesFromBasketApi {
         final var updDish = dishesFromBasketFacade.updateDishCount(dish.getUserId(), dish.getDishId(), dish.getCount());
 
         if (updDish != null) {
-            logger.error("Order successful update");
+            logger.info("Order successful update");
             logger.info("Consumed: {}", updDish);
             return updDish;
         }
