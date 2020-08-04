@@ -29,6 +29,11 @@ public class RestaurantFacadeImpl implements RestaurantFacade {
   }
 
   @Override
+  public CreatedRestaurant[] getAll() {
+    return restaurantService.getAll();
+  }
+
+  @Override
   public CreatedRestaurant update(long id, UpdatableRestaurant updatableRestaurant) {
     return restaurantService.update(id, updatableRestaurant);
   }

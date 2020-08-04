@@ -47,6 +47,11 @@ public class RestaurantServiceImpl implements RestaurantService {
   }
 
   @Override
+  public CreatedRestaurant[] getAll() {
+    return restaurantStruct.toCreatedRestaurants(restaurantMapper.getAll());
+  }
+
+  @Override
   public CreatedRestaurant update(long id, UpdatableRestaurant updatableRestaurant) {
     CreatedRestaurant restaurant = RESTAURANT.get(id);
 

@@ -7,14 +7,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.relex.delivery.rest.exception.ObjectNotExistsException;
 import ru.relex.delivery.services.facade.RestaurantFacade;
+import ru.relex.delivery.services.model.dish.CreatedDish;
 import ru.relex.delivery.services.model.restaurant.CreatedRestaurant;
 import ru.relex.delivery.services.model.restaurant.NewRestaurant;
 import ru.relex.delivery.services.model.restaurant.UpdatableRestaurant;
 
 @RestController
 @RequestMapping(
-  value = "/restaurants",
-  consumes = "application/json",
   produces = "application/json"
 )
 public class RestaurantApi {
@@ -29,7 +28,7 @@ public class RestaurantApi {
   }
 
 
-  @PostMapping
+  @PostMapping(path = "/restaurants")
   @ResponseStatus(HttpStatus.CREATED)
   CreatedRestaurant createRestaurant(@RequestBody final NewRestaurant restaurant) {
     logger.info("Consumed: {}", restaurant);
@@ -37,7 +36,7 @@ public class RestaurantApi {
     return restaurantFacade.createRestaurant(restaurant);
   }
 
-  @GetMapping(path = "/{restaurantId}")
+  @GetMapping(path = "/restaurants/{restaurantId}")
   CreatedRestaurant getById(@PathVariable("restaurantId") long id){
     final var restaurant = restaurantFacade.getById(id);
 
@@ -50,7 +49,19 @@ public class RestaurantApi {
     return restaurant;
   }
 
-  @PutMapping(path = "/{restaurantId}")
+  @GetMapping(path = "/restaurants")
+  CreatedRestaurant[] getAll(){
+    final var restaurants = restaurantFacade.getAll();
+
+    if(restaurants == null){
+      logger.error("GET request error. Restaurants do not exist");
+      throw new ObjectNotExistsException();
+    }
+    logger.info("Return {}", restaurants);
+    return restaurants;
+  }
+
+  @PutMapping(path = "/restaurants/{restaurantId}")
   CreatedRestaurant updateRestaurant(
     @PathVariable("restaurantId") long id,
     @RequestBody UpdatableRestaurant updatableRestaurant
@@ -66,7 +77,7 @@ public class RestaurantApi {
     return restaurant;
   }
 
-  @DeleteMapping(path = "/{restaurantId}")
+  @DeleteMapping(path = "/restaurants/{restaurantId}")
   void deleteRestaurant(@PathVariable("restaurantId") long id){
     if(restaurantFacade.deleteById(id)){
       logger.info("Delete restaurant by id = {}", id);

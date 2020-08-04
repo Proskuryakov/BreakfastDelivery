@@ -39,6 +39,8 @@ public interface RestaurantStruct {
   @Mapping(target = "restaurantType", source = "restaurantType")
   CreatedRestaurant toCreatedRestaurant(RestaurantModel model);
 
+  CreatedRestaurant[] toCreatedRestaurants(RestaurantModel[] all);
+
   @Mapping(target = "restaurantName", source = "updatableRestaurant.restaurantName")
   @Mapping(target = "restaurantType", source = "updatableRestaurant.restaurantType")
   @Mapping(target = "address", source = "updatableRestaurant.address")
