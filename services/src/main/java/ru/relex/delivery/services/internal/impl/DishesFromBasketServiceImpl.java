@@ -38,47 +38,12 @@ public class DishesFromBasketServiceImpl implements DishesFromBasketService {
     @Override
     public List<BaseDishesFromBasket> getDishesFromBasket(long id) {
         List<DishesFromBasketModel> om = dishesFromBasketMapper.getDishesFromBasket(id);
-        List<DishesFromBasketModel> updateDishList = new ArrayList<>();
-        List<Long> dishsesId = new ArrayList<>();
         List<BaseDishesFromBasket> currList = new ArrayList<>();
 
         if (om != null) {
             for (int i = 0; i < om.size(); i++) {
-                int finalI = i;
-
-                long dishId = om.get(i).getDishId();
-                if (!dishsesId.contains(dishId)) {
-                    dishsesId.add(dishId);
-                    long dishCount = 0;
-                    for (int j = 0; j < om.size(); j++) {
-                        if (dishId == om.get(j).getDishId()) {
-                            dishCount += om.get(j).getCount();
-                            dishesFromBasketMapper.deleteDishFromBasketIndex(om.get(j).getResId());
-                        }
-                    }
-                    dishesFromBasketMapper.addDishToBasket(om.get(0).getUserId(), dishId, dishCount);
-                    long finalDishCount = dishCount;
-                    currList.add(new BaseDishesFromBasket() {
-
-                        @Override
-                        public long getUserId() {
-                            return om.get(0).getUserId();
-                        }
-
-                        @Override
-                        public long getDishId() {
-                            return dishId;
-                        }
-
-                        @Override
-                        public long getCount() {
-                            return finalDishCount;
-                        }
-                    });
-                }
+                currList.add(dishesFromBasketStruct.toBaseDishesFromBasket(om.get(i)));
             }
-
-
             return currList;
         } else return null;
     }

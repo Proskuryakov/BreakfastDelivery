@@ -64,6 +64,7 @@ CREATE TABLE dishesFromBasket
     res_id SERIAL PRIMARY KEY,
     user_id INTEGER,
     dish_id INTEGER  ,
-    count INTEGER
+    count INTEGER,
+    UNIQUE   (user_id, dish_id)
 
 );
