@@ -13,13 +13,7 @@ import javax.validation.constraints.NotEmpty;
 @Value.Immutable
 @JsonDeserialize(builder = ImmutableBaseDishesFromBasket.Builder.class)
 
-public interface BaseDishesFromBasket {
-
-    long getUserId();
-
-
-    long getDishId();
-
+public interface BaseDishesFromBasket extends DishesFromBasketIds {
 
     long getCount();
 

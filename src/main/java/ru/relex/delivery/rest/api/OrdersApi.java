@@ -12,11 +12,13 @@ import ru.relex.delivery.services.model.order.CreatedOrder;
 import ru.relex.delivery.services.model.order.NewOrder;
 import ru.relex.delivery.services.model.order.UpdatableOrder;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping(
         value = "/orders",
-        consumes = "application/json",
+
         produces = "application/json"
 )
 public class OrdersApi {
@@ -32,6 +34,9 @@ public class OrdersApi {
 
 
     @PostMapping
+    @RequestMapping(
+            consumes = "application/json"
+    )
     @ResponseStatus(HttpStatus.CREATED)
     CreatedOrder createOrder(@RequestBody final NewOrder order) {
         logger.info("Consumed: {}", order);
@@ -39,21 +44,32 @@ public class OrdersApi {
         return orderFacade.createOrder(order);
     }
 
-    @GetMapping(path="/{id}")
+    @GetMapping
+    @RequestMapping(
+            value = "/{id}"
+    )
     CreatedOrder getOrderById(@PathVariable("id") long id) {
         final var order = orderFacade.getOrderById(id);
         if (order == null) {
             logger.error("Order with such id does not exist");
              throw new ObjectNotExistsException();
         }
-
         return order;
     }
-
+    @GetMapping
+    List<CreatedOrder> getOrders( ) {
+        final var order = orderFacade.getOrders( );
+        if (order == null) {
+            logger.error("Order with such id does not exist");
+            throw new ObjectNotExistsException();
+        }
+        logger.info("orders successfully get");
+        return order;
+    }
     @DeleteMapping(path="/{id}")
     void deleteOrder(@PathVariable("id") long id) {
         if (orderFacade.deleteOrderById(id)) {
-            logger.error("Order successful delete");
+            logger.info("Order successful delete");
 
             return;
         }
@@ -61,18 +77,19 @@ public class OrdersApi {
       throw new ObjectNotExistsException();
     }
 
-    @PutMapping(path = "/{id}")
+    @PutMapping
+    @RequestMapping(
+            value = "/{id}",
+            consumes = "application/json"
+    )
     CreatedOrder updateOrder(@PathVariable("id") long id,
                            @RequestBody UpdatableOrder updatableOrder) {
         final var order = orderFacade.updateOrder(id, updatableOrder);
-
         if (order == null) {
             logger.error("Update Error. Order with such id does not exist");
-
             throw new ObjectNotExistsException();
         }
-        logger.error("Order successful update");
-
+        logger.info("Order successful update");
         return order;
     }
 

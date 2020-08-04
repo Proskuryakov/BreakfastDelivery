@@ -19,8 +19,13 @@ public interface DishesFromBasketMapper {
     List<DishesFromBasketModel> getDishesFromBasket(@Param("user_id") long user_id);
 
     void addDishToBasket(@Param("user_id") long userId, @Param("dish_id") long dishId, @Param("count") long count);
-    void deleteDishFromBasket(@Param("user_id") long user_id, @Param("dish_id") long dishId  );
-    void deleteDishFromBasketIndex(@Param("res_id") long res_id  );
+
+    void updateDishCount(@Param("user_id") long userId, @Param("dish_id") long dishId, @Param("count") long count);
+
+    void deleteDishFromBasket(@Param("user_id") long user_id, @Param("dish_id") long dishId);
+
+    void deleteDishFromBasketIndex(@Param("res_id") long res_id);
+
     @Select("" +
             "SELECT user_id  as user_id ," +
             " dish_id  as dishId , " +
@@ -29,5 +34,5 @@ public interface DishesFromBasketMapper {
             "FROM dishesFromBasket   " +
             "WHERE  user_id = #{user_id} AND dish_id = #{dish_id}"
     )
-     DishesFromBasketModel getDishFromUserIdDishId(@Param("user_id") long user_id,  @Param("dish_id") long dishId);
+    DishesFromBasketModel getDishFromUserIdDishId(@Param("user_id") long user_id, @Param("dish_id") long dishId);
 }
