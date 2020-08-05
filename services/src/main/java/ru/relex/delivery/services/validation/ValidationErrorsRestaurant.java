@@ -16,8 +16,7 @@ public class ValidationErrorsRestaurant {
   public static final String RESTAURANT_START_WORK_DAY_IN_ADDRESS_MUST_BE_SET = "RESTAURANT_START_WORK_DAY_IN_ADDRESS_MUST_BE_SET";
   public static final String RESTAURANT_END_WORK_DAY_IN_ADDRESS_MUST_BE_SET = "RESTAURANT_END_WORK_DAY_IN_ADDRESS_MUST_BE_SET";
 
-
-  public ValidationErrorsRestaurant() {
+    public ValidationErrorsRestaurant() {
   }
 
   private static final Map<String, String> ERRORS = Map.ofEntries(

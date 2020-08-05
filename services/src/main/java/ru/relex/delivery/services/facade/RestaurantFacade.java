@@ -16,4 +16,5 @@ public interface RestaurantFacade {
 
   boolean deleteById(long id);
 
+  CreatedRestaurant[] getAll();
 }

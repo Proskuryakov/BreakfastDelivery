@@ -10,6 +10,8 @@ public interface RestaurantService {
 
   CreatedRestaurant getById(long id);
 
+  CreatedRestaurant[] getAll();
+
   CreatedRestaurant update(long id, UpdatableRestaurant updatableRestaurant);
 
   boolean deleteById(long id);

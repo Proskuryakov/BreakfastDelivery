@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ru.relex.delivery.db.mapper.RestaurantMapper">
+
+  <select id="createRestaurant"
+          parameterType="ru.relex.delivery.db.model.RestaurantModel"
+          resultType="ru.relex.delivery.db.model.RestaurantModel">
+    INSERT INTO restaurants (restaurant_name, street, building, start_work_day, end_work_day, restaurant_image)
+    VALUES (#{restaurantName}, #{street}, #{building}, #{startWorkDay}, #{endWorkDay}, #{restaurantImage})
+    RETURNING restaurant_id AS id
+  </select>
+
+  <insert id="saveRestaurantType" parameterType="map">
+    INSERT INTO restaurant_restaurant_types (restaurant_id, restaurant_type_id)
+    VALUES (#{restaurantId}, #{restaurantType})
+  </insert>
+</mapper>

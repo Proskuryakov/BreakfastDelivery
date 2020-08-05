@@ -2,6 +2,7 @@ package ru.relex.delivery.services.model.restaurant;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.lang.Nullable;
+import ru.relex.delivery.commons.model.RestaurantType;
 import ru.relex.delivery.services.validation.ValidationErrorsRestaurant;
 
 import javax.validation.Valid;
@@ -33,6 +34,6 @@ public interface BaseRestaurant {
   @NotNull(message = ValidationErrorsRestaurant.RESTAURANT_WORKING_HOURS_MUST_BE_SET)
   WorkingHours getWorkingHours();
 
-  List<Long> getListOfDishes();
+  String getRestaurantImage();
 
 }

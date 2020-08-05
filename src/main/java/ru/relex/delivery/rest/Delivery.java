@@ -10,10 +10,10 @@ import ru.relex.delivery.services.ServicesConfiguration;
 @Import(
   ServicesConfiguration.class
   )
-public class SampleApp {
+public class Delivery {
 
   public static void main(String[] args) {
 
-    SpringApplication.run(SampleApp.class, args);
+    SpringApplication.run(Delivery.class, args);
   }
 }
