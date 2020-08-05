@@ -1,4 +1,4 @@
-
+drop table dish_types, dishes, dish_dish_types, orders, dishesFromOrder, dishesFromBasket;
 CREATE TABLE dish_types
 (
     dish_type_id INTEGER PRIMARY KEY,
@@ -56,6 +56,15 @@ VALUES (1, 'DRINK'),
      position_id    SERIAL PRIMARY KEY,
      order_id   INTEGER   ,
      count INTEGER NOT NULL DEFAULT '1',
-     dish_id VARCHAR(50)  NOT NULL,
+     dish_id VARCHAR(50)  NOT NULL   ,
      FOREIGN KEY (order_id) REFERENCES orders(order_id)
  );
+CREATE TABLE dishesFromBasket
+(
+    res_id SERIAL PRIMARY KEY,
+    user_id INTEGER,
+    dish_id INTEGER  ,
+    count INTEGER,
+    UNIQUE   (user_id, dish_id)
+
+);

@@ -36,6 +36,4 @@ public class OrderModel {
     private Integer statusId;
     private String phone;
     private List<PositionInOrder> listOfDishes;
-
-
 }

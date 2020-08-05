@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.relex.delivery.rest.exception.ObjectNotExistsException;
 import ru.relex.delivery.services.facade.DishesFromBasketFacade;
 import ru.relex.delivery.services.model.dishesFromBasket.BaseDishesFromBasket;
+import ru.relex.delivery.services.model.dishesFromBasket.DishesFromBasketIds;
 import ru.relex.delivery.services.model.order.CreatedOrder;
 
 import java.util.List;
@@ -15,7 +16,6 @@ import java.util.List;
 @RestController
 @RequestMapping(
         value = "/dishesFromBasket",
-        consumes = "application/json",
         produces = "application/json"
 )
 public class DishesFromBasketApi {
@@ -28,35 +28,52 @@ public class DishesFromBasketApi {
         this.dishesFromBasketFacade = dishesFromBasketFacade;
     }
 
-    @DeleteMapping()
+    @DeleteMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    void deleteOrder(@RequestBody final BaseDishesFromBasket dish) {
-        if (dishesFromBasketFacade.deleteDishFromBasket(dish.getUserId() , dish.getDishId(), dish.getCount())) {
-            logger.error("Order successful delete");
-
-            return;
+    boolean deleteOrder(@RequestBody final DishesFromBasketIds ids) {
+        if (dishesFromBasketFacade.deleteDishFromBasket(ids)) {
+            logger.info("Order successful delete");
+            return true;
         }
         logger.error("Delete Error.  ");
         throw new ObjectNotExistsException();
+
     }
 
-
-    @PostMapping
+    @PutMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    void addDishToBasket(@RequestBody final BaseDishesFromBasket dish) {
-        logger.info("Consumed: {}", dish);
+    BaseDishesFromBasket updateDishCount(@RequestBody final BaseDishesFromBasket dish) {
+        final var updDish = dishesFromBasketFacade.updateDishCount(dish.getUserId(), dish.getDishId(), dish.getCount());
 
-         dishesFromBasketFacade.addDishToBasket(dish);
+        if (updDish != null) {
+            logger.info("Order successful update");
+            logger.info("Consumed: {}", updDish);
+            return updDish;
+        }
+        logger.error("Update Error.  ");
+        throw new ObjectNotExistsException();
     }
 
-    @GetMapping(path="/{userId}")
+    @PostMapping(consumes = "application/json")
+
+    @ResponseStatus(HttpStatus.CREATED)
+    boolean addDishToBasket(@RequestBody final BaseDishesFromBasket dish) {
+        logger.info("Consumed: {}", dish);
+        dishesFromBasketFacade.addDishToBasket(dish);
+        return true;
+    }
+
+    @GetMapping
+    @RequestMapping(
+            value = "/{userId}"
+
+    )
     List<BaseDishesFromBasket> getDishesById(@PathVariable("userId") long userId) {
         final var dishes = dishesFromBasketFacade.getDishesById(userId);
-        if (dishes == null|| dishes.isEmpty()) {
+        if (dishes == null || dishes.isEmpty()) {
             logger.error("Basket is empty");
             throw new ObjectNotExistsException();
         }
-
         return dishes;
     }
 

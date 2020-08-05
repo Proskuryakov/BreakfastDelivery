@@ -67,10 +67,42 @@ paths:
           description: "Dish object that should be deleted"
           required: true
           schema:
+            $ref: "#/definitions/DishesFromBasketIds"
+      responses:
+        201:
+          description: "Dish was successfully created"
+        400:
+          description: "Data is invalid"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ErrorResponse"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+    put:
+      tags:
+        - "dishesFromBasket"
+      summary: "delete a dish from the user's basket"
+      description: "This can only be done by the logged in user."
+      operationId: "updateDishCount"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Dish object that should be deleted"
+          required: true
+          schema:
             $ref: "#/definitions/DishesFromBasket"
       responses:
         201:
           description: "Dish was successfully created"
+          schema:
+            $ref: "#/definitions/DishesFromBasket"
         400:
           description: "Data is invalid"
           schema:
@@ -114,6 +146,7 @@ paths:
           description: "Unauthorized"
         403:
           description: "Forbidden"
+
   /dishes:
     post:
       tags:
@@ -259,6 +292,31 @@ paths:
           description: "Order successfully create"
           schema:
             $ref: "#/definitions/CreatedOrder"
+        400:
+          description: "Data is invalid"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ErrorResponse"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+    get:
+      tags:
+        - "order"
+      summary: "Get orders"
+      description: "This can only be done by the logged in user."
+      operationId: "getOrders"
+      produces:
+        - "application/json"
+      responses:
+        201:
+          description: "Orders successfully get"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/CreatedOrder"
         400:
           description: "Data is invalid"
           schema:
@@ -476,6 +534,22 @@ definitions:
         type: "integer"
         format: "int64"
         minimum: 1
+  DishesFromBasketIds:
+    type: "object"
+    required:
+      - "userId"
+      - "dishId"
+    properties:
+      userId:
+        type: "integer"
+        format: "int64"
+        minimum: 1
+      dishId:
+        type: "integer"
+        format: "int64"
+        minimum: 1
+
+
   NewDish:
     type: "object"
     required:

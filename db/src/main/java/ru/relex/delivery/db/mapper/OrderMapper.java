@@ -16,7 +16,7 @@ public interface OrderMapper {
 
     //language=postgreSQL
     @Select("" +
-            "SELECT  order_id   , " +
+            "SELECT  order_id  as id   , " +
             "       created_at," +
             "       phone," +
             "       city," +
@@ -31,7 +31,21 @@ public interface OrderMapper {
             "WHERE  order_id = #{order_id}"
     )
     OrderModel getOrder(@Param("order_id") long order_id);
-
+    @Select("" +
+            "SELECT  order_id as id  , " +
+            "       created_at," +
+            "       phone," +
+            "       city," +
+            "       street," +
+            "       house," +
+            "       flat," +
+            "      entrance," +
+            "       floor," +
+            "       status_id  as statusId ," +
+            "       checkres  " +
+            "FROM orders   "
+    )
+    List<OrderModel> getOrders( );
     @Select("" +
             "SELECT  dish_id  as dishId , " +
             "       count " +

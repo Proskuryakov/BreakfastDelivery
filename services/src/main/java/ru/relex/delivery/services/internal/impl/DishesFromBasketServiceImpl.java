@@ -11,6 +11,7 @@ import ru.relex.delivery.db.model.PositionInOrderModel;
 import ru.relex.delivery.services.internal.DishesFromBasketService;
 import ru.relex.delivery.services.mapper.DishesFromBasketStruct;
 import ru.relex.delivery.services.model.dishesFromBasket.BaseDishesFromBasket;
+import ru.relex.delivery.services.model.dishesFromBasket.DishesFromBasketIds;
 import ru.relex.delivery.services.model.order.CreatedOrder;
 
 import java.util.ArrayList;
@@ -29,80 +30,43 @@ public class DishesFromBasketServiceImpl implements DishesFromBasketService {
     }
 
     @Override
-    public void addDishToBasket(BaseDishesFromBasket dish) {
+    public boolean addDishToBasket(BaseDishesFromBasket dish) {
         dishesFromBasketMapper.addDishToBasket(dish.getUserId(), dish.getDishId(), dish.getCount());
-
+        return true;
     }
 
     @Override
     public List<BaseDishesFromBasket> getDishesFromBasket(long id) {
         List<DishesFromBasketModel> om = dishesFromBasketMapper.getDishesFromBasket(id);
-        List<DishesFromBasketModel> updateDishList = new ArrayList<>();
-        List<Long> dishsesId = new ArrayList<>();
         List<BaseDishesFromBasket> currList = new ArrayList<>();
 
         if (om != null) {
             for (int i = 0; i < om.size(); i++) {
-                int finalI = i;
-
-                long dishId = om.get(i).getDishId();
-                if (!dishsesId.contains(dishId)) {
-                    dishsesId.add(dishId);
-                    long dishCount = 0;
-                    for (int j = 0; j < om.size(); j++) {
-                        if (dishId == om.get(j).getDishId()) {
-                            dishCount += om.get(j).getCount();
-                            dishesFromBasketMapper.deleteDishFromBasketIndex(om.get(j).getResId());
-                        }
-                    }
-                    dishesFromBasketMapper.addDishToBasket(om.get(0).getUserId(), dishId, dishCount );
-                    long finalDishCount = dishCount;
-                    currList.add(new BaseDishesFromBasket() {
-
-                        @Override
-                        public long getUserId() {
-                            return om.get(0).getUserId();
-                        }
-
-                        @Override
-                        public long getDishId() {
-                            return dishId;
-                        }
-
-                        @Override
-                        public long getCount() {
-                            return finalDishCount;
-                        }
-                    });
-                }
+                currList.add(dishesFromBasketStruct.toBaseDishesFromBasket(om.get(i)));
             }
-
-
-
-
-
-
             return currList;
         } else return null;
     }
 
     @Override
-    public boolean deleteDishFromBasket(long user_id, long dish_id, long count) {
-         DishesFromBasketModel  dish = dishesFromBasketMapper.getDishFromUserIdDishId(user_id, dish_id);
+    public boolean deleteDishFromBasket(DishesFromBasketIds ids) {
+        DishesFromBasketModel dish = dishesFromBasketMapper.getDishFromUserIdDishId(ids.getUserId(), ids.getDishId());
         if (dish == null) {
             return false;
         }
-        long currCount = dish.getCount();
-
-        if (count >= currCount) {
-            dishesFromBasketMapper.deleteDishFromBasket(user_id, dish_id);
-        } else {
-            long newCount = currCount - count;
-            dishesFromBasketMapper.deleteDishFromBasket(user_id, dish_id);
-            dishesFromBasketMapper.addDishToBasket(user_id, dish_id, newCount);
-        }
-
+        dishesFromBasketMapper.deleteDishFromBasket(ids.getUserId(), ids.getDishId());
 
         return true;
+    }
+
+    @Override
+    public BaseDishesFromBasket updateDishCount(long user_id, long dish_id, long count) {
+        DishesFromBasketModel dish = dishesFromBasketMapper.getDishFromUserIdDishId(user_id, dish_id);
+        if (dish == null) {
+            return null;
+        }
+        dishesFromBasketMapper.updateDishCount(user_id, dish_id, count);
+        DishesFromBasketModel updatableDishModel = dishesFromBasketMapper.getDishFromUserIdDishId(user_id, dish_id);
+        return dishesFromBasketStruct.toBaseDishesFromBasket(updatableDishModel);
     }
 }
