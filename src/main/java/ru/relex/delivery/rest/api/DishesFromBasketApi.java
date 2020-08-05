@@ -70,7 +70,7 @@ public class DishesFromBasketApi {
     )
     List<BaseDishesFromBasket> getDishesById(@PathVariable("userId") long userId) {
         final var dishes = dishesFromBasketFacade.getDishesById(userId);
-        if (dishes == null || dishes.isEmpty()) {
+        if (dishes == null) {
             logger.error("Basket is empty");
             throw new ObjectNotExistsException();
         }

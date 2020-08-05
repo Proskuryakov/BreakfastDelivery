@@ -45,7 +45,7 @@ public class DishesFromBasketServiceImpl implements DishesFromBasketService {
                 currList.add(dishesFromBasketStruct.toBaseDishesFromBasket(om.get(i)));
             }
             return currList;
-        } else return null;
+        } else return currList;
     }
 
     @Override

@@ -1,4 +1,3 @@
-drop table dish_types, dishes, dish_dish_types, orders, dishesFromOrder, dishesFromBasket;
 CREATE TABLE dish_types
 (
     dish_type_id INTEGER PRIMARY KEY,
@@ -16,15 +15,6 @@ CREATE TABLE dishes
     restaurant_id INTEGER
 );
 
-CREATE TABLE dish_dish_types
-(
-    dish_id INTEGER,
-    dish_type_id INTEGER,
-    PRIMARY KEY (dish_id, dish_type_id),
-    CONSTRAINT dish_dish_types_dish_id_fk FOREIGN KEY (dish_id) REFERENCES dishes (dish_id) ON DELETE CASCADE,
-    CONSTRAINT dish_dish_types_dish_type_id_fk FOREIGN KEY (dish_type_id) REFERENCES dish_types (dish_type_id) ON DELETE CASCADE
-);
-
 INSERT INTO dish_types(dish_type_id, name)
 VALUES (1, 'DRINK'),
        (2, 'MAIN'),
@@ -35,6 +25,15 @@ VALUES (1, 'DRINK'),
        (7, 'PIZZA'),
        (8, 'SUSHI'),
        (9, 'BAKERY');
+
+CREATE TABLE dish_dish_types
+(
+    dish_id INTEGER,
+    dish_type_id INTEGER,
+    PRIMARY KEY (dish_id, dish_type_id),
+    CONSTRAINT dish_dish_types_dish_id_fk FOREIGN KEY (dish_id) REFERENCES dishes (dish_id) ON DELETE CASCADE,
+    CONSTRAINT dish_dish_types_dish_type_id_fk FOREIGN KEY (dish_type_id) REFERENCES dish_types (dish_type_id) ON DELETE CASCADE
+);
 
  CREATE TABLE  orders
 (
