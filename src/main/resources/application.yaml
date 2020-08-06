@@ -14,3 +14,12 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
   type-handlers-package: ru.relex.delivery.db.handler
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIASGKEBJAWTYAN6DFG
+      secretKey: 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
+    region: eu-central-1
+    s3:
+      bucket: dovecote-bucket-97
+      endpointUrl: https://s3.eu-central-1.amazonaws.com
