@@ -81,38 +81,7 @@ paths:
           description: "Unauthorized"
         403:
           description: "Forbidden"
-    get:
-      tags:
-        - "dishesFromBasket"
-      summary: "get a dish from the user's basket by user id and dish id"
-      description: "This can only be done by the logged in user."
-      operationId: "getDishFromBasketByUseridDishId"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
-      parameters:
-        - in: "body"
-          name: "body"
-          description: "Dish object that should be get"
-          required: true
-          schema:
-            $ref: "#/definitions/DishesFromBasketIds"
-      responses:
-        201:
-          description: "Dish was successfully get"
-          schema:
-            $ref: "#/definitions/DishesFromBasket"
-        400:
-          description: "Data is invalid"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/ErrorResponse"
-        401:
-          description: "Unauthorized"
-        403:
-          description: "Forbidden"
+
     put:
       tags:
         - "dishesFromBasket"
@@ -145,6 +114,8 @@ paths:
           description: "Unauthorized"
         403:
           description: "Forbidden"
+
+
   /dishesFromBasket/{userId}:
     get:
       tags:
@@ -198,6 +169,43 @@ paths:
       responses:
         201:
           description: "Dishes was successfully deleted from basket"
+        400:
+          description: "Data is invalid"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ErrorResponse"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+  /dishesFromBasket/{userId}/{dishId}:
+    get:
+      tags:
+        - "dishesFromBasket"
+      summary: "Get dish by user id and dish id"
+      description: "This can only be done by the logged in user."
+      operationId: "getDishesByUserIdDishID"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "ID of user to get the basket"
+          required: true
+          type: "integer"
+          format: "int64"
+        - name: "dishId"
+          in: "path"
+          description: "ID of user to get the basket"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        201:
+          description: "Dishes was successfully returned"
+          schema:
+            $ref: "#/definitions/DishesFromBasket"
         400:
           description: "Data is invalid"
           schema:

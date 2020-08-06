@@ -43,7 +43,7 @@ public class DishesFromBasketFacadeImpl implements DishesFromBasketFacade {
     }
 
     @Override
-    public BaseDishesFromBasket getDishByUserIdDishId(DishesFromBasketIds ids) {
-        return dishesFromBasketService.getDishByUserIdDishId(ids);
+    public BaseDishesFromBasket getDishByUserIdDishId(long userId,long dishId) {
+        return dishesFromBasketService.getDishByUserIdDishId(userId, dishId);
     }
 }

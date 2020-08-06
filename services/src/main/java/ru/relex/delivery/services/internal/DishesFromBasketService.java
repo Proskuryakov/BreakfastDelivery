@@ -15,5 +15,5 @@ public interface DishesFromBasketService {
 
     boolean deleteDishesFromBasketByUserId(long user_id);
 
-    BaseDishesFromBasket getDishByUserIdDishId(DishesFromBasketIds ids);
+    BaseDishesFromBasket getDishByUserIdDishId(long userId,long dishId);
 }

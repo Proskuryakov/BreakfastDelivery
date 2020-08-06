@@ -17,5 +17,5 @@ public interface DishesFromBasketFacade {
 
     List<BaseDishesFromBasket> getDishesById(long id);
 
-    BaseDishesFromBasket getDishByUserIdDishId(DishesFromBasketIds ids);
+    BaseDishesFromBasket getDishByUserIdDishId(long userId,long dishId);
 }
