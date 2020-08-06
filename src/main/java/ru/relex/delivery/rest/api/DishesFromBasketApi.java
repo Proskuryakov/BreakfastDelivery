@@ -87,10 +87,16 @@ public class DishesFromBasketApi {
         return dishes;
     }
 
-    @GetMapping(consumes = "application/json")
+    @GetMapping
+    @RequestMapping(
+
+            value = "/{userId}/{dishId}"
+
+    )
+
     @ResponseStatus(HttpStatus.CREATED)
-    BaseDishesFromBasket getDishByUserIdDishId(@RequestBody final DishesFromBasketIds ids) {
-        final var dish = dishesFromBasketFacade.getDishByUserIdDishId(ids);
+    BaseDishesFromBasket getDishByUserIdDishId(@PathVariable("userId") long userId, @PathVariable("dishId") long dishId) {
+        final var dish = dishesFromBasketFacade.getDishByUserIdDishId(userId,dishId );
 
         if (dish!=null) {
             logger.info("Order successful get");
