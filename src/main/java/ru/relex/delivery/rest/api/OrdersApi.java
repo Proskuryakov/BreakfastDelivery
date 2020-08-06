@@ -32,7 +32,6 @@ public class OrdersApi {
         this.orderFacade = userFacade;
     }
 
-
     @PostMapping
     @RequestMapping(
             consumes = "application/json"
@@ -40,7 +39,6 @@ public class OrdersApi {
     @ResponseStatus(HttpStatus.CREATED)
     CreatedOrder createOrder(@RequestBody final NewOrder order) {
         logger.info("Consumed: {}", order);
-
         return orderFacade.createOrder(order);
     }
 
@@ -48,17 +46,30 @@ public class OrdersApi {
     @RequestMapping(
             value = "/{id}"
     )
-    CreatedOrder getOrderById(@PathVariable("id") long id) {
-        final var order = orderFacade.getOrderById(id);
+    CreatedOrder getOrderByOrderId(@PathVariable("id") long id) {
+        final var order = orderFacade.getOrderByOrderId(id);
         if (order == null) {
             logger.error("Order with such id does not exist");
-             throw new ObjectNotExistsException();
+            throw new ObjectNotExistsException();
         }
         return order;
     }
     @GetMapping
-    List<CreatedOrder> getOrders( ) {
-        final var order = orderFacade.getOrders( );
+    @RequestMapping(
+            value = "/byUserId/{id}"
+    )
+    CreatedOrder getOrderByUserId(@PathVariable("id") long id) {
+         final var order = orderFacade.getOrderByUserId(id);
+        if (order == null) {
+            logger.error("Order with such id does not exist");
+            throw new ObjectNotExistsException();
+        }
+        return order;
+    }
+
+    @GetMapping
+    List<CreatedOrder> getOrders() {
+        final var order = orderFacade.getOrders();
         if (order == null) {
             logger.error("Order with such id does not exist");
             throw new ObjectNotExistsException();
@@ -66,7 +77,8 @@ public class OrdersApi {
         logger.info("orders successfully get");
         return order;
     }
-    @DeleteMapping(path="/{id}")
+
+    @DeleteMapping(path = "/{id}")
     void deleteOrder(@PathVariable("id") long id) {
         if (orderFacade.deleteOrderById(id)) {
             logger.info("Order successful delete");
@@ -74,7 +86,7 @@ public class OrdersApi {
             return;
         }
         logger.error("Delete Error. Order with such id does not exist");
-      throw new ObjectNotExistsException();
+        throw new ObjectNotExistsException();
     }
 
     @PutMapping
@@ -83,7 +95,7 @@ public class OrdersApi {
             consumes = "application/json"
     )
     CreatedOrder updateOrder(@PathVariable("id") long id,
-                           @RequestBody UpdatableOrder updatableOrder) {
+                             @RequestBody UpdatableOrder updatableOrder) {
         final var order = orderFacade.updateOrder(id, updatableOrder);
         if (order == null) {
             logger.error("Update Error. Order with such id does not exist");
@@ -92,7 +104,6 @@ public class OrdersApi {
         logger.info("Order successful update");
         return order;
     }
-
 
 
 }

@@ -23,8 +23,13 @@ public class DishesFromBasketFacadeImpl implements DishesFromBasketFacade {
     }
 
     @Override
-    public boolean deleteDishFromBasket(DishesFromBasketIds ids ) {
-        return dishesFromBasketService.deleteDishFromBasket(ids);
+    public boolean deleteDishFromBasketByUserIdDishId(DishesFromBasketIds ids ) {
+        return dishesFromBasketService.deleteDishFromBasketByUserIdDishId(ids);
+    }
+
+    @Override
+    public boolean deleteDishesFromBasketByUserId(long user_id) {
+        return dishesFromBasketService.deleteDishesFromBasketByUserId(user_id);
     }
 
     @Override

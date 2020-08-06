@@ -28,8 +28,13 @@ public class OrderFacadeImpl implements OrderFacade {
     }
 
     @Override
-    public CreatedOrder getOrderById(  long id) {
-        return orderService.getOrderById(id);
+    public CreatedOrder getOrderByUserId(long id) {
+        return orderService.getOrderByUserId(id);
+    }
+
+    @Override
+    public CreatedOrder getOrderByOrderId(long id) {
+        return orderService.getOrderByOrderId(id);
     }
 
     @Override

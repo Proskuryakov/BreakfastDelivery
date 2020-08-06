@@ -23,4 +23,8 @@ public interface BaseOrder {
     @NotNull
     @Pattern(regexp = "\\d{5,15}", message = "PHONE_FORMAT_IS_INVALID")
     String getPhone();
+
+    @Nullable
+    @NotNull
+     String getUserId();
 }

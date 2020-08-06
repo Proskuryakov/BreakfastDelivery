@@ -34,21 +34,19 @@ public interface Address {
             message = ValidationErrorsOrder.HOUSE_LENGTH_IS_INVALID
     )      String getHouse();
     @Nullable
-    @NotNull
+
     @Length(
             min = 1,
             max = 10,
             message = ValidationErrorsOrder.FLAT_LENGTH_IS_INVALID
     )      String getFlat();
     @Nullable
-    @NotNull
     @Length(
             min = 1,
             max = 10,
             message = ValidationErrorsOrder.ENTRANCE_LENGTH_IS_INVALID
     )      String getEntrance();
     @Nullable
-    @NotNull
     @Length(
             min = 1,
             max = 10,

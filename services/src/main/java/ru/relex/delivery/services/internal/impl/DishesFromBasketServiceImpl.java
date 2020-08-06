@@ -2,17 +2,12 @@ package ru.relex.delivery.services.internal.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.relex.delivery.commons.model.PositionInOrder;
-import ru.relex.delivery.commons.model.StatusesOfOrder;
 import ru.relex.delivery.db.mapper.DishesFromBasketMapper;
 import ru.relex.delivery.db.model.DishesFromBasketModel;
-import ru.relex.delivery.db.model.OrderModel;
-import ru.relex.delivery.db.model.PositionInOrderModel;
 import ru.relex.delivery.services.internal.DishesFromBasketService;
 import ru.relex.delivery.services.mapper.DishesFromBasketStruct;
 import ru.relex.delivery.services.model.dishesFromBasket.BaseDishesFromBasket;
 import ru.relex.delivery.services.model.dishesFromBasket.DishesFromBasketIds;
-import ru.relex.delivery.services.model.order.CreatedOrder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,16 +40,16 @@ public class DishesFromBasketServiceImpl implements DishesFromBasketService {
                 currList.add(dishesFromBasketStruct.toBaseDishesFromBasket(om.get(i)));
             }
             return currList;
-        } else return null;
+        } else return currList;
     }
 
     @Override
-    public boolean deleteDishFromBasket(DishesFromBasketIds ids) {
+    public boolean deleteDishFromBasketByUserIdDishId(DishesFromBasketIds ids) {
         DishesFromBasketModel dish = dishesFromBasketMapper.getDishFromUserIdDishId(ids.getUserId(), ids.getDishId());
         if (dish == null) {
             return false;
         }
-        dishesFromBasketMapper.deleteDishFromBasket(ids.getUserId(), ids.getDishId());
+        dishesFromBasketMapper.deleteDishFromBasketBuUserIdDishId(ids.getUserId(), ids.getDishId());
 
         return true;
     }
@@ -68,5 +63,16 @@ public class DishesFromBasketServiceImpl implements DishesFromBasketService {
         dishesFromBasketMapper.updateDishCount(user_id, dish_id, count);
         DishesFromBasketModel updatableDishModel = dishesFromBasketMapper.getDishFromUserIdDishId(user_id, dish_id);
         return dishesFromBasketStruct.toBaseDishesFromBasket(updatableDishModel);
+    }
+
+    @Override
+    public boolean deleteDishesFromBasketByUserId(long user_id) {
+        List<DishesFromBasketModel> dish = dishesFromBasketMapper.getDishesFromBasket(user_id);
+        if (dish == null|| dish.isEmpty()) {
+            return false;
+        }
+        dishesFromBasketMapper.deleteDishesFromBasketByUserId(user_id);
+
+        return true;
     }
 }

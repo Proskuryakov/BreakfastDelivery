@@ -38,15 +38,16 @@ VALUES (1, 'DRINK'),
 
  CREATE TABLE  orders
 (
+user_id INTEGER UNIQUE,
     order_id    SERIAL PRIMARY KEY,
     created_at TIMESTAMP    NOT NULL DEFAULT NOW(),
     phone      VARCHAR(15)  NOT NULL UNIQUE,
     city   VARCHAR(100)  NOT NULL ,
     street   VARCHAR(100)  NOT NULL ,
     house   VARCHAR(10)  NOT NULL ,
-    flat   VARCHAR(10)  NOT NULL ,
-    entrance   VARCHAR(10)  NOT NULL,
-    floor   VARCHAR(10)  NOT NULL ,
+    flat   VARCHAR(10)   ,
+    entrance   VARCHAR(10)   ,
+    floor   VARCHAR(10)    ,
      status_id INTEGER DEFAULT '1',
        checkres INTEGER
  );

@@ -10,6 +10,8 @@ import java.util.List;
 public interface DishesFromBasketService {
     boolean addDishToBasket(BaseDishesFromBasket order);
     List<BaseDishesFromBasket> getDishesFromBasket(long id);
-    boolean deleteDishFromBasket(DishesFromBasketIds ids);
+    boolean deleteDishFromBasketByUserIdDishId(DishesFromBasketIds ids);
     BaseDishesFromBasket updateDishCount(long user_id, long dish_id, long count);
+
+    boolean deleteDishesFromBasketByUserId(long user_id);
 }
