@@ -9,7 +9,6 @@ import ru.relex.delivery.rest.exception.ObjectNotExistsException;
 import ru.relex.delivery.services.facade.DishesFromBasketFacade;
 import ru.relex.delivery.services.model.dishesFromBasket.BaseDishesFromBasket;
 import ru.relex.delivery.services.model.dishesFromBasket.DishesFromBasketIds;
-import ru.relex.delivery.services.model.order.CreatedOrder;
 
 import java.util.List;
 
@@ -30,14 +29,26 @@ public class DishesFromBasketApi {
 
     @DeleteMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    boolean deleteOrder(@RequestBody final DishesFromBasketIds ids) {
-        if (dishesFromBasketFacade.deleteDishFromBasket(ids)) {
+    boolean deleteOrderByUserIdDishId(@RequestBody final DishesFromBasketIds ids) {
+        if (dishesFromBasketFacade.deleteDishFromBasketByUserIdDishId(ids)) {
             logger.info("Order successful delete");
             return true;
         }
         logger.error("Delete Error.  ");
         throw new ObjectNotExistsException();
 
+    }
+
+    @DeleteMapping(
+            value = "/{userId}"
+    )
+    boolean deleteOrderByUserId(@PathVariable("userId") long userId) {
+        if (dishesFromBasketFacade.deleteDishesFromBasketByUserId(userId)) {
+            logger.info("Order successful delete");
+            return true;
+        }
+        logger.error("Delete Error.  ");
+        return false;
     }
 
     @PutMapping(consumes = "application/json")
@@ -66,9 +77,8 @@ public class DishesFromBasketApi {
     @GetMapping
     @RequestMapping(
             value = "/{userId}"
-
     )
-    List<BaseDishesFromBasket> getDishesById(@PathVariable("userId") long userId) {
+    List<BaseDishesFromBasket> getDishesByUserId(@PathVariable("userId") long userId) {
         final var dishes = dishesFromBasketFacade.getDishesById(userId);
         if (dishes == null) {
             logger.error("Basket is empty");

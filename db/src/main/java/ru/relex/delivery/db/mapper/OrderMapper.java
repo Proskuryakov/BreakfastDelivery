@@ -18,6 +18,7 @@ public interface OrderMapper {
     @Select("" +
             "SELECT  order_id  as id   , " +
             "       created_at," +
+            "user_id as userId," +
             "       phone," +
             "       city," +
             "       street," +
@@ -30,11 +31,13 @@ public interface OrderMapper {
             "FROM orders   " +
             "WHERE  order_id = #{order_id}"
     )
-    OrderModel getOrder(@Param("order_id") long order_id);
+    OrderModel getOrderByOrderId(@Param("order_id") long order_id);
     @Select("" +
             "SELECT  order_id as id  , " +
+            "user_id as userId," +
             "       created_at," +
             "       phone," +
+
             "       city," +
             "       street," +
             "       house," +
@@ -57,7 +60,23 @@ public interface OrderMapper {
 
     OrderModel updateOrder(@Param("order_id") long order_id, @Param("status_id") long status_id);
     //OrderModel getOrder(@Param("position_id") long orderId  );
-
+    @Select("" +
+            "SELECT  order_id  as id   , " +
+            "       created_at," +
+            "user_id as userId," +
+            "       phone," +
+            "       city," +
+            "       street," +
+            "       house," +
+            "       flat," +
+            "      entrance," +
+            "       floor," +
+            "       status_id  as statusId ," +
+            "       checkres  " +
+            "FROM orders   " +
+            "WHERE  user_id = #{user_id}"
+    )
+    OrderModel getOrderByUserId(@Param("user_id") long user_id);
 
     void deleteOrder(@Param("order_id") long order_id );
     void deletePosition(@Param("order_id") long order_id );

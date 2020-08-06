@@ -9,8 +9,9 @@ import java.util.List;
 
 public interface OrderFacade {
     CreatedOrder createOrder(@Valid NewOrder order);
+    CreatedOrder getOrderByUserId(long id);
 
-    CreatedOrder getOrderById(  long id);
+    CreatedOrder getOrderByOrderId(long id);
     List<CreatedOrder> getOrders(   );
 
     boolean deleteOrderById(  long id);

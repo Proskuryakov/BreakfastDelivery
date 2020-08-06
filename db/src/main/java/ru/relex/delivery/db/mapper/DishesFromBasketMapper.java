@@ -22,9 +22,9 @@ public interface DishesFromBasketMapper {
 
     void updateDishCount(@Param("user_id") long userId, @Param("dish_id") long dishId, @Param("count") long count);
 
-    void deleteDishFromBasket(@Param("user_id") long user_id, @Param("dish_id") long dishId);
+    void deleteDishFromBasketBuUserIdDishId(@Param("user_id") long user_id, @Param("dish_id") long dishId);
 
-    void deleteDishFromBasketIndex(@Param("res_id") long res_id);
+    void deleteDishesFromBasketByUserId(@Param("user_id") long user_id);
 
     @Select("" +
             "SELECT user_id  as user_id ," +

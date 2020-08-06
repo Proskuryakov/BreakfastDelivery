@@ -29,8 +29,7 @@ public interface OrderStruct {
 
 
     @Mapping(target = "createdAt", source = "createdAt")
-
-     CreatedOrder toCreatedOrder(OrderModel byId);
+    CreatedOrder toCreatedOrder(OrderModel byId);
 
     @Mapping(target = "phone", source = "order.phone")
     @Mapping(target = "house", source = "order.address.house")
@@ -42,6 +41,7 @@ public interface OrderStruct {
     @Mapping(target = "listOfDishes", source = "order.listOfDishes")
     @Mapping(target = "checkres", source = "check")
     @Mapping(target = "statusId", source = "status")
+    @Mapping(target = "userId", source = "order.userId")
 
     OrderModel fromNewOrder(NewOrder order , Integer check, Integer status    );
 
@@ -58,6 +58,7 @@ public interface OrderStruct {
     @Mapping(target = "status", source = "statusId")
     @Mapping(target = "id", source = "byId.id")
     @Mapping(target = "listOfDishes", source = "pst")
+    @Mapping(target = "userId", source = "byId.userId")
 
     CreatedOrder toCreatedOrder(OrderModel byId, StatusesOfOrder statusId, List<PositionInOrder> pst );
 
@@ -74,22 +75,12 @@ public interface OrderStruct {
     @Mapping(target = "status", source = "statusId")
     @Mapping(target = "id", source = "id")
     @Mapping(target = "listOfDishes", source = "model.listOfDishes")
+    @Mapping(target = "userId", source = " model.userId")
 
     CreatedOrder toCreatedOrder(OrderModel model, long id, Instant createdAt, double check, StatusesOfOrder statusId);
 
 
 
-//    @Mapping(target = "address.house", source = "model.house")
-//    @Mapping(target = "address.street", source = "model.street")
-//    @Mapping(target = "address.city", source = "model.city")
-//    @Mapping(target = "address.flat", source = "model.flat")
-//    @Mapping(target = "address.entrance", source = "model.entrance")
-//    @Mapping(target = "address.floor", source = "model.floor")
-//    @Mapping(target = "phone", source = "model.phone")
-//    @Mapping(target = "order_id", source = "id")
-//    @Mapping(target = "createdAt", source = "createdAt")
-//    @Mapping(target = "status", source = "model.status")
-//    CreatedOrder toCreatedOrder(OrderModel byId);
 
 
     @DefaultCreatedAtMapper

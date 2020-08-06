@@ -13,16 +13,16 @@
         VALUES (  #{user_id}  , #{dish_id}, #{count}  )
 
     </insert>
-    <delete id="deleteDishFromBasket"
+    <delete id="deleteDishFromBasketBuUserIdDishId"
             parameterType="map" >
     DELETE FROM dishesFromBasket
     WHERE dish_id = #{dish_id} AND user_id = #{user_id};
 
 </delete>
-    <delete id="deleteDishFromBasketIndex"
+    <delete id="deleteDishesFromBasketByUserId"
             parameterType="map" >
     DELETE FROM dishesFromBasket
-    WHERE res_id = #{res_id}  ;
+    WHERE user_id = #{user_id}  ;
 
 </delete>
     <select id="updateDishCount"

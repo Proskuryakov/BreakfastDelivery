@@ -12,11 +12,13 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode(exclude = {
         "id",
+        "userId",
         "createdAt",
         "phone",
         "city",
         "street",
         "house",
+
         "flat",
         "entrance",
         "floor",
@@ -27,6 +29,8 @@ public class OrderModel {
     private long id;
     private Instant createdAt;
     private String city;
+    private long userId;
+
     private String street;
     private String house;
     private String flat;

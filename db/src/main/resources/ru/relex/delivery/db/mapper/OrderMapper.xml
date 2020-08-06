@@ -8,9 +8,9 @@
     <select id="createOrder"
             parameterType="ru.relex.delivery.db.model.OrderModel"
             resultType="ru.relex.delivery.db.model.OrderModel">
-        INSERT INTO orders (  phone, city, street, house, flat, entrance , floor, checkres , status_id  )
-        VALUES (  #{phone}, #{city}, #{street}, #{house}, #{flat}, #{entrance}, #{floor}  , #{checkres},#{statusId} )
-        RETURNING order_id AS id, created_at AS createdAt, status_id AS statusId
+        INSERT INTO orders (  user_id, phone, city, street, house, flat, entrance , floor, checkres , status_id  )
+        VALUES (  #{userId}, #{phone}, #{city}, #{street}, #{house}, #{flat}, #{entrance}, #{floor}  , #{checkres},#{statusId} )
+        RETURNING order_id AS id, created_at AS createdAt, status_id AS statusId, user_id AS userId
     </select>
 
 

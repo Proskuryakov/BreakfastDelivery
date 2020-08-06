@@ -57,8 +57,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public CreatedOrder getOrderById(long id) {
-        OrderModel om = orderMapper.getOrder(id);
+    public CreatedOrder getOrderByOrderId(long id) {
+        OrderModel om = orderMapper.getOrderByOrderId(id);
         if (om != null) {
             Integer idstatus = om.getStatusId();
             System.out.println(idstatus);
@@ -87,10 +87,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
-
     @Override
     public boolean deleteOrderById(long id) {
-        CreatedOrder order = getOrderById(id);
+        CreatedOrder order = getOrderByOrderId(id);
         if (order == null) {
             return false;
         }
@@ -103,15 +102,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public CreatedOrder updateOrder(long id, UpdatableOrder updatableOrder) {
-
-        //updateOrder
-        CreatedOrder order = getOrderById(id);
+        CreatedOrder order = getOrderByOrderId(id);
         if (order == null) {
             return null;
         }
         Integer ind = updatableOrder.getStatus().getId();
         OrderModel updmodel = orderMapper.updateOrder(id, updatableOrder.getStatus().getId());
-
         CreatedOrder updatedOrder = orderStruct.merge(order, updatableOrder);
 
         return updatedOrder;
@@ -122,15 +118,11 @@ public class OrderServiceImpl implements OrderService {
         List<OrderModel> om = orderMapper.getOrders();
         if (om != null) {
             List<CreatedOrder> createdOrders = new ArrayList<>();
-             List<PositionInOrder> createdList = new ArrayList<>();
-            //получить
+            List<PositionInOrder> createdList = new ArrayList<>();
             for (int i = 0; i < om.size(); i++) {
                 Integer idstatus = om.get(i).getStatusId();
-
                 List<PositionInOrderModel> positions = orderMapper.getPositionOfOrder(om.get(i).getId());
                 List<PositionInOrder> createdListPos = new ArrayList<>();
-
-                //получить
                 for (int j = 0; j < positions.size(); j++) {
                     int finalI = j;
                     createdListPos.add(new PositionInOrder() {
@@ -149,8 +141,33 @@ public class OrderServiceImpl implements OrderService {
             }
             return createdOrders;
         } else return null;
-
     }
 
+    @Override
+    public CreatedOrder getOrderByUserId(long user_id) {
+        OrderModel om = orderMapper.getOrderByUserId(user_id);
+        if (om != null) {
+            long order_id = om.getId();
+            Integer idstatus = om.getStatusId();
 
+            List<PositionInOrderModel> positions = orderMapper.getPositionOfOrder(order_id);
+            List<PositionInOrder> createdList = new ArrayList<>();
+
+             for (int i = 0; i < positions.size(); i++) {
+                int finalI = i;
+                createdList.add(new PositionInOrder() {
+                    @Override
+                    public long getDishId() {
+                        return positions.get(finalI).getDishid();
+                    }
+
+                    @Override
+                    public long getCount() {
+                        return positions.get(finalI).getCount();
+                    }
+                });
+            }
+            return orderStruct.toCreatedOrder(om, StatusesOfOrder.fromId(idstatus), createdList);
+        } else return orderStruct.toCreatedOrder(om);
+    }
 }
