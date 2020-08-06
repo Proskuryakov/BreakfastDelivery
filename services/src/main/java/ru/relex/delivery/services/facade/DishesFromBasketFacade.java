@@ -16,4 +16,6 @@ public interface DishesFromBasketFacade {
     BaseDishesFromBasket updateDishCount(long user_id, long dish_id, long count);
 
     List<BaseDishesFromBasket> getDishesById(long id);
+
+    BaseDishesFromBasket getDishByUserIdDishId(DishesFromBasketIds ids);
 }

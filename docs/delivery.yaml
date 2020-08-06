@@ -81,6 +81,38 @@ paths:
           description: "Unauthorized"
         403:
           description: "Forbidden"
+    get:
+      tags:
+        - "dishesFromBasket"
+      summary: "get a dish from the user's basket by user id and dish id"
+      description: "This can only be done by the logged in user."
+      operationId: "getDishFromBasketByUseridDishId"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Dish object that should be get"
+          required: true
+          schema:
+            $ref: "#/definitions/DishesFromBasketIds"
+      responses:
+        201:
+          description: "Dish was successfully get"
+          schema:
+            $ref: "#/definitions/DishesFromBasket"
+        400:
+          description: "Data is invalid"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ErrorResponse"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
     put:
       tags:
         - "dishesFromBasket"

@@ -87,5 +87,18 @@ public class DishesFromBasketApi {
         return dishes;
     }
 
+    @GetMapping(consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    BaseDishesFromBasket getDishByUserIdDishId(@RequestBody final DishesFromBasketIds ids) {
+        final var dish = dishesFromBasketFacade.getDishByUserIdDishId(ids);
 
+        if (dish!=null) {
+            logger.info("Order successful get");
+            return dish;
+        }
+        logger.error(" Get error  .  ");
+        return null;
+      //  throw new ObjectNotExistsException();
+
+    }
 }
