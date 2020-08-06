@@ -10,9 +10,9 @@ import ru.relex.delivery.web.WebConfiguration;
 
 @SpringBootApplication
 @Import(
-  {ServicesConfiguration.class, WebConfiguration.class}
+  {ServicesConfiguration.class, WebConfiguration.class, WebConfig.class}
   )
-@ComponentScan(basePackages = {"ru.relex.delivery.services.service", "ru.relex.delivery.web.handler"})
+@ComponentScan(basePackages = {"ru.relex.delivery.web.handler", "ru.relex.delivery.rest.api"})
 public class Delivery {
 
   public static void main(String[] args) {
