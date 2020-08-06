@@ -29,7 +29,7 @@ public interface DishesFromBasketMapper {
     @Select("" +
             "SELECT user_id  as user_id ," +
             " dish_id  as dishId , " +
-            " res_id   , " +
+            " res_id as resId  , " +
             "       count " +
             "FROM dishesFromBasket   " +
             "WHERE  user_id = #{user_id} AND dish_id = #{dish_id}"

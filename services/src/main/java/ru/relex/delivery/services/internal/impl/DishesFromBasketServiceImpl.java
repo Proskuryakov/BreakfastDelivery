@@ -75,4 +75,13 @@ public class DishesFromBasketServiceImpl implements DishesFromBasketService {
 
         return true;
     }
+
+    @Override
+    public BaseDishesFromBasket getDishByUserIdDishId(DishesFromBasketIds ids) {
+        DishesFromBasketModel dish = dishesFromBasketMapper.getDishFromUserIdDishId(ids.getUserId() , ids.getDishId());
+
+        if (dish != null) {
+            return dishesFromBasketStruct.toBaseDishesFromBasket(dish);
+        } else return null;
+    }
 }
