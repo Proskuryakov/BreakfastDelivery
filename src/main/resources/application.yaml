@@ -5,11 +5,11 @@ spring:
   liquibase:
     change-log: classpath*:migrations/master-changelog.yaml
     user: postgres
-    url: jdbc:postgresql://localhost:5432/delivery
+    url: jdbc:postgresql://rds-postgres-delivery.cqulanj8rndz.eu-central-1.rds.amazonaws.com:5432/delivery
   datasource:
-    url: jdbc:postgresql://localhost:5432/delivery
+    url: jdbc:postgresql://rds-postgres-delivery.cqulanj8rndz.eu-central-1.rds.amazonaws.com:5432/delivery
     username: postgres
-    password: root
+    password: customVITAroot
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
