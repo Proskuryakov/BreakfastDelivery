@@ -57,7 +57,7 @@ public class RestaurantApi {
       logger.error("GET request error. Restaurants do not exist");
       throw new ObjectNotExistsException();
     }
-    logger.info("Return {}", restaurants);
+    logger.info("Return all restaurants");
     return restaurants;
   }
 

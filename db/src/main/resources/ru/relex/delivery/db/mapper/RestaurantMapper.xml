@@ -16,4 +16,32 @@
     INSERT INTO restaurant_restaurant_types (restaurant_id, restaurant_type_id)
     VALUES (#{restaurantId}, #{restaurantType})
   </insert>
+
+  <delete id="deleteRestaurant" parameterType="map">
+    DELETE
+    FROM restaurants
+    WHERE restaurant_id = #{id};
+
+    DELETE
+    FROM restaurant_restaurant_types
+    WHERE restaurant_id = #{id};
+  </delete>
+
+  <update id="updateRestaurant" parameterType="ru.relex.delivery.db.model.RestaurantModel">
+    UPDATE restaurants
+    SET restaurant_name  = #{restaurantName},
+        street           = #{street},
+        building         = #{building},
+        start_work_day   = #{startWorkDay},
+        end_work_day     = #{endWorkDay},
+        restaurant_image = #{restaurantImage}
+    WHERE restaurant_id = #{id};
+  </update>
+
+  <update id="updateRestaurantType" parameterType="map">
+    UPDATE restaurant_restaurant_types
+    SET restaurant_type_id = #{restaurantType}
+    WHERE restaurant_id = #{restaurantId};
+  </update>
+
 </mapper>

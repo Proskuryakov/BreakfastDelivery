@@ -53,21 +53,26 @@ public class RestaurantServiceImpl implements RestaurantService {
 
   @Override
   public CreatedRestaurant update(long id, UpdatableRestaurant updatableRestaurant) {
-    CreatedRestaurant restaurant = RESTAURANT.get(id);
-
-    if (restaurant == null)
+    CreatedRestaurant restaurant = getById(id);
+    if(restaurant == null){
       return null;
+    }
 
-    CreatedRestaurant updateRestaurant = restaurantStruct.merge(restaurant, updatableRestaurant);
+    final var model = restaurantStruct.fromUpdatableRestaurant(updatableRestaurant, id);
 
-    RESTAURANT.put(id, updateRestaurant);
+    restaurantMapper.updateRestaurant(model);
+    restaurantMapper.updateRestaurantType(id, updatableRestaurant.getRestaurantType());
 
-    return updateRestaurant;
+    return restaurantStruct.toCreatedRestaurant(model, updatableRestaurant.getRestaurantType(), id);
   }
 
   @Override
   public boolean deleteById(long id) {
-    return RESTAURANT.remove(id) != null;
+    CreatedRestaurant restaurant = getById(id);
+    if(restaurant == null){
+      return false;
+    }
+    restaurantMapper.deleteRestaurant(id);
+    return true;
   }
-
 }
