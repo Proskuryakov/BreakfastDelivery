@@ -37,7 +37,7 @@ CREATE TABLE dish_dish_types
 
  CREATE TABLE  orders
 (
-user_id INTEGER UNIQUE,
+    user_id INTEGER UNIQUE,
     order_id    SERIAL PRIMARY KEY,
     created_at TIMESTAMP    NOT NULL DEFAULT NOW(),
     phone      VARCHAR(15)  NOT NULL UNIQUE,
