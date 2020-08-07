@@ -2,15 +2,11 @@ package ru.relex.delivery.services.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Qualifier;
 import ru.relex.delivery.db.model.RestaurantModel;
 import ru.relex.delivery.services.model.restaurant.CreatedRestaurant;
 import ru.relex.delivery.services.model.restaurant.NewRestaurant;
 import ru.relex.delivery.services.model.restaurant.UpdatableRestaurant;
 import ru.relex.delivery.commons.model.RestaurantType;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 
 @Mapper
 public interface RestaurantStruct {
@@ -21,6 +17,14 @@ public interface RestaurantStruct {
   @Mapping(target = "startWorkDay", source = "restaurant.workingHours.startWorkDay", dateFormat = "HH:mm")
   @Mapping(target = "endWorkDay", source = "restaurant.workingHours.endWorkDay", dateFormat = "HH:mm")
   RestaurantModel fromNewRestaurant(NewRestaurant restaurant);
+
+  @Mapping(target = "id", source = "id")
+  @Mapping(target = "restaurantName", source = "updatableRestaurant.restaurantName")
+  @Mapping(target = "street", source = "updatableRestaurant.address.street")
+  @Mapping(target = "building", source = "updatableRestaurant.address.building")
+  @Mapping(target = "startWorkDay", source = "updatableRestaurant.workingHours.startWorkDay", dateFormat = "HH:mm")
+  @Mapping(target = "endWorkDay", source = "updatableRestaurant.workingHours.endWorkDay", dateFormat = "HH:mm")
+  RestaurantModel fromUpdatableRestaurant(UpdatableRestaurant updatableRestaurant, long id);
 
   @Mapping(target = "restaurantName", source = "model.restaurantName")
   @Mapping(target = "address.street", source = "model.street")
@@ -47,5 +51,4 @@ public interface RestaurantStruct {
   @Mapping(target = "workingHours", source = "updatableRestaurant.workingHours")
   @Mapping(target = "restaurantImage", source = "updatableRestaurant.restaurantImage")
   CreatedRestaurant merge(CreatedRestaurant restaurant, UpdatableRestaurant updatableRestaurant);
-
 }
