@@ -25,7 +25,14 @@
     WHERE res_id = #{res_id}  ;
 
 </delete>
+    <select id="updateDishCount"
+            parameterType="map"
+            resultType="ru.relex.delivery.db.model.OrderModel"
+    >
+ UPDATE dishesFromBasket
+SET count = #{count} WHERE user_id = #{user_id} AND dish_id = #{dish_id};
 
+    </select>
 
     <!--    <delete  id="deleteOrder"  parameterType="map">-->
     <!-- DELETE FROM dishesfromorder WHERE position_id = #{position_id}-->
