@@ -10,16 +10,8 @@ import ru.relex.delivery.services.model.restaurant.CreatedRestaurant;
 import ru.relex.delivery.services.model.restaurant.NewRestaurant;
 import ru.relex.delivery.services.model.restaurant.UpdatableRestaurant;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
-
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
-
-  private final Map<Long, CreatedRestaurant> RESTAURANT = new ConcurrentHashMap<>();
-
-  private final AtomicLong lastId = new AtomicLong(0);
 
   private final RestaurantStruct restaurantStruct;
   private final RestaurantMapper restaurantMapper;
@@ -54,7 +46,7 @@ public class RestaurantServiceImpl implements RestaurantService {
   @Override
   public CreatedRestaurant update(long id, UpdatableRestaurant updatableRestaurant) {
     CreatedRestaurant restaurant = getById(id);
-    if(restaurant == null){
+    if (restaurant == null) {
       return null;
     }
 
@@ -69,7 +61,7 @@ public class RestaurantServiceImpl implements RestaurantService {
   @Override
   public boolean deleteById(long id) {
     CreatedRestaurant restaurant = getById(id);
-    if(restaurant == null){
+    if (restaurant == null) {
       return false;
     }
     restaurantMapper.deleteRestaurant(id);

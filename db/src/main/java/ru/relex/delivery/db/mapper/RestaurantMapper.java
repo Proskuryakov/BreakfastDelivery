@@ -2,7 +2,6 @@ package ru.relex.delivery.db.mapper;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import ru.relex.delivery.commons.model.DishType;
 import ru.relex.delivery.commons.model.RestaurantType;
 import ru.relex.delivery.db.model.RestaurantModel;
 

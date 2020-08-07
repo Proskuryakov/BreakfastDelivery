@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.relex.delivery.rest.exception.ObjectNotExistsException;
 import ru.relex.delivery.services.facade.RestaurantFacade;
-import ru.relex.delivery.services.model.dish.CreatedDish;
 import ru.relex.delivery.services.model.restaurant.CreatedRestaurant;
 import ru.relex.delivery.services.model.restaurant.NewRestaurant;
 import ru.relex.delivery.services.model.restaurant.UpdatableRestaurant;

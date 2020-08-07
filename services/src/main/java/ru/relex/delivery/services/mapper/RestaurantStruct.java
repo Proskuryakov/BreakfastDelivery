@@ -2,15 +2,11 @@ package ru.relex.delivery.services.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Qualifier;
 import ru.relex.delivery.db.model.RestaurantModel;
 import ru.relex.delivery.services.model.restaurant.CreatedRestaurant;
 import ru.relex.delivery.services.model.restaurant.NewRestaurant;
 import ru.relex.delivery.services.model.restaurant.UpdatableRestaurant;
 import ru.relex.delivery.commons.model.RestaurantType;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 
 @Mapper
 public interface RestaurantStruct {
