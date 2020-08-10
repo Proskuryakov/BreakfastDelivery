@@ -62,10 +62,6 @@ public class OrdersApi {
     )
     CreatedOrder getOrderByUserId(@PathVariable("id") long id) {
          final var order = orderFacade.getOrderByUserId(id);
-        if (order == null) {
-            logger.error("Order with such id does not exist");
-            throw new ObjectNotExistsException();
-        }
         return order;
     }
     @GetMapping
