@@ -712,7 +712,7 @@ definitions:
     required:
       - "username"
       - "password"
-      - "role"
+      - "userRole"
       - "personalInfo"
     properties:
       username:
@@ -767,7 +767,7 @@ definitions:
     required:
       - "userId"
       - "username"
-      - "role"
+      - "userRole"
       - "personalInfo"
       - "listOfOrders"
     properties:

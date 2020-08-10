@@ -21,9 +21,7 @@ import ru.relex.delivery.services.model.user.UpdatableUser;
 
 @RestController
 @RequestMapping(
-  value = "/users",
-  consumes = "application/json",
-  produces = "application/json"
+        produces = "application/json"
 )
 public class UserApi {
 
@@ -37,14 +35,14 @@ public class UserApi {
   }
 
 
-  @PostMapping
+  @PostMapping(value = "/public/users", consumes = "application/json")
   @ResponseStatus(HttpStatus.CREATED)
   ExistingUser createUser(@RequestBody final NewUser user) {
     logger.info("Consumed: {}", user);
     return userFacade.createUser(user);
   }
 
-  @GetMapping(path = "/{id}")
+  @GetMapping(path = "users/{id}")
   ExistingUser getById(@PathVariable("id") long id) {
 
     final var user = userFacade.getById(id);
@@ -55,24 +53,24 @@ public class UserApi {
     return user;
   }
 
-  @PutMapping(path = "/{id}")
-  ExistingUser updateUser(@PathVariable("id") long id,
-                          @RequestBody UpdatableUser updatableUser) {
-    final var user = userFacade.update(id, updatableUser);
-
-    if (user == null) {
-      throw new ObjectNotExistsException();
-    }
-
-    return user;
-  }
-
-  @DeleteMapping(path = "/{id}")
-  void deleteUser(@PathVariable("id") long id) {
-    if (userFacade.deleteById(id)) {
-      return;
-    }
-
-    throw new ObjectNotExistsException();
-  }
+//  @PutMapping(path = "/{id}")
+//  ExistingUser updateUser(@PathVariable("id") long id,
+//                          @RequestBody UpdatableUser updatableUser) {
+//    final var user = userFacade.update(id, updatableUser);
+//
+//    if (user == null) {
+//      throw new ObjectNotExistsException();
+//    }
+//
+//    return user;
+//  }
+//
+//  @DeleteMapping(path = "/{id}")
+//  void deleteUser(@PathVariable("id") long id) {
+//    if (userFacade.deleteById(id)) {
+//      return;
+//    }
+//
+//    throw new ObjectNotExistsException();
+//  }
 }

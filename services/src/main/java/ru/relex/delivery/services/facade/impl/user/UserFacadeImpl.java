@@ -2,6 +2,8 @@ package ru.relex.delivery.services.facade.impl.user;
 
 import javax.validation.Valid;
 
+import org.springframework.transaction.annotation.Transactional;
+import ru.relex.delivery.db.model.UserProfile;
 import ru.relex.delivery.services.facade.UserFacade;
 import ru.relex.delivery.services.meta.Facade;
 import ru.relex.delivery.services.model.user.ExistingUser;
@@ -19,6 +21,7 @@ public class UserFacadeImpl implements UserFacade {
   }
 
   @Override
+  @Transactional
   public ExistingUser createUser(@Valid final NewUser user) {
     return userService.createUser(user);
   }
