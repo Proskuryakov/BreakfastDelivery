@@ -80,7 +80,12 @@ public interface OrderMapper {
 
     void deleteOrder(@Param("order_id") long order_id );
     void deletePosition(@Param("order_id") long order_id );
-
+    @Select("" +
+            "SELECT  order_id  as id     " +
+            "FROM orders   " +
+            "WHERE  status_id = #{status_id}"
+    )
+List<OrderModel>  getCountOrdersByOrderStatus(@Param("status_id") long status_id );
 
 }
 

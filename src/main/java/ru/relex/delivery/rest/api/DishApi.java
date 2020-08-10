@@ -40,8 +40,9 @@ public class DishApi {
 
     final var dish = dishFacade.getById(id);
     if (dish == null) {
-      logger.error("GET request error. Dish with such id does not exist");
-      throw new ObjectNotExistsException();
+     logger.error("GET request error. Dish with such id does not exist");
+//      throw new ObjectNotExistsException();
+      return null;
     }
     logger.info("Return {} by id = {}", dish, id);
     return dish;

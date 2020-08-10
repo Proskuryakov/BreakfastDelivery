@@ -1,6 +1,7 @@
 package ru.relex.delivery.services.facade.impl.order;
 
 import org.springframework.transaction.annotation.Transactional;
+import ru.relex.delivery.commons.model.StatusesOfOrder;
 import ru.relex.delivery.services.facade.OrderFacade;
 import ru.relex.delivery.services.internal.OrderService;
 import ru.relex.delivery.services.meta.Facade;
@@ -50,6 +51,11 @@ public class OrderFacadeImpl implements OrderFacade {
     @Override
     public CreatedOrder updateOrder(  long id, UpdatableOrder updatableOrder) {
         return orderService.updateOrder(id, updatableOrder);
+    }
+
+    @Override
+    public List<Integer> getCountOrdersByStatus( ) {
+        return orderService.getCountOrdersByStatus( );
     }
 }
 

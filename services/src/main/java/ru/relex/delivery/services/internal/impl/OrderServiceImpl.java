@@ -61,9 +61,7 @@ public class OrderServiceImpl implements OrderService {
         OrderModel om = orderMapper.getOrderByOrderId(id);
         if (om != null) {
             Integer idstatus = om.getStatusId();
-            System.out.println(idstatus);
-
-            List<PositionInOrderModel> positions = orderMapper.getPositionOfOrder(id);
+             List<PositionInOrderModel> positions = orderMapper.getPositionOfOrder(id);
             List<PositionInOrder> createdList = new ArrayList<>();
 
             //получить
@@ -103,9 +101,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public CreatedOrder updateOrder(long id, UpdatableOrder updatableOrder) {
         CreatedOrder order = getOrderByOrderId(id);
-        if (order == null) {
+         if (order == null) {
             return null;
         }
+
         Integer ind = updatableOrder.getStatus().getId();
         OrderModel updmodel = orderMapper.updateOrder(id, updatableOrder.getStatus().getId());
         CreatedOrder updatedOrder = orderStruct.merge(order, updatableOrder);
@@ -141,6 +140,24 @@ public class OrderServiceImpl implements OrderService {
             }
             return createdOrders;
         } else return null;
+    }
+
+    @Override
+    public List<Integer> getCountOrdersByStatus() {
+
+        List<OrderModel> om1 =orderMapper.getCountOrdersByOrderStatus(StatusesOfOrder.ORDER_IN_PROCESSING.getId());
+        List<OrderModel> om2 =orderMapper.getCountOrdersByOrderStatus(StatusesOfOrder.ORDER_PREPARING.getId());
+        List<OrderModel> om3 =orderMapper.getCountOrdersByOrderStatus(StatusesOfOrder.ORDER_DELIVERY.getId());
+        List<OrderModel> om4 =orderMapper.getCountOrdersByOrderStatus(StatusesOfOrder.ORDER_DELIVERED.getId());
+        List<OrderModel> om5 =orderMapper.getCountOrdersByOrderStatus(StatusesOfOrder.ORDER_CANCELLED.getId());
+        List<Integer> resList =new ArrayList<>();
+        resList.add(om1.size());
+        resList.add(om2.size());
+        resList.add(om3.size());
+        resList.add(om4.size());
+        resList.add(om5.size());
+
+        return resList;
     }
 
     @Override
