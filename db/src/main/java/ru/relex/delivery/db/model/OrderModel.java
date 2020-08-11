@@ -17,8 +17,8 @@ import java.util.List;
         "phone",
         "city",
         "street",
+        "checkres",
         "house",
-
         "flat",
         "entrance",
         "floor",

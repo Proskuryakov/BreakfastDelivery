@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.relex.delivery.commons.model.PositionInOrder;
 import ru.relex.delivery.commons.model.StatusesOfOrder;
+import ru.relex.delivery.db.mapper.DishMapper;
 import ru.relex.delivery.db.mapper.OrderMapper;
+import ru.relex.delivery.db.model.DishModel;
 import ru.relex.delivery.db.model.OrderModel;
 import ru.relex.delivery.db.model.PositionInOrderModel;
 import ru.relex.delivery.services.internal.OrderService;
@@ -26,22 +28,31 @@ public class OrderServiceImpl implements OrderService {
     private final AtomicLong lastId = new AtomicLong(0);
     private final OrderStruct orderStruct;
     private final OrderMapper orderMapper;
+    private final DishMapper dishMapper;
 
     @Autowired
-    public OrderServiceImpl(OrderMapper orderMapper, OrderStruct orderStruct) {
+    public OrderServiceImpl(OrderMapper orderMapper, OrderStruct orderStruct, DishMapper dishMapper) {
         this.orderMapper = orderMapper;
         this.orderStruct = orderStruct;
+        this.dishMapper = dishMapper;
     }
 
     @Override
     public CreatedOrder createOrder(NewOrder order) {
-        double check = 0;
+        long check = 0;
 
+        for (int i = 0; i < order.getListOfDishes().size(); i++) {
+            DishModel dim = dishMapper.findById(order.getListOfDishes().get(i).getDishId());
+            if (dim != null) {
+                check += order.getListOfDishes().get(i).getCount() * dim.getDishPrice();
+            }
+        }
 
-        final var model = orderStruct.fromNewOrder(order, 0, 1);
+        final var model = orderStruct.fromNewOrder(order, (int)check, 1);
         OrderModel newOrder = orderMapper.createOrder(model);
         long id = newOrder.getId();
         for (int i = 0; i < order.getListOfDishes().size(); i++) {
+
             orderMapper.addPositionOfOrder(id, order.getListOfDishes().get(i).getDishId(), order.getListOfDishes().get(i).getCount());
         }
 
@@ -53,7 +64,7 @@ public class OrderServiceImpl implements OrderService {
         // long newId = lastId.addAndGet(1);
         // CreatedOrder createdOrder = orderMapper.fromNewOrder(order, newId, check);
         //ORDERS.put(newId, createdOrder);
-        return orderStruct.toCreatedOrder(model, newOrder.getId(), newOrder.getCreatedAt(), 0, StatusesOfOrder.fromId(newOrder.getStatusId()));
+        return orderStruct.toCreatedOrder(model, newOrder.getId(), newOrder.getCreatedAt(),  (int)check, StatusesOfOrder.fromId(newOrder.getStatusId()));
     }
 
     @Override
@@ -61,8 +72,6 @@ public class OrderServiceImpl implements OrderService {
         OrderModel om = orderMapper.getOrderByOrderId(id);
         if (om != null) {
             Integer idstatus = om.getStatusId();
-            System.out.println(idstatus);
-
             List<PositionInOrderModel> positions = orderMapper.getPositionOfOrder(id);
             List<PositionInOrder> createdList = new ArrayList<>();
 
@@ -106,6 +115,7 @@ public class OrderServiceImpl implements OrderService {
         if (order == null) {
             return null;
         }
+
         Integer ind = updatableOrder.getStatus().getId();
         OrderModel updmodel = orderMapper.updateOrder(id, updatableOrder.getStatus().getId());
         CreatedOrder updatedOrder = orderStruct.merge(order, updatableOrder);
@@ -144,6 +154,24 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<Integer> getCountOrdersByStatus() {
+
+        List<OrderModel> om1 = orderMapper.getCountOrdersByOrderStatus(StatusesOfOrder.ORDER_IN_PROCESSING.getId());
+        List<OrderModel> om2 = orderMapper.getCountOrdersByOrderStatus(StatusesOfOrder.ORDER_PREPARING.getId());
+        List<OrderModel> om3 = orderMapper.getCountOrdersByOrderStatus(StatusesOfOrder.ORDER_DELIVERY.getId());
+        List<OrderModel> om4 = orderMapper.getCountOrdersByOrderStatus(StatusesOfOrder.ORDER_DELIVERED.getId());
+        List<OrderModel> om5 = orderMapper.getCountOrdersByOrderStatus(StatusesOfOrder.ORDER_CANCELLED.getId());
+        List<Integer> resList = new ArrayList<>();
+        resList.add(om1.size());
+        resList.add(om2.size());
+        resList.add(om3.size());
+        resList.add(om4.size());
+        resList.add(om5.size());
+
+        return resList;
+    }
+
+    @Override
     public CreatedOrder getOrderByUserId(long user_id) {
         OrderModel om = orderMapper.getOrderByUserId(user_id);
         if (om != null) {
@@ -153,7 +181,7 @@ public class OrderServiceImpl implements OrderService {
             List<PositionInOrderModel> positions = orderMapper.getPositionOfOrder(order_id);
             List<PositionInOrder> createdList = new ArrayList<>();
 
-             for (int i = 0; i < positions.size(); i++) {
+            for (int i = 0; i < positions.size(); i++) {
                 int finalI = i;
                 createdList.add(new PositionInOrder() {
                     @Override
