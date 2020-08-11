@@ -27,7 +27,7 @@ public interface OrderMapper {
             "      entrance," +
             "       floor," +
             "       status_id  as statusId ," +
-            "       checkres  " +
+            "       checkres as checkres  " +
             "FROM orders   " +
             "WHERE  order_id = #{order_id}"
     )
