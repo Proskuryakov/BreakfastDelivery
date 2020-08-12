@@ -21,6 +21,7 @@ import ru.relex.delivery.services.model.user.UpdatableUser;
 
 @RestController
 @RequestMapping(
+        value = "/users",
         produces = "application/json"
 )
 public class UserApi {
@@ -35,14 +36,14 @@ public class UserApi {
   }
 
 
-  @PostMapping(value = "/public/users", consumes = "application/json")
+  @PostMapping(consumes = "application/json")
   @ResponseStatus(HttpStatus.CREATED)
   ExistingUser createUser(@RequestBody final NewUser user) {
     logger.info("Consumed: {}", user);
     return userFacade.createUser(user);
   }
 
-  @GetMapping(path = "users/{id}")
+  @GetMapping(path = "/{id}")
   ExistingUser getById(@PathVariable("id") long id) {
 
     final var user = userFacade.getById(id);

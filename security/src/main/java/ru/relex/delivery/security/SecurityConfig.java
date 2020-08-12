@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -111,11 +112,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .csrf().csrfTokenRepository(csrfTokenRepository()).and()/*.disable()*/
                 .cors().configurationSource(corsConfigurationSource()).and()
                 .authorizeRequests()
-                .antMatchers("/dishes/**", "/restaurants/**" ).permitAll()
-                .antMatchers("/в/**").not().authenticated()
+                .antMatchers(HttpMethod.GET, "/dishes/**", "/restaurants/**" ).permitAll()
+                .antMatchers(HttpMethod.POST, "/users" ).permitAll()
                 .antMatchers("/auth/**").not().authenticated()
                 .antMatchers("/admin/**").hasAnyAuthority(UserRole.ADMIN.name())
                 .anyRequest().authenticated()
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
                 .and()
                 .addFilterAfter(authenticationFilter, LogoutFilter.class)
         ;
