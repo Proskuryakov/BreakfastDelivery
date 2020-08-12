@@ -15,6 +15,7 @@ import ru.relex.delivery.services.model.dish.ImmutableCreatedDish;
 import ru.relex.delivery.services.model.dish.NewDish;
 import ru.relex.delivery.services.model.dish.UpdatableDish;
 import ru.relex.delivery.services.internal.DishService;
+import ru.relex.delivery.services.model.order.CreatedOrder;
 
 
 @Service
@@ -116,17 +117,26 @@ public class DishServiceImpl implements DishService {
     @Override
     public CreatedDish update(long id, UpdatableDish updatableDish) {
         CreatedDish dsh = getById(id);
-        UpdatableDishModel newUpdatableDishModel = toUpdatableDishModel(updatableDish, dsh);
-        DishModel dishModel = dishMapper.updateDishById(newUpdatableDishModel);
-        Integer idType = newUpdatableDishModel.getDishType().getId();
-        dishMapper.updateDishType(id, idType);
-        CreatedDish createdDish = dishStruct.toCreatedDish(dishModel, dishModel.getId(), dsh.getRestaurantId(), DishType.fromId(idType ));
+        if (dsh != null) {
+            UpdatableDishModel newUpdatableDishModel = toUpdatableDishModel(updatableDish, dsh);
+            DishModel dishModel = dishMapper.updateDishById(newUpdatableDishModel);
+            Integer idType = newUpdatableDishModel.getDishType().getId();
+            dishMapper.updateDishType(id, idType);
+            CreatedDish createdDish = dishStruct.toCreatedDish(dishModel, dishModel.getId(), dsh.getRestaurantId(), DishType.fromId(idType));
 
-        return createdDish;
+            return createdDish;
+        } else return null;
     }
 
     @Override
     public boolean deleteById(long id) {
-        return DISHES.remove(id) != null;
+        CreatedDish dish = getById(id);
+        if (dish == null) {
+            return false;
+        }
+        dishMapper.deleteDishById(id);
+
+
+        return true;
     }
 }

@@ -65,6 +65,7 @@ public interface DishMapper {
 
     void saveDishType(@Param("dishId") long dishId, @Param("dishType") DishType dishType);
 
+    void deleteDishById(@Param("dish_id") long disId );
 
     DishModel updateDishById(UpdatableDishModel dishModel );
     void updateDishType( @Param("dishId") long dishId, @Param("dishType") Integer dishType );
