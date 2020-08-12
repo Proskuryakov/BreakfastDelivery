@@ -23,6 +23,11 @@ import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import ru.relex.delivery.commons.model.UserRole;
 import ru.relex.delivery.db.mapper.UserAuthMapper;
 import ru.relex.delivery.security.converter.DeliveryAuthenticationConverter;
@@ -33,6 +38,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity(debug = true)
@@ -43,7 +50,7 @@ import java.io.IOException;
 )
 @ComponentScan(basePackageClasses = SecurityConfig.class)
 
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
     private final UserDetailsService userDetailsService;
     private final UserAuthMapper userMapper;
@@ -101,8 +108,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
         http
-                .cors().disable()
                 .csrf().csrfTokenRepository(csrfTokenRepository()).and()/*.disable()*/
+                .cors().configurationSource(corsConfigurationSource()).and()
                 .authorizeRequests()
                 .antMatchers("/public/**").permitAll()
                 .antMatchers("/auth/**").not().authenticated()
@@ -112,6 +119,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterAfter(authenticationFilter, LogoutFilter.class)
         ;
 
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/api").allowedMethods("*")
+                .allowedOrigins("*")
+                .allowedMethods("*");
+        registry.addMapping("/api/**").allowedMethods("*")
+                .allowedOrigins("*")
+                .allowedMethods("*");
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Collections.singletonList("*"));
+        configuration.setAllowedMethods(Arrays.asList("HEAD",
+                "GET", "POST", "PUT", "DELETE", "PATCH"));
+        // setAllowCredentials(true) is important, otherwise:
+        // The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'.
+        // configuration.setAllowCredentials(true);
+        // setAllowedHeaders is important! Without it, OPTIONS preflight request
+        // will fail with 403 Invalid CORS request
+        // configuration.setAllowedHeaders(Collections.unmodifiableList(Arrays.asList("Authorization", "Cache-Control", "Content-Type")));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
     private CsrfTokenRepository csrfTokenRepository() {
