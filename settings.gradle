@@ -2,6 +2,7 @@ rootProject.name = 'delivery'
 
 include 'services'
 include 'db'
-include 'security'
 include 'commons'
+include 'web'
+include 'security'
 

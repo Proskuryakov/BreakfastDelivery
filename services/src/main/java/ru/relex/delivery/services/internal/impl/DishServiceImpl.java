@@ -2,10 +2,11 @@ package ru.relex.delivery.services.internal.impl;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.relex.delivery.services.mapper.DishMapper;
+import ru.relex.delivery.db.mapper.DishMapper;
+import ru.relex.delivery.db.model.DishModel;
+import ru.relex.delivery.services.mapper.DishStruct;
 import ru.relex.delivery.services.model.dish.CreatedDish;
 import ru.relex.delivery.services.model.dish.NewDish;
 import ru.relex.delivery.services.model.dish.UpdatableDish;
@@ -17,34 +18,45 @@ public class DishServiceImpl implements DishService {
 
   private final Map<Long, CreatedDish> DISHES = new ConcurrentHashMap<>();
 
-  private final AtomicLong lastId = new AtomicLong(0);
+  private final DishStruct dishStruct;
 
   private final DishMapper dishMapper;
 
   @Autowired
-  public DishServiceImpl(final DishMapper dishMapper) {
+  public DishServiceImpl(final DishStruct dishStruct,
+                         final DishMapper dishMapper) {
+    this.dishStruct = dishStruct;
     this.dishMapper = dishMapper;
   }
 
-
   @Override
-  public CreatedDish createDish(final NewDish dish) {
-    // Выделить ID для пользователя
-    long newId = lastId.addAndGet(1);
+  public CreatedDish createDish(final NewDish dish, long restaurantId) {
+    // Преобразовать NewUser в UserModel
+    final var model = dishStruct.fromNewDish(dish, restaurantId);
 
-    // Преобразовать NewUser в ExistingUser
-    CreatedDish existingUser = dishMapper.fromNewDish(dish, newId);
+    DishModel newDish = dishMapper.createDish(model);
+    dishMapper.saveDishType(newDish.getId(), dish.getDishType());
 
     // Сохранить в HashMap
-    DISHES.put(newId, existingUser);
+    //USERS.put(newId, existingUser);
 
     // Вернуть ExistingUser клиенту
-    return existingUser;
+    return dishStruct.toCreatedDish(model, newDish.getId());
   }
 
   @Override
   public CreatedDish getById(long id) {
-    return DISHES.get(id);
+    return dishStruct.toCreatedDish(dishMapper.findById(id));
+  }
+
+  @Override
+  public CreatedDish[] getByRestaurantId(long id) {
+    return dishStruct.toCreatedDishesByRestaurantId(dishMapper.findByRestaurantId(id));
+  }
+
+  @Override
+  public CreatedDish[] getAll() {
+    return dishStruct.toCreatedDishes(dishMapper.findAll());
   }
 
   @Override
@@ -55,7 +67,7 @@ public class DishServiceImpl implements DishService {
       return null;
     }
 
-    CreatedDish updatedDish = dishMapper.merge(dish, updatableDish);
+    CreatedDish updatedDish = dishStruct.merge(dish, updatableDish);
 
     DISHES.put(id, updatedDish);
 

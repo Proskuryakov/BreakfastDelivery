@@ -45,10 +45,13 @@ allprojects {
       implementation(project(":commons"))
     }
   }
+
 }
 
 dependencies {
   implementation(project(":services"))
+  implementation(project(":db"))
+  implementation(project(":web"))
   implementation(project(":security"))
   implementation "org.springframework.boot:spring-boot-starter-web:$bootVer"
   implementation "org.springframework:spring-web:5.2.7.RELEASE"

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ru.relex.delivery.db.mapper.DishMapper">
+
+  <select id="createDish"
+          parameterType="ru.relex.delivery.db.model.DishModel"
+          resultType="ru.relex.delivery.db.model.DishModel">
+    INSERT INTO dishes (dish_name, dish_price, dish_calories, dish_cooking_time_minutes, dish_image, restaurant_id)
+    VALUES (#{dishName}, #{dishPrice}, #{dishCalories}, #{dishCookingTimeMinutes}, #{dishImage}, #{restaurantId})
+    RETURNING dish_id AS id
+  </select>
+
+  <insert id="saveDishType" parameterType="map">
+    INSERT INTO dish_dish_types (dish_id, dish_type_id)
+    VALUES (#{dishId}, #{dishType})
+ </insert>
+</mapper>

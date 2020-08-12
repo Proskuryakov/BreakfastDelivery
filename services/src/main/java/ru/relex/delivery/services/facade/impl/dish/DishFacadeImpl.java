@@ -1,5 +1,6 @@
 package ru.relex.delivery.services.facade.impl.dish;
 
+import org.springframework.transaction.annotation.Transactional;
 import ru.relex.delivery.services.facade.DishFacade;
 import ru.relex.delivery.services.internal.DishService;
 import ru.relex.delivery.services.meta.Facade;
@@ -19,13 +20,25 @@ public class DishFacadeImpl implements DishFacade {
   }
 
   @Override
-  public CreatedDish createDish(@Valid final NewDish dish) {
-    return dishService.createDish(dish);
+  @Transactional
+  public CreatedDish createDish(@Valid final NewDish dish, long restaurant_id) {
+    return dishService.createDish(dish, restaurant_id);
   }
 
   @Override
+  @Transactional
   public CreatedDish getById(long id) {
     return dishService.getById(id);
+  }
+
+  @Override
+  public CreatedDish[] getAll() {
+    return dishService.getAll();
+  }
+
+  @Override
+  public CreatedDish[] getByRestaurantId(long id) {
+    return dishService.getByRestaurantId(id);
   }
 
   @Override

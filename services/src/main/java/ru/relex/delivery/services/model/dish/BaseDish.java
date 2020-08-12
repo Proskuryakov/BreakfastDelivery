@@ -1,6 +1,7 @@
 package ru.relex.delivery.services.model.dish;
 
 import org.springframework.lang.Nullable;
+import ru.relex.delivery.commons.model.DishType;
 import ru.relex.delivery.services.validation.ValidationErrorsDish;
 
 import javax.validation.Valid;
@@ -20,5 +21,7 @@ public interface BaseDish {
 
   @Nullable @NotNull(message = ValidationErrorsDish.DISH_COOKING_TIME_MINUTES_MUST_BE_SET)
   Integer getDishCookingTimeMinutes();
+
+  String getDishImage();
 
 }
