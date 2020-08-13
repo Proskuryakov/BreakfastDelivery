@@ -116,6 +116,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .antMatchers(HttpMethod.POST, "/users" ).permitAll()
                 .antMatchers("/auth/**").not().authenticated()
                 .antMatchers("/admin/**").hasAnyAuthority(UserRole.ADMIN.name())
+                .antMatchers("/logout").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .logout()
