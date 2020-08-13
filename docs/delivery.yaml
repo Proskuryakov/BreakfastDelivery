@@ -267,6 +267,12 @@ paths:
           required: true
           type: "integer"
           format: "int64"
+        - in: "body"
+          name: "body"
+          description: "UpdatableDish"
+          required: true
+          schema:
+            $ref: "#/definitions/UpdatableDish"
       responses:
         201:
           description: "Dish was successfully updated"
@@ -282,7 +288,6 @@ paths:
           description: "Unauthorized"
         403:
           description: "Forbidden"
-
     get:
       tags:
         - "dish"
@@ -734,25 +739,17 @@ definitions:
 
   UpdatableDish:
     type: "object"
-    required:
-      - "mainDishInfo"
-      - "dishType"
-      - "dishCalories"
-      - "dishCookingTimeMinutes"
     properties:
-      mainDishInfo:
-        type: object
-        properties:
-          dishName:
-            type: "string"
-            minLength: 1
-            maxLength: 64
-            example: "Lasagna"
-          dishPrice:
-            type: "integer"
-            format: "int64"
-            minimum: 1
-            example: 250
+      dishName:
+        type: "string"
+        minLength: 1
+        maxLength: 64
+        example: "Lasagna"
+      dishPrice:
+        type: "integer"
+        format: "int64"
+        minimum: 1
+        example: 250
       dishType:
         type: "string"
         enum:
@@ -765,17 +762,19 @@ definitions:
           - PIZZA
           - SUSHI
           - BAKERY
-        example: "MAIN"
       dishCalories:
-        type: "integer"
-        format: "int64"
-        minimum: 1
-        example: 175
+        type: "string"
+        minLength: 1
+        maxLength: 64
+        example: "Lasagna"
       dishCookingTimeMinutes:
         type: "integer"
         format: "int64"
         minimum: 1
-        example: 30
+        example: 250
+      dishImage:
+        type: "string"
+        example: "amazon.sdsdjskd"
 
   CreatedDish :
     type: object

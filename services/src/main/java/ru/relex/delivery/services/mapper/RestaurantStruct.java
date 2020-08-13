@@ -29,8 +29,8 @@ public interface RestaurantStruct {
   @Mapping(target = "restaurantName", source = "model.restaurantName")
   @Mapping(target = "address.street", source = "model.street")
   @Mapping(target = "address.building", source = "model.building")
-  @Mapping(target = "workingHours.startWorkDay", source = "model.startWorkDay")
-  @Mapping(target = "workingHours.endWorkDay", source = "model.endWorkDay")
+  @Mapping(target = "workingHours.startWorkDay", source = "model.startWorkDay", dateFormat = "HH:mm")
+  @Mapping(target = "workingHours.endWorkDay", source = "model.endWorkDay", dateFormat = "HH:mm")
   @Mapping(target = "restaurantType", source = "restaurantType")
   @Mapping(target = "id", source = "id")
   CreatedRestaurant toCreatedRestaurant(RestaurantModel model, RestaurantType restaurantType, long id);
@@ -38,8 +38,8 @@ public interface RestaurantStruct {
   @Mapping(target = "restaurantName", source = "model.restaurantName")
   @Mapping(target = "address.street", source = "model.street")
   @Mapping(target = "address.building", source = "model.building")
-  @Mapping(target = "workingHours.startWorkDay", source = "model.startWorkDay")
-  @Mapping(target = "workingHours.endWorkDay", source = "model.endWorkDay")
+  @Mapping(target = "workingHours.startWorkDay", source = "model.startWorkDay", dateFormat = "HH:mm")
+  @Mapping(target = "workingHours.endWorkDay", source = "model.endWorkDay", dateFormat = "HH:mm")
   @Mapping(target = "restaurantType", source = "restaurantType")
   CreatedRestaurant toCreatedRestaurant(RestaurantModel model);
 
@@ -48,7 +48,7 @@ public interface RestaurantStruct {
   @Mapping(target = "restaurantName", source = "updatableRestaurant.restaurantName")
   @Mapping(target = "restaurantType", source = "updatableRestaurant.restaurantType")
   @Mapping(target = "address", source = "updatableRestaurant.address")
-  @Mapping(target = "workingHours", source = "updatableRestaurant.workingHours")
-  @Mapping(target = "restaurantImage", source = "updatableRestaurant.restaurantImage")
+  @Mapping(target = "workingHours", source = "updatableRestaurant.workingHours", dateFormat = "HH:mm")
+  @Mapping(target = "restaurantImage", source = "updatableRestaurant.restaurantImage", dateFormat = "HH:mm")
   CreatedRestaurant merge(CreatedRestaurant restaurant, UpdatableRestaurant updatableRestaurant);
 }

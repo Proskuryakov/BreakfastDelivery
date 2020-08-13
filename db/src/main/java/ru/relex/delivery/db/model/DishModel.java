@@ -14,7 +14,8 @@ import java.time.Instant;
   "dishPrice",
   "dishCalories",
   "dishCookingTimeMinutes",
-  "restaurant_id"
+  "restaurant_id",
+     "dishImage"
 })
 public class DishModel {
 
