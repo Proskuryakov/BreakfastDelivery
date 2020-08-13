@@ -31,9 +31,14 @@ public class DishApi {
     @ResponseStatus(HttpStatus.CREATED)
     CreatedDish createDish(@RequestBody final NewDish dish,
                            @PathVariable("restaurant_id") long restaurant_id) {
-        logger.info("Consumed: {}", dish);
-        return dishFacade.createDish(dish, restaurant_id);
-    }
+        CreatedDish created = dishFacade.createDish(dish, restaurant_id);
+        if(created!=null){
+            logger.info("Consumed: {}", dish);
+            return created;
+        }else {
+            return null;
+        }
+     }
 
     @GetMapping(path = "/dishes/{id}")
     CreatedDish getById(@PathVariable("id") long id) {
