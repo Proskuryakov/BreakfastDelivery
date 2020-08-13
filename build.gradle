@@ -35,11 +35,7 @@ allprojects {
 
   }
 
-  if (name != 'commons') {
-    dependencies {
-      implementation(project(":commons"))
-    }
-  }
+
   test {
     useJUnitPlatform()
   }
@@ -56,6 +52,7 @@ dependencies {
   implementation(project(":services"))
   implementation(project(":db"))
   implementation(project(":web"))
+  implementation(project(":security"))
   implementation "org.springframework.boot:spring-boot-starter-web:$bootVer"
   implementation "org.springframework:spring-web:5.2.7.RELEASE"
   implementation "javax.validation:validation-api:2.0.1.Final"

@@ -26,3 +26,35 @@ databaseChangeLog:
 #        - sqlFile:
 #            path: DELIVERY-1-20200728-1900.sql
 #            relativeToChangelogFile: true
+#      id: DELIVERY-1-20200727-1121
+#      author: dimabondarenko
+#      comment: Create initial information
+#      changes:
+#        - sqlFile:
+#            path: DELIVERY-1-20200727-1121.sql
+#            relativeToChangelogFile: true
+#  - changeSet:
+#      id: UBER-1-20200801-1521
+#      author: dimabondarenko
+#      comment: Fill roles tables
+#      changes:
+#        - sqlFile:
+#            path: DELIVERY-1-20200801-1521.sql
+#            relativeToChangelogFile: true
+#  - changeSet:
+#      id: DELIVERY-1-20200803-1010
+#      author: dimabondarenko
+#      comment: Changing the default users tables
+#      changes:
+#        - sqlFile:
+#            path: DELIVERY-1-20200803-1010.sql
+#            relativeToChangelogFile: true
+#  - changeSet:
+#      id: DELIVERY-1-20200803-1012
+#      author: dimabondarenko
+#      comment: Changing the default users tables as true
+#      changes:
+#        - sqlFile:
+#            path: DELIVERY-1-20200803-1012.sql
+#            relativeToChangelogFile: true
+

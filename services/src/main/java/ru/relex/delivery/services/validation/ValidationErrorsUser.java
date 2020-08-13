@@ -15,7 +15,7 @@ public final class ValidationErrorsUser {
   public static final String ROLE_MUST_BE_SET = "ROLE_MUST_BE_SET";
 
   private static final Map<String, String> ERRORS = Map.ofEntries(
-    Map.entry(ROLE_MUST_BE_SET, "Role must be set"),
+    Map.entry(ROLE_MUST_BE_SET, "UserRole must be set"),
     Map.entry(PERSONAL_INFO_MUST_BE_SET, "Personal info must be set")
   );
 

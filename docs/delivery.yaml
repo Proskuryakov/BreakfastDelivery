@@ -874,10 +874,6 @@ definitions:
         type: "integer"
         format: "int64"
         minimum: 1
-      listOfOrders:
-        type: array
-        items:
-          $ref: "#/definitions/CreatedOrder"
 
   CreatedUser:
     type: "object"
@@ -886,7 +882,6 @@ definitions:
       - "username"
       - "role"
       - "personalInfo"
-      - "listOfOrders"
     properties:
       userId:
         type: "integer"
