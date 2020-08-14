@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.context.annotation.Bean;
 import ru.relex.delivery.commons.model.DishType;
 import ru.relex.delivery.db.model.DishModel;
+import ru.relex.delivery.db.model.DishTypesModel;
 import ru.relex.delivery.db.model.OrderModel;
 import ru.relex.delivery.db.model.UpdatableDishModel;
 
@@ -70,5 +71,19 @@ public interface DishMapper {
     DishModel updateDishById(UpdatableDishModel dishModel );
     void updateDishType( @Param("dishId") long dishId, @Param("dishType") Integer dishType );
 
+    //language=PostgreSQL
+    @Select("" +
+            "SELECT dt.name AS dishType, " +
+            "       d.dish_image AS dishImage " +
+            "FROM dish_types dt " +
+            "INNER JOIN (" +
+            "SELECT dish_type_id, " +
+            "            MIN(dish_id) AS dish_id" +
+            "            FROM dish_dish_types " +
+            "            GROUP BY dish_type_id" +
+            ") ddt ON dt.dish_type_id = ddt.dish_type_id " +
+            "LEFT JOIN dishes d on ddt.dish_id = d.dish_id "
+    )
+    DishTypesModel[] findAllTypes();
 
 }

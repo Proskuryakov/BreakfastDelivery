@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.relex.delivery.db.mapper.RestaurantMapper;
 import ru.relex.delivery.db.model.RestaurantModel;
+import ru.relex.delivery.db.model.RestaurantTypesModel;
 import ru.relex.delivery.services.internal.RestaurantService;
 import ru.relex.delivery.services.mapper.RestaurantStruct;
 import ru.relex.delivery.services.model.restaurant.CreatedRestaurant;
@@ -67,4 +68,9 @@ public class RestaurantServiceImpl implements RestaurantService {
     restaurantMapper.deleteRestaurant(id);
     return true;
   }
+
+  @Override
+  public RestaurantTypesModel[] getAllTypes() {
+    return restaurantMapper.findAllTypes();
+  };
 }

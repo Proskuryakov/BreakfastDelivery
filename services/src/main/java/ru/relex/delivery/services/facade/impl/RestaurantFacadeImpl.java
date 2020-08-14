@@ -1,5 +1,6 @@
 package ru.relex.delivery.services.facade.impl;
 
+import ru.relex.delivery.db.model.RestaurantTypesModel;
 import ru.relex.delivery.services.facade.RestaurantFacade;
 import ru.relex.delivery.services.internal.RestaurantService;
 import ru.relex.delivery.services.meta.Facade;
@@ -41,5 +42,10 @@ public class RestaurantFacadeImpl implements RestaurantFacade {
   @Override
   public boolean deleteById(long id) {
     return restaurantService.deleteById(id);
+  }
+
+  @Override
+  public RestaurantTypesModel[] getAllTypes() {
+    return restaurantService.getAllTypes();
   }
 }

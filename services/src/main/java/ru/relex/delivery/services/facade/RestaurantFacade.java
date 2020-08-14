@@ -1,5 +1,6 @@
 package ru.relex.delivery.services.facade;
 
+import ru.relex.delivery.db.model.RestaurantTypesModel;
 import ru.relex.delivery.services.model.restaurant.CreatedRestaurant;
 import ru.relex.delivery.services.model.restaurant.NewRestaurant;
 import ru.relex.delivery.services.model.restaurant.UpdatableRestaurant;
@@ -17,4 +18,6 @@ public interface RestaurantFacade {
   boolean deleteById(long id);
 
   CreatedRestaurant[] getAll();
+
+  RestaurantTypesModel[] getAllTypes();
 }

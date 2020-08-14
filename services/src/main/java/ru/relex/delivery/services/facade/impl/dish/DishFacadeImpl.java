@@ -1,6 +1,7 @@
 package ru.relex.delivery.services.facade.impl.dish;
 
 import org.springframework.transaction.annotation.Transactional;
+import ru.relex.delivery.db.model.DishTypesModel;
 import ru.relex.delivery.services.facade.DishFacade;
 import ru.relex.delivery.services.internal.DishService;
 import ru.relex.delivery.services.meta.Facade;
@@ -49,5 +50,10 @@ public class DishFacadeImpl implements DishFacade {
   @Override
   public boolean deleteById(long id) {
     return dishService.deleteById(id);
+  }
+
+  @Override
+  public DishTypesModel[] getAllTypes() {
+    return dishService.getAllTypes();
   }
 }

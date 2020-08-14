@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import ru.relex.delivery.db.model.RestaurantTypesModel;
 import ru.relex.delivery.rest.exception.ObjectNotExistsException;
 import ru.relex.delivery.services.facade.RestaurantFacade;
 import ru.relex.delivery.services.model.restaurant.CreatedRestaurant;
@@ -84,6 +85,17 @@ public class RestaurantApi {
     }
     logger.error("Delete Error. Object with such id does not exist");
     throw new ObjectNotExistsException();
+  }
+
+  @GetMapping(path = "/restaurants/types")
+  RestaurantTypesModel[] getAllTypes() {
+    final var restaurant = restaurantFacade.getAllTypes();
+    if (restaurant == null) {
+      logger.error("GET request error. Restaurants does not exist");
+      return null;
+    }
+
+    return restaurant;
   }
 
 }
