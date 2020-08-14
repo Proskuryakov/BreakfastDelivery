@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import ru.relex.delivery.commons.model.DishType;
 import ru.relex.delivery.db.mapper.DishMapper;
 import ru.relex.delivery.db.model.DishModel;
+import ru.relex.delivery.db.model.DishTypesModel;
 import ru.relex.delivery.db.model.UpdatableDishModel;
 import ru.relex.delivery.services.mapper.DishStruct;
 import ru.relex.delivery.services.model.dish.CreatedDish;
@@ -139,4 +140,9 @@ public class DishServiceImpl implements DishService {
 
         return true;
     }
+
+    @Override
+    public DishTypesModel[] getAllTypes() {
+        return dishMapper.findAllTypes();
+    };
 }

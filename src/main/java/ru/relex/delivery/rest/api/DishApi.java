@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import ru.relex.delivery.db.model.DishTypesModel;
 import ru.relex.delivery.rest.exception.ObjectNotExistsException;
 import ru.relex.delivery.services.facade.DishFacade;
 import ru.relex.delivery.services.model.dish.CreatedDish;
@@ -93,5 +94,16 @@ public class DishApi {
         }
         logger.error("DELETE request Error. Dish with such id does not exist");
         return false;
+    }
+
+    @GetMapping(path = "/dishes/types")
+    DishTypesModel[] getAllTypes() {
+        final var dish = dishFacade.getAllTypes();
+        if (dish == null) {
+            logger.error("GET request error. Dishes does not exist");
+            return null;
+        }
+
+        return dish;
     }
 }

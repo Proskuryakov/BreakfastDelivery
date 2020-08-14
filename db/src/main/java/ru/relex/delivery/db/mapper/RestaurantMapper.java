@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import ru.relex.delivery.commons.model.RestaurantType;
 import ru.relex.delivery.db.model.RestaurantModel;
+import ru.relex.delivery.db.model.RestaurantTypesModel;
 
 public interface RestaurantMapper {
 
@@ -53,4 +54,19 @@ public interface RestaurantMapper {
   RestaurantModel[] getAll();
 
   void deleteRestaurant(@Param("id") long id);
+
+  //language=PostgreSQL
+  @Select("" +
+          "SELECT rt.name AS restaurantType, " +
+          "       r.restaurant_image AS restaurantImage " +
+          "FROM restaurant_types rt " +
+          "INNER JOIN (" +
+          "SELECT restaurant_type_id, " +
+          "            MIN(restaurant_id) AS restaurant_id" +
+          "            FROM restaurant_restaurant_types " +
+          "            GROUP BY restaurant_type_id" +
+          ") rrt ON rt.restaurant_type_id = rrt.restaurant_type_id " +
+          "LEFT JOIN restaurants r on rrt.restaurant_id = r.restaurant_id "
+  )
+  RestaurantTypesModel[] findAllTypes();
 }
