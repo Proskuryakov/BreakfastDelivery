@@ -38,16 +38,18 @@ public class DishServiceImpl implements DishService {
     @Override
     public CreatedDish createDish(final NewDish dish, long restaurantId) {
         // Преобразовать NewUser в UserModel
-        final var model = dishStruct.fromNewDish(dish, restaurantId);
+        if (!dish.getMainDishInfo().getDishName().trim().isEmpty()) {
+            final var model = dishStruct.fromNewDish(dish, restaurantId);
 
-        DishModel newDish = dishMapper.createDish(model);
-        dishMapper.saveDishType(newDish.getId(), dish.getDishType());
+            DishModel newDish = dishMapper.createDish(model);
+            dishMapper.saveDishType(newDish.getId(), dish.getDishType());
 
-        // Сохранить в HashMap
-        //USERS.put(newId, existingUser);
+            // Сохранить в HashMap
+            //USERS.put(newId, existingUser);
 
-        // Вернуть ExistingUser клиенту
-        return dishStruct.toCreatedDish(model, newDish.getId());
+            // Вернуть ExistingUser клиенту
+            return dishStruct.toCreatedDish(model, newDish.getId());
+        } else return null;
     }
 
     @Override
@@ -67,7 +69,7 @@ public class DishServiceImpl implements DishService {
             UpdatableDishModel updatableDishModel = new UpdatableDishModel();
             if (model != null) {
 
-                if (model.getDishName() != null) {
+                if (model.getDishName() != null && !model.getDishName().trim().isEmpty()) {
                     updatableDishModel.setDishName(model.getDishName());
                 } else {
                     updatableDishModel.setDishName(cDish.getMainDishInfo().getDishName());
